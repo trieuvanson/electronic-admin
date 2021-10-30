@@ -1,0 +1,298 @@
+:root {
+  --body-bg: #fafafb;
+  --box-bg: #ffffff;
+  --main-color: #3797A4;
+  --text-color: #455560;
+  --text-second-color: #72849ab3;
+  --border-color: #e9e9e9;
+  --menu-item-active-bg: rgba(62, 121, 247, 0.1);
+  --while: #fff;
+  --black: #272727;
+  --priamry: #0d6efd;
+  --success: #198754;
+  --danger: #dc3545;
+  --secondary: #6c757d;
+  --box-border-radius: 15px;
+  --sidebar-size: 300px;
+  --sidebar-logo-img-size: 45px;
+  --sidebar-logo-size: 80px;
+  --profile-image-size: 45px;
+  --main-header-height: 80px;
+  --shadow: 0 1px 4px -1px rgb(0 0 0 / 15%);
+  --darkmode-toggle-size: 20px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arima Madurai', cursive;
+  background-color: var(--box-bg);
+  color: var(--text-color);
+  position: relative;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+  display: inline-block;
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button + button {
+  margin-left: 5px;
+}
+
+.float-right {
+  float: right;
+}
+
+.mt-32 {
+  margin-top: 32px;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-priamry {
+  color: var(--priamry);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--main-color);
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.btn i {
+  font-size: 2rem;
+}
+
+.btn-hover:hover {
+  opacity: 0.8;
+}
+
+.btn-outline {
+  border: 2px solid var(--main-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-outline:hover {
+  background-color: var(--main-color);
+  color: var(--while);
+}
+
+.btn-priamry {
+  color: var(--while);
+  background-color: var(--priamry);
+  border-radius: 3px;
+}
+
+.btn-danger {
+  color: var(--while);
+  background-color: var(--danger);
+  border-radius: 3px;
+}
+
+.btn-secondary {
+  color: var(--while);
+  background-color: var(--secondary);
+  border-radius: 3px;
+}
+
+.box {
+  background-color: var(--box-bg);
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--box-border-radius);
+}
+
+.box-hover:hover {
+  border-color: var(--main-color);
+}
+
+.box-header {
+  text-transform: capitalize;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.box-body {
+  padding: 20px 0;
+}
+
+.box-footer {
+  padding: 20px 0;
+}
+
+.text-second {
+  color: var(--text-second-color);
+  font-size: 1.6rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.f-height {
+  height: 100%;
+}
+
+table {
+  width: 100%;
+  min-width: 1000px;
+  font-size: 1.6rem;
+}
+
+table thead tr {
+  text-align: left;
+}
+
+table th,
+table td {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.overflow-scroll {
+  overflow-y: auto;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.icon-copy {
+  font-size: 1.8rem;
+  color: var(--success);
+}
+
+.icon-edit {
+  font-size: 1.8rem;
+  color: var(--priamry);
+}
+
+.icon-delete {
+  font-size: 1.8rem;
+  color: var(--danger);
+}
+
+.table-input-text {
+  width: 40px;
+  padding: 0px 6px;
+  height: 25px;
+  border: 1px solid var(--border-color);
+  outline: none;
+}
+
+.table-img {
+  width: 45px;
+  height: 45px;
+}
+
+.table-title {
+  margin-top: 10px;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+
+.table-btn {
+  background-color: var(--success);
+  color: var(--while);
+  min-width: 60px;
+  height: 25px;
+}
+
+.table-search {
+  display: flex;
+}
+
+.table-search input {
+  width: 30%;
+  max-width: 90%;
+  height: 35px;
+  max-height: 46px;
+  border-radius: 3px;
+  border: 1px solid var(--border-color);
+  outline: none;
+  padding: 0 8px;
+  font-size: 1.4rem;
+  color: var(--black);
+}
+
+.table-icon {
+  width: 35px;
+  height: 35px;
+  background-color: var(--priamry);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  color: var(--while);
+  cursor: pointer;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.box-btn {
+  display: flex;
+}
+
+.btn-icon-text {
+  display: flex;
+}
+
+.btn-icon-text i{
+  margin-right: 10px;
+}
