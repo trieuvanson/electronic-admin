@@ -11,6 +11,7 @@
   --priamry: #0d6efd;
   --success: #198754;
   --danger: #dc3545;
+  --light: #f8f9fa;
   --secondary: #6c757d;
   --box-border-radius: 15px;
   --sidebar-size: 300px;
@@ -93,6 +94,18 @@ button + button {
   color: var(--danger);
 }
 
+.bg-primary {
+  background-color: var(--priamry);
+}
+
+.bg-light {
+  background-color: var(--light);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
 .btn {
   background-color: transparent;
   border: none;
@@ -123,7 +136,7 @@ button + button {
   color: var(--while);
 }
 
-.btn-priamry {
+.btn-primary {
   color: var(--while);
   background-color: var(--priamry);
   border-radius: 3px;
@@ -146,6 +159,12 @@ button + button {
   padding: 20px;
   border: 1px solid var(--border-color);
   border-radius: var(--box-border-radius);
+}
+
+.box-light {
+  background-color: var(--box-bg);
+  padding-left: 20px;
+  padding-bottom: 10px;
 }
 
 .box-hover:hover {
@@ -228,6 +247,18 @@ table td {
   color: var(--danger);
 }
 
+.table-input {
+  width: 40px;
+  height: 30px;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  padding: 4px;
+  text-align: center;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #dbdfe4;
+}
+
 .table-input-text {
   width: 40px;
   padding: 0px 6px;
@@ -295,4 +326,33 @@ table td {
 
 .btn-icon-text i{
   margin-right: 10px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-label {
+  font-size: 1.6rem;
+  color: var(--text-color);
+}
+
+.form-control {
+  width: 100%;
+  display: block;
+  height: 43px;
+  padding: 6px 12px;
+  font-size: 1.4rem;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  outline: none;
+}
+
+.form-textarea {
+  width: 100%;
+  outline: none;
+  padding: 8px 12px;
+  border: 1px solid #e0e4e8;
 }

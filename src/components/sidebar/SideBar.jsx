@@ -54,7 +54,7 @@ function SideBar() {
             link: "#",
             linkClass: 'sidebar-menu-dropdown',
             icon: "ti-layers-alt",
-            name: "Quản lý thực đơn",
+            name: "Quản lý sản phẩm",
             dropdown: "dropdown-icon",
             active: false,
             child: [
@@ -71,7 +71,7 @@ function SideBar() {
                 {
                     id: 3,
                     link: "#",
-                    name: "Thực đơn"
+                    name: "Sản phẩm"
                 }
             ]
         },
