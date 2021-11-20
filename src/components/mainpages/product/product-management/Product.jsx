@@ -40,21 +40,12 @@ function Product() {
                     <div className="col-12">
                         <div className="box-light box-btn">
                             <select className="selection">
-                                <option value="">Chọn danh mục</option>
                                 <option value="">1</option>
                                 <option value="">2</option>
                                 <option value="">3</option>
                             </select>
 
                             <select className="selection">
-                                <option value="">Chọn danh mục</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
-
-                            <select className="selection">
-                                <option value="">Chọn hãng</option>
                                 <option value="">1</option>
                                 <option value="">2</option>
                                 <option value="">3</option>

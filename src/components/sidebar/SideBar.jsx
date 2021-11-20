@@ -78,7 +78,7 @@ function SideBar() {
         {
             index: 3,
             liClass: '',
-            link: "#",
+            link: "/admin/order",
             linkClass: '',
             icon: "ti-truck",
             name: "Quản lý đơn hàng",

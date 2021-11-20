@@ -3,25 +3,27 @@ import UserApi from "./api/UserApi";
 import ProductsApi from "./api/ProductsApi";
 import {getToken} from "./utils/Common";
 import CategoriesApi from "./api/CategoriesApi";
+import OrdersApi from "./api/OrdersApi";
 
 export const GlobalState = createContext({})
 
-export const DataProvider = ({children}) =>{
+export const DataProvider = ({children}) => {
     const [token, setToken] = useState("")
-    useEffect(() =>{
+    useEffect(() => {
         const loggedIn = localStorage.getItem('isLogin')
-        if(loggedIn){
-            const refreshToken = () =>{
+        if (loggedIn) {
+            const refreshToken = () => {
                 setToken(getToken().access_token)
             }
             refreshToken()
         }
-    },[])
+    }, [])
     const state = {
-       tokens: [token, setToken],
-       userAPI: UserApi(token),
-       productAPI: ProductsApi(token),
-        categoriesApi: CategoriesApi()
+        tokens: [token, setToken],
+        userAPI: UserApi(token),
+        productAPI: ProductsApi(token),
+        categoriesApi: CategoriesApi(),
+        orderAPI: OrdersApi(token)
     }
 
     return (

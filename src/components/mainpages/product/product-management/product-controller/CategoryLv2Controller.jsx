@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 function CategoryLv1() {
     const state = useContext(GlobalState)
     const params = useParams();
+    const [categories] = state.categoriesApi.categories
     const [brands] = state.categoriesApi.brands
     const [detail, setDetail] = useState("")
 
@@ -13,7 +14,7 @@ function CategoryLv1() {
     }, [params.id, brands])
 
     const getDetail = (id) => {
-        const result = brands.filter(brand => brand.id == id)
+        const result = categories.filter(category => category.id == id)
         setDetail(result[0])
     }
 
@@ -49,6 +50,23 @@ function CategoryLv1() {
                                                     <input type="text" name="name"
                                                            value={detail?.name} onChange={onChangeInput}
                                                             className="form-control"/>
+                                                </div>
+                                            </div>
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label className="form-label">Danh mục cấp 1</label>
+                                                    <select name="brand"
+                                                            value={detail?.brand?.id || 0   } onChange={onChangeInput}
+                                                            className="form-control">
+                                                        <option value="">Chọn danh mục cấp 1</option>
+                                                        {
+                                                            brands.map((category, index) => {
+                                                                return (
+                                                                    <option key={index} value={category.id}>{category.name}</option>
+                                                                )
+                                                            })
+                                                        }
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>

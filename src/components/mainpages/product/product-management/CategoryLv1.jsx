@@ -43,7 +43,7 @@ function CategoryLv1() {
                     <div className="col-12">
                         <div className="box">
                             <div className="box-header">
-                                Danh mục danh mục cấp 1
+                                Danh mục sản phẩm cấp 1
                             </div>
                             <div className="box-body overflow-scroll">
                                 <table>
