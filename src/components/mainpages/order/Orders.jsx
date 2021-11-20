@@ -7,22 +7,38 @@ function Product() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
     const status = [{
-        id: 0,
         name: 'Đang chờ xử lý',
-        class: 'badge-warning'
+        class: 'order-ready'
     }, {
-        id: 1,
         name: 'Đang giao hàng',
-        class: 'badge-info'
+        class: 'order-delivery'
     }, {
-        id: 2,
         name: 'Đã giao hàng',
-        class: 'badge-success'
+        class: 'order-shipped'
     }, {
-        id: 3,
-        name: 'Đã hủy',
-        class: 'badge-danger'
+        name: 'Huỷ bỏ',
+        class: 'order-cancel'
     }]
+
+    const sortOrder = () => {
+        return order.sort((a,b) => {
+            return new Date(a.update_at).getTime() -
+                new Date(b.update_at).getTime()
+        }).reverse();
+    }
+
+    console.log(sortOrder())
+
+
+    const getClassStatus = (str) => {
+        let className = ''
+        status.find(item => {
+            if (item.name === str) {
+                className = item.class
+            }
+        })
+        return className
+    }
 
     return (
         <div className="main">
@@ -58,7 +74,7 @@ function Product() {
                                     </thead>
                                     <tbody>
                                     {
-                                        order && order.map((item, index) => {
+                                        order && sortOrder().map((item, index) => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>#{index + 1}</td>
@@ -66,7 +82,7 @@ function Product() {
                                                     <td>{item.created_at}</td>
                                                     <td>{item.payment}</td>
                                                     <td>{item.total ? formatCash(item.total) : null} <sup>đ</sup></td>
-                                                    <td><span className="order-status order-cancel">{item.status}</span></td>
+                                                    <td><span className={`order-status ${getClassStatus(item.status)}`}>{item.status}</span></td>
                                                 </tr>
                                             )
                                         })
