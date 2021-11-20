@@ -473,3 +473,31 @@
 }
 
 /* end product */
+
+/* Phân trang */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination>li>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+.pagination>li>a.active {
+  background-color: var(--black);
+  color: var(--while);
+}
+
+.pagination>li>a:hover {
+  border: 2px solid var(--black);
+}
+/* end phân trang */
+

@@ -147,7 +147,19 @@ function Product() {
                                     </tbody>
                                 </table>
                             </div>
+
+                            <ul className="pagination">
+                                <li><a href="#"><i className="ti-angle-left"></i></a></li>
+                                <li><a href="#" className="active">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#"><i className="ti-angle-right"></i></a></li>
+                            </ul>
                         </div>
+
+
                     </div>
                 </div>
             </div>
