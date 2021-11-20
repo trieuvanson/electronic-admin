@@ -472,6 +472,25 @@
   margin-left: 15px;
 }
 
+.update-end {
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #da0e0e;
+  font-style: italic;
+}
+
+.box-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box-text span {
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #da0e0e;
+  font-style: italic;
+}
+
 /* end product */
 
 /* Phân trang */

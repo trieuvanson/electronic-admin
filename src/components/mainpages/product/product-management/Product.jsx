@@ -98,7 +98,8 @@ function Product() {
                                             <img src={product.thumbnail}alt="" className="table-img"/>
                                         </td>
                                         <td>
-                                            {product.name}
+                                            {product.name} <sup className="update-end">cập nhập lần cuối:
+                                            12/12/22001</sup>
                                             <div className="table-title">
                                                 <Link to="#" className="mr-8 text-priamry">
                                                     <i className="ti-eye"></i>
