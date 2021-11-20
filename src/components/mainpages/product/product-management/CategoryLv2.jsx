@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CateLevel2() {
+function CategoryLv2() {
 
     return (
         <div className="main">
@@ -164,4 +164,4 @@ function CateLevel2() {
     )
 }
 
-export default CateLevel2
+export default CategoryLv2

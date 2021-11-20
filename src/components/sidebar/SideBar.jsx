@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function SideBar() {
     const [show, setShow] = useState([
         {
-            active: false,
+            active: true,
             index: 1
         },
         {
@@ -40,8 +40,8 @@ function SideBar() {
         {
             index: 1,
             liClass: '',
-            link: "#",
-            linkClass: 'active',
+            link: "/admin/dashboard",
+            linkClass: '',
             icon: "ti-home",
             name: "Dashboard",
             dropdown: "",
@@ -60,17 +60,17 @@ function SideBar() {
             child: [
                 {
                     id: 1,
-                    link: "#",
+                    link: "/admin/product/brand",
                     name: "Danh mục cấp 1"
                 },
                 {
                     id: 2,
-                    link: "#",
+                    link: "/admin/product/category",
                     name: "Danh mục cấp 2"
                 },
                 {
                     id: 3,
-                    link: "#",
+                    link: "/admin/product",
                     name: "Sản phẩm"
                 }
             ]
@@ -139,7 +139,7 @@ function SideBar() {
     return (
         <div className="sidebar">
             <div className="sidebar-logo">
-                <h3>Sramt Thing</h3>
+                <h3>Smart Things</h3>
                 <div className="sidebar-close" id="sidebar-close">
                     <i className="ti-arrow-left"/>
                 </div>
@@ -157,10 +157,10 @@ function SideBar() {
             </div>
             <ul className="sidebar-menu">
                 {
-                    sidebars.map((sd) => {
+                    sidebars.map((sd, index) => {
                         return (
                             <li className={sd.liClass} key={sd.index}>
-                                <Link to={sd.link} className={sd.linkClass} onClick={() => onClickSidebar(sd.index)}>
+                                <Link to={sd.link} className={show[index].active?"active":""} onClick={() => onClickSidebar(sd.index)}>
                                     <i className={sd.icon}/>
                                     <span>{sd.name}</span>
                                     {sd.dropdown ? <div className={sd.dropdown}/> : null}

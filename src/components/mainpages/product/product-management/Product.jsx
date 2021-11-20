@@ -1,7 +1,9 @@
-import React from 'react'
-
-function CateLevel1() {
-
+import React, {useContext} from 'react'
+import {GlobalState} from "../../../../GlobalState"
+import {Link} from "react-router-dom"
+function Product() {
+    const state = useContext(GlobalState)
+    const [products] = state.productAPI.products
     return (
         <div className="main">
             <div className="main-header">
@@ -9,7 +11,7 @@ function CateLevel1() {
                     <i className="ti-menu"></i>
                 </div>
                 <div className="main-title">
-                    Quản lý sản phẩm cấp 1
+                    Quản lý sản phẩm
                 </div>
             </div>
             <div className="main-content">
@@ -35,11 +37,34 @@ function CateLevel1() {
                             </div>
                         </div>
                     </div>
+                    <div className="col-12">
+                        <div className="box-light box-btn">
+                            <select className="selection">
+                                <option value="">Chọn danh mục</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
 
+                            <select className="selection">
+                                <option value="">Chọn danh mục</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+
+                            <select className="selection">
+                                <option value="">Chọn hãng</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className="col-12">
                         <div className="box">
                             <div className="box-header">
-                                Danh mục sản phẩm cấp 1
+                                Danh mục sản phẩm
                             </div>
                             <div className="box-body overflow-scroll">
                                 <table>
@@ -52,47 +77,61 @@ function CateLevel1() {
                                         <th>Hình</th>
                                         <th>Tiêu đề</th>
                                         <th className="text-center">Nổi bật</th>
+                                        <th className="text-center">Nổi bật danh mục</th>
+                                        <th className="text-center">Sale</th>
+                                        <th className="text-center">Khuyến mãi</th>
                                         <th className="text-center">Hiển thị</th>
                                         <th>Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                        {
+                                            products && products.map((product, index) => (
+                                                <tr key = {product.id}>
                                         <td>
                                             <input type="checkbox" name="" id=""/>
                                         </td>
                                         <td>
-                                            <input type="text" className="table-input" value="2"/>
+                                            <input type="text" className="table-input" value={++index}/>
                                         </td>
                                         <td>
-                                            <img src="images/product11.jpg" alt="" className="table-img"/>
+                                            <img src={product.thumbnail}alt="" className="table-img"/>
                                         </td>
                                         <td>
-                                            Điện thoại
+                                            {product.name}
                                             <div className="table-title">
-                                                <a href="" className="mr-8 text-priamry">
+                                                <Link to="#" className="mr-8 text-priamry">
                                                     <i className="ti-eye"></i>
                                                     view
-                                                </a>
-                                                <a href="" className="mr-8 text-priamry">
+                                                </Link>
+                                                <Link to={`/admin/product/${product.id}`} className="mr-8 text-priamry">
                                                     <i className="ti-pencil-alt"></i>
                                                     edit
-                                                </a>
-                                                <a href="" className="mr-8 text-success">
+                                                </Link>
+                                                <Link to="#" className="mr-8 text-success">
                                                     <i className="ti-files"></i>
                                                     copy
-                                                </a>
-                                                <a href="" className="text-danger">
+                                                </Link>
+                                                <Link to="#" className="text-danger">
                                                     <i className="ti-trash"></i>
                                                     delete
-                                                </a>
+                                                </Link>
                                             </div>
                                         </td>
                                         <td className="text-center">
+                                            <input type="checkbox" checked = {product.features} name="" id=""/>
+                                        </td>
+                                        <td className="text-center">
                                             <input type="checkbox" name="" id=""/>
                                         </td>
                                         <td className="text-center">
                                             <input type="checkbox" name="" id=""/>
+                                        </td>
+                                        <td className="text-center">
+                                            <input type="checkbox" name="" checked = {product.best_seller} id=""/>
+                                        </td>
+                                        <td className="text-center">
+                                            <input type="checkbox" name="" checked = {product.status} id=""/>
                                         </td>
                                         <td>
                                             <a href="product-detail.html">
@@ -103,53 +142,8 @@ function CateLevel1() {
                                             </button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>
-                                            <input type="text" className="table-input" value="2"/>
-                                        </td>
-                                        <td>
-                                            <img src="images/product11.jpg" alt="" className="table-img"/>
-                                        </td>
-                                        <td>
-                                            Điện thoại
-                                            <div className="table-title">
-                                                <a href="" className="mr-8 text-priamry">
-                                                    <i className="ti-eye"></i>
-                                                    view
-                                                </a>
-                                                <a href="" className="mr-8 text-priamry">
-                                                    <i className="ti-pencil-alt"></i>
-                                                    edit
-                                                </a>
-                                                <a href="" className="mr-8 text-success">
-                                                    <i className="ti-files"></i>
-                                                    copy
-                                                </a>
-                                                <a href="" className="text-danger">
-                                                    <i className="ti-trash"></i>
-                                                    delete
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>
-                                            <a href="product-detail.html">
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </a>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -162,4 +156,4 @@ function CateLevel1() {
     )
 }
 
-export default CateLevel1
+export default Product

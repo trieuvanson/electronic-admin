@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Product() {
+function CategoryLv1() {
 
     return (
         <div className="main">
@@ -9,7 +9,7 @@ function Product() {
                     <i className="ti-menu"></i>
                 </div>
                 <div className="main-title">
-                    Quản lý sản phẩm
+                    Quản lý danh mục cấp 1
                 </div>
             </div>
             <div className="main-content">
@@ -35,34 +35,11 @@ function Product() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12">
-                        <div className="box-light box-btn">
-                            <select className="selection">
-                                <option value="">Chọn danh mục</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
 
-                            <select className="selection">
-                                <option value="">Chọn danh mục</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
-
-                            <select className="selection">
-                                <option value="">Chọn hãng</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                            </select>
-                        </div>
-                    </div>
                     <div className="col-12">
                         <div className="box">
                             <div className="box-header">
-                                Danh mục sản phẩm
+                                Danh mục danh mục cấp 1
                             </div>
                             <div className="box-body overflow-scroll">
                                 <table>
@@ -75,9 +52,6 @@ function Product() {
                                         <th>Hình</th>
                                         <th>Tiêu đề</th>
                                         <th className="text-center">Nổi bật</th>
-                                        <th className="text-center">Nổi bật danh mục</th>
-                                        <th className="text-center">sale</th>
-                                        <th className="text-center">Khuyến mãi</th>
                                         <th className="text-center">Hiển thị</th>
                                         <th>Thao tác</th>
                                     </tr>
@@ -120,15 +94,6 @@ function Product() {
                                         <td className="text-center">
                                             <input type="checkbox" name="" id=""/>
                                         </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
                                         <td>
                                             <a href="product-detail.html">
                                                 <i className="ti-pencil-alt icon-edit"></i>
@@ -175,15 +140,6 @@ function Product() {
                                         <td className="text-center">
                                             <input type="checkbox" name="" id=""/>
                                         </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
                                         <td>
                                             <a href="product-detail.html">
                                                 <i className="ti-pencil-alt icon-edit"></i>
@@ -206,4 +162,4 @@ function Product() {
     )
 }
 
-export default Product
+export default CategoryLv1

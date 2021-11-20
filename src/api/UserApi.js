@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {LOCAL_LINK} from "../utils/hyperlink";
 import axios from "axios";
 
@@ -16,11 +16,11 @@ function UserApi(token) {
                     await res.data.roles.forEach((role) => {
                         if (role.id === "ADMIN_ROLE") {
                             setIsAdmin(true)
+                            setUser(res.data)
+                            setIsLogged(true)
                         }
                     })
-                    console.log(res.data)
-                    setUser(res.data)
-                    setIsLogged(true)
+
                 } catch (err) {
                     console.log(err)
                     localStorage.clear()
