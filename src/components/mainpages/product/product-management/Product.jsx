@@ -6,7 +6,7 @@ function Product() {
     const [products, setProducts] = state.productAPI.products
     const action = state.productAPI.productAction
     const updateProductOnclick = (e, id) => {
-        const {name, value} = e.target
+        const {name} = e.target
         products.map(product => {
             if (product.id === id) {
                 product[name] = !product[name]
