@@ -12,7 +12,8 @@ function App() {
         //Đây là của Đại
         //Chờ
         //Giờ test lại nè
-
+        //LÀ như này nhá
+        //Đầu tiên qua bên dai1
         <DataProvider>
             {/*Hi*/}
             <Router>
