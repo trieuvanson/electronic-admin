@@ -86,7 +86,10 @@ function ProductDetail() {
                     <div className="col-12">
                         <div className="box">
                             <div className="box-header">
-                                Chỉnh sửa thông tin
+                                <div className="box-text">
+                                    <p>Chỉnh sửa thông tin</p>
+                                    <span>cập nhập lần cuối: 12/12/2001</span>
+                                </div>
                             </div>
                             <div className="box-body">
                                 <div className="row">

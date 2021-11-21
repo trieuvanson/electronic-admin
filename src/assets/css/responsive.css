@@ -27,4 +27,8 @@
       position: absolute;
       right: -15px;
   }
+
+  .pagination {
+      justify-content: center;
+  }
 }

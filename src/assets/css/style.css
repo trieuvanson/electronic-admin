@@ -476,4 +476,51 @@
   margin-left: 15px;
 }
 
+.update-end {
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #da0e0e;
+  font-style: italic;
+}
+
+.box-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box-text span {
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #da0e0e;
+  font-style: italic;
+}
+
 /* end product */
+
+/* Phân trang */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination>li>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+.pagination>li>a.active {
+  background-color: var(--black);
+  color: var(--while);
+}
+
+.pagination>li>a:hover {
+  border: 2px solid var(--black);
+}
+/* end phân trang */
+

@@ -116,7 +116,8 @@ function Product() {
                                             <img src={product.thumbnail}alt="" className="table-img"/>
                                         </td>
                                         <td>
-                                            {product.name}
+                                            {product.name} <sup className="update-end">cập nhập lần cuối:
+                                            12/12/22001</sup>
                                             <div className="table-title">
                                                 <Link to="#" className="mr-8 text-priamry">
                                                     <i className="ti-eye"></i>
@@ -153,7 +154,19 @@ function Product() {
                                     </tbody>
                                 </table>
                             </div>
+
+                            <ul className="pagination">
+                                <li><a href="#"><i className="ti-angle-left"></i></a></li>
+                                <li><a href="#" className="active">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#"><i className="ti-angle-right"></i></a></li>
+                            </ul>
                         </div>
+
+
                     </div>
                 </div>
             </div>
