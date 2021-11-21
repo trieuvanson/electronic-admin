@@ -7,10 +7,10 @@ function Product() {
     const action = state.productAPI.productAction
 
 
-    const get = () => {
-        var now = new Date(products[0]?.update_at);
-        return new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    }
+    // const get = () => {
+    //     var now = new Date(products[0]?.update_at);
+    //     return new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+    // }
 
 console.log(get())
 
