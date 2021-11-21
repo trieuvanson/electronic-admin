@@ -5,6 +5,15 @@ function Product() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productAPI.products
     const action = state.productAPI.productAction
+
+
+    const get = () => {
+        var now = new Date(products[0]?.update_at);
+        return new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+    }
+
+console.log(get())
+
     const updateProductOnclick = (e, id) => {
         const {name} = e.target
         products.map(product => {
@@ -22,6 +31,7 @@ function Product() {
                 new Date(b.update_at).getTime()
         }).reverse();
     }
+    console.log(sortProductsByDate())
 
 
 
@@ -116,8 +126,7 @@ function Product() {
                                             <img src={product.thumbnail}alt="" className="table-img"/>
                                         </td>
                                         <td>
-                                            {product.name} <sup className="update-end">cập nhập lần cuối:
-                                            12/12/22001</sup>
+                                            {product.name} <sup className="update-end">Cập nhập lần cuối: {product.update_at}</sup>
                                             <div className="table-title">
                                                 <Link to="#" className="mr-8 text-priamry">
                                                     <i className="ti-eye"></i>
