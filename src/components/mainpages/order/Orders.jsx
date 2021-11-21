@@ -55,6 +55,61 @@ function Product() {
                     <div className="col-12">
                         <div className="box">
                             <div className="box-header">
+                                Fitter
+                            </div>
+                            <div className="box-body">
+                                <div className="row">
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Mã</label>
+                                            <input type="text" className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Họ tên</label>
+                                            <input type="text" className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Trạng thái</label>
+                                            <select className="selection">
+                                                <option value="">Chọn danh mục</option>
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                                <option value="">3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Tổng tiền</label>
+                                            <input type="text" className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Từ</label>
+                                            <input type="date" className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Đến</label>
+                                            <input type="date" className="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-12">
+                        <div className="box">
+                            <div className="box-header">
                                 Danh sách đơn hàng
                             </div>
                             <div className="box-body overflow-scroll">
