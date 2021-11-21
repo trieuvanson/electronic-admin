@@ -3,7 +3,28 @@ import {GlobalState} from "../../../../GlobalState"
 import {Link} from "react-router-dom"
 function Product() {
     const state = useContext(GlobalState)
-    const [products] = state.productAPI.products
+    const [products, setProducts] = state.productAPI.products
+    const action = state.productAPI.productAction
+    const updateProductOnclick = (e, id) => {
+        const {name, value} = e.target
+        products.map(product => {
+            if (product.id === id) {
+                product[name] = !product[name]
+                action.updateProduct(product)
+            }
+        })
+        setProducts([...products])
+    }
+
+    const sortProductsByDate = () => {
+        return products.sort((a,b) => {
+            return new Date(a.update_at).getTime() -
+                new Date(b.update_at).getTime()
+        }).reverse();
+    }
+
+
+
     return (
         <div className="main">
             <div className="main-header">
@@ -70,27 +91,24 @@ function Product() {
                                 <table>
                                     <thead>
                                     <tr>
-                                        <th>
-                                            <input type="checkbox" name="" id=""/>
-                                        </th>
+                                        {/*<th>*/}
+                                        {/*    <input type="checkbox" name="" id=""/>*/}
+                                        {/*</th>*/}
                                         <th>STT</th>
                                         <th>Hình</th>
                                         <th>Tiêu đề</th>
                                         <th className="text-center">Nổi bật</th>
-                                        <th className="text-center">Nổi bật danh mục</th>
-                                        <th className="text-center">Sale</th>
-                                        <th className="text-center">Khuyến mãi</th>
+                                        <th className="text-center">Bán chạy</th>
                                         <th className="text-center">Hiển thị</th>
-                                        <th>Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            products && products.map((product, index) => (
+                                            products && sortProductsByDate().map((product, index) => (
                                                 <tr key = {product.id}>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
+                                        {/*<td>*/}
+                                        {/*    <input type="checkbox" name="" id=""/>*/}
+                                        {/*</td>*/}
                                         <td>
                                             <input type="text" className="table-input" value={++index}/>
                                         </td>
@@ -109,10 +127,6 @@ function Product() {
                                                     <i className="ti-pencil-alt"></i>
                                                     edit
                                                 </Link>
-                                                <Link to="#" className="mr-8 text-success">
-                                                    <i className="ti-files"></i>
-                                                    copy
-                                                </Link>
                                                 <Link to="#" className="text-danger">
                                                     <i className="ti-trash"></i>
                                                     delete
@@ -120,27 +134,19 @@ function Product() {
                                             </div>
                                         </td>
                                         <td className="text-center">
-                                            <input type="checkbox" checked = {product.features} name="" id=""/>
+                                            <input type="checkbox"
+                                                   onClick={(e) => updateProductOnclick(e,product.id)}
+                                                   checked = {product.features} name="features" id="features"/>
                                         </td>
                                         <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
+                                            <input type="checkbox" name="best_seller"
+                                                   onClick={(e) => updateProductOnclick(e,product.id)}
+                                                   checked = {product.best_seller}  id="best_seller"/>
                                         </td>
                                         <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" checked = {product.best_seller} id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" checked = {product.status} id=""/>
-                                        </td>
-                                        <td>
-                                            <a href="product-detail.html">
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </a>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
+                                            <input type="checkbox" name="status"
+                                                   onClick={(e) => updateProductOnclick(e,product.id)}
+                                                   checked = {product.status} id="status"/>
                                         </td>
                                     </tr>
                                             ))

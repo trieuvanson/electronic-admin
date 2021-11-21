@@ -271,6 +271,10 @@
   color: #c0392b;
   background-color: rgba(240, 219, 217, 1);
 }
+.order-delivery {
+  color: #6e00da;
+  background-color: rgb(193 167 218);
+}
 
 .payment-status {
   display: flex;

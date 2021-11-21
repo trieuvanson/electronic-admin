@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {GlobalState} from "../../../../GlobalState";
+import {Link} from "react-router-dom";
 
 function CategoryLv2() {
+    const state = useContext(GlobalState)
+    const [categories, setCategories] = state.categoriesApi.categories
 
     return (
         <div className="main">
@@ -9,7 +13,7 @@ function CategoryLv2() {
                     <i className="ti-menu"></i>
                 </div>
                 <div className="main-title">
-                    Quản lý sản phẩm cấp 2
+                    Quản lý Danh Mục cấp 2
                 </div>
             </div>
             <div className="main-content">
@@ -27,10 +31,10 @@ function CategoryLv2() {
 
                             <div className="form-search">
                                 <div className="input-group">
-                                    <input type="text" />
-                                        <div className="icon">
-                                            <i className="ti-search"></i>
-                                        </div>
+                                    <input type="text"/>
+                                    <div className="icon">
+                                        <i className="ti-search"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +42,7 @@ function CategoryLv2() {
                     <div className="col-12">
                         <div className="box-light box-btn">
                             <select className="selection">
-                                <option value="">Chọn danh mục</option>
+                                <option value="">Chọn danh mục cấp 1</option>
                                 <option value="">1</option>
                                 <option value="">2</option>
                                 <option value="">3</option>
@@ -54,103 +58,47 @@ function CategoryLv2() {
                                 <table>
                                     <thead>
                                     <tr>
-                                        <th>
-                                            <input type="checkbox" name="" id=""/>
-                                        </th>
+                                        {/*<th>*/}
+                                        {/*    <input type="checkbox" name="" id=""/>*/}
+                                        {/*</th>*/}
                                         <th>STT</th>
                                         <th>Tiêu đề</th>
-                                        <th className="text-center">Nổi bật</th>
-                                        <th className="text-center">Hiển thị</th>
-                                        <th>Thao tác</th>
+                                        <th>Danh mục cấp 1</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>
-                                            <input type="text" className="table-input" value="2"/>
-                                        </td>
-                                        <td>
-                                            Điện thoại
-                                            <div className="table-title">
-                                                <a href="" className="mr-8 text-priamry">
-                                                    <i className="ti-eye"></i>
-                                                    view
-                                                </a>
-                                                <a href="" className="mr-8 text-priamry">
-                                                    <i className="ti-pencil-alt"></i>
-                                                    edit
-                                                </a>
-                                                <a href="" className="mr-8 text-success">
-                                                    <i className="ti-files"></i>
-                                                    copy
-                                                </a>
-                                                <a href="" className="text-danger">
-                                                    <i className="ti-trash"></i>
-                                                    delete
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>
-                                            <a href="product-detail.html">
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </a>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>
-                                            <input type="text" className="table-input" value="2"/>
-                                        </td>
-                                        <td>
-                                            Điện thoại
-                                            <div className="table-title">
-                                                <a href="" className="mr-8 text-priamry">
-                                                    <i className="ti-eye"></i>
-                                                    view
-                                                </a>
-                                                <a href="" className="mr-8 text-priamry">
-                                                    <i className="ti-pencil-alt"></i>
-                                                    edit
-                                                </a>
-                                                <a href="" className="mr-8 text-success">
-                                                    <i className="ti-files"></i>
-                                                    copy
-                                                </a>
-                                                <a href="" className="text-danger">
-                                                    <i className="ti-trash"></i>
-                                                    delete
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td className="text-center">
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>
-                                            <a href="product-detail.html">
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </a>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    {
+                                        categories.map((category, index) => {
+                                            return (
+                                                <tr key={category.id}>
+                                                    <td>
+                                                        <input type="text" className="table-input" value={index + 1}/>
+                                                    </td>
+                                                    <td>
+                                                        {category.name}
+                                                        <div className="table-title">
+                                                            <Link to="#" className="mr-8 text-priamry">
+                                                                <i className="ti-eye"/>
+                                                                view
+                                                            </Link>
+                                                            <Link to={`category/${category.id}`}
+                                                                  className="mr-8 text-priamry">
+                                                                <i className="ti-pencil-alt"/>
+                                                                edit
+                                                            </Link>
+                                                            <Link to="#" className="text-danger">
+                                                                <i className="ti-trash"/>
+                                                                delete
+                                                            </Link>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {category.brand?.name}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
 
                                     </tbody>
                                 </table>
