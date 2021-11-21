@@ -8,9 +8,8 @@ import Login from "./components/mainpages/auth/Login";
 
 function App() {
     return (
-        //Tao test ở đây
+        //Tét
         <DataProvider>
-            {/*Hi*/}
             <Router>
                 <Switch>
                     <Route exact path={["/admin/:page", "/admin/:page/:page", "/admin/:page/:page/:id"]}>
