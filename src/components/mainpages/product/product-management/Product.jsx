@@ -13,7 +13,7 @@ function Product() {
     // }
     // /Giờ t sửa bên master, m sửa bên dai1. Okela? ok
     //Rồi á. m push lleenrar r t pull giờ ko, m fetch. à pull thử Trong này luôn a ok r gio
-    //Đã sửa
+    //Đã sửa ối giờ ơi di ngu, giờ m push lên để t merge
     const updateProductOnclick = (e, id) => {
         const {name} = e.target
         products.map(product => {
