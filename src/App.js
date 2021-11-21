@@ -12,8 +12,8 @@ function App() {
         //Đây là của Đại
         //Chờ
         //Giờ test lại nè
-        //LÀ như này nhá
-        //Đầu tiên qua bên dai1
+        //Ở master ấn fetch, xong ấn update(nếu có thông báo)
+        //Xong rồi qua dai1 để merge
         <DataProvider>
             {/*Hi*/}
             <Router>
