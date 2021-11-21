@@ -9,6 +9,7 @@ import Login from "./components/mainpages/auth/Login";
 function App() {
     return (
         <DataProvider>
+            {/*Hi*/}
             <Router>
                 <Switch>
                     <Route exact path={["/admin/:page", "/admin/:page/:page", "/admin/:page/:page/:id"]}>
