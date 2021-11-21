@@ -8,7 +8,6 @@ import Login from "./components/mainpages/auth/Login";
 
 function App() {
     return (
-        //Tao test ở đây
         <DataProvider>
             <Router>
                 <Switch>
