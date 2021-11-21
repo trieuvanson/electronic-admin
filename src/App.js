@@ -17,6 +17,7 @@ function App() {
         //Xong là xong xuôi
         //Giờ t sửa ở đây nè lm sao quen me r
         //H push lên dai1
+        //Hi
         <DataProvider>
             {/*Hi*/}
             <Router>
