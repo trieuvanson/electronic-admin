@@ -14,6 +14,7 @@ function App() {
         //Giờ test lại nè
         //Ở master ấn fetch, xong ấn update(nếu có thông báo)
         //Xong rồi qua dai1 để merge
+        //Xong là xong xuôi
         <DataProvider>
             {/*Hi*/}
             <Router>
