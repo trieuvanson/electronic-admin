@@ -9,6 +9,7 @@ function CategoriesApi() {
         const res = await axios.get(`${LOCAL_LINK}/api/product-category/`)
         setCategories(res.data)
     }
+    //Test
     const getBrands = async () => {
         const res = await axios.get(`${LOCAL_LINK}/api/brand/`)
         setBrands(res.data)
