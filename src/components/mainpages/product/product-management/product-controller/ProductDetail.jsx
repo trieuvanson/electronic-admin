@@ -20,6 +20,7 @@ function ProductDetail() {
         setCategoriesByBrands(newArray)
     }
 
+
     function getDetail() {
         products.forEach(pro => {
             if (pro.id == params.id) {
@@ -50,6 +51,7 @@ function ProductDetail() {
 
     const inputChange = (e) => {
         const {name, value} = e.target
+        console.log([name])
         if (name === "category") {
             setDetail({...detail, category: {id: value, brand: {id: detail.category.brand.id}}})
         } else if (name === "brand") {
