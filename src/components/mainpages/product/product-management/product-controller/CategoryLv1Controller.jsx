@@ -56,19 +56,19 @@ function CategoryLv1() {
                                 </div>
                             </div>
                             <div className="box-footer box-btn">
-                                <button className="btn btn-primary btn-icon-text btn-hover">
+                                <button className="btn btn-primary btn-icon-text">
                                     <i className="ti-save"></i>
                                     Lưu
                                 </button>
-                                <button className="btn btn-success btn-icon-text btn-hover">
+                                <button className="btn btn-success btn-icon-text">
                                     <i className="ti-save"></i>
                                     Lưu lại trang
                                 </button>
-                                <button className="btn btn-danger btn-icon-text btn-hover">
+                                <button className="btn btn-danger btn-icon-text">
                                     <i className="ti-reload"></i>
                                     Xóa tất cả
                                 </button>
-                                <button className="btn btn-primary btn-icon-text btn-hover">
+                                <button className="btn btn-primary btn-icon-text">
                                     <i className="ti-close"></i>
                                     Thoát
                                 </button>

@@ -121,6 +121,67 @@ function ProductDetail() {
                                             </div>
                                         </div>
                                         <div className="row">
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label className="form-label">Loại sản phẩm</label>
+                                                    <select className="selection form"
+                                                            name="brand"
+                                                            value={detail?.category?.brand?.id}
+                                                            onChange={(e) => {
+                                                                getCategoriesByBrand(e.target.value)
+                                                                inputChange(e)
+                                                            }}
+                                                            onClick={(e) => {
+                                                                getCategoriesByBrand(e.target.value)
+                                                                inputChange(e)
+                                                            }}>
+                                                        {
+                                                            brands.map((item, index) => {
+                                                                return (
+                                                                    <option key={index}
+                                                                            value={item.id}>
+                                                                        {item.name}
+                                                                    </option>
+                                                                )
+                                                            })
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label className="form-label">Hãng</label>
+                                                    <select className="selection form"
+                                                            name="category"
+                                                            onChange={inputChange}
+                                                            value={detail?.category?.id}
+                                                    >
+
+                                                        {
+                                                            categoriesByBrands?
+                                                                categoriesByBrands && categoriesByBrands.map((item, index) => {
+                                                                    return (
+                                                                        <option key={index}
+                                                                                value={item.id}>
+                                                                            {item.name}
+                                                                        </option>
+                                                                    )
+                                                                }):
+                                                                categories.filter(item => item.brand?.id == detail?.category?.brand?.id).map((item, index) => {
+                                                                    return (
+                                                                        <option key={index}
+                                                                                value={item.id}>
+                                                                            {item.name}
+                                                                        </option>
+                                                                    )
+                                                                })
+
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
                                             <div className="col-12">
                                                 <div className="form-group">
                                                     <label className="form-label" htmlFor="description">
@@ -141,67 +202,7 @@ function ProductDetail() {
                                                 <div className="box">
                                                     <div className="box-header">
                                                         Danh mục sản phẩm <br/> <br/>
-                                                        <div className="row">
-                                                            <div className="col-6">
-                                                                <div className="form-group">
-                                                                    <label className="form-label">Loại sản phẩm</label>
-                                                                    <select className="selection"
-                                                                            name="brand"
-                                                                            value={detail?.category?.brand?.id}
-                                                                            onChange={(e) => {
-                                                                                getCategoriesByBrand(e.target.value)
-                                                                                inputChange(e)
-                                                                            }}
-                                                                            onClick={(e) => {
-                                                                                getCategoriesByBrand(e.target.value)
-                                                                                inputChange(e)
-                                                                            }}>
-                                                                        {
-                                                                            brands.map((item, index) => {
-                                                                                return (
-                                                                                    <option key={index}
-                                                                                            value={item.id}>
-                                                                                        {item.name}
-                                                                                    </option>
-                                                                                )
-                                                                            })
-                                                                        }
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-6">
-                                                                <div className="form-group">
-                                                                    <label className="form-label">Hãng</label>
-                                                                    <select className="selection"
-                                                                            name="category"
-                                                                            onChange={inputChange}
-                                                                            value={detail?.category?.id}
-                                                                    >
 
-                                                                        {
-                                                                            categoriesByBrands?
-                                                                            categoriesByBrands && categoriesByBrands.map((item, index) => {
-                                                                                return (
-                                                                                    <option key={index}
-                                                                                            value={item.id}>
-                                                                                        {item.name}
-                                                                                    </option>
-                                                                                )
-                                                                            }):
-                                                                            categories.filter(item => item.brand?.id == detail?.category?.brand?.id).map((item, index) => {
-                                                                                return (
-                                                                                    <option key={index}
-                                                                                            value={item.id}>
-                                                                                        {item.name}
-                                                                                    </option>
-                                                                                )
-                                                                            })
-
-                                                                        }
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -232,21 +233,22 @@ function ProductDetail() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12">
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="box">
-                                                    <div className="box-header">
-                                                        <button className="btn btn-block btn-outline"
-                                                                onClick={updateProduct}>
-                                                            Lưu
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+
+                            <div className="box-footer box-btn">
+                                <button className="btn btn-primary btn-icon-text" onClick={updateProduct}>
+                                    Lưu
+                                </button>
+                                <button className="btn btn-success btn-icon-text">
+                                    Lưu lại trang
+                                </button>
+                                <button className="btn btn-danger btn-icon-text">
+                                    Xóa tất cả
+                                </button>
+                                <button className="btn btn-secondary btn-icon-text">
+                                    Thoát
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -46,11 +46,11 @@ function Product() {
                 <div className="row">
                     <div className="col-12">
                         <div className="box-light box-btn">
-                            <button className="btn btn-primary btn-icon-text btn-hover">
+                            <button className="btn btn-primary btn-icon-text">
                                 <i className="ti-plus"></i>
-                                Thoát
+                                Thêm
                             </button>
-                            <button className="btn btn-danger btn-icon-text btn-hover">
+                            <button className="btn btn-danger btn-icon-text">
                                 <i className="ti-trash"></i>
                                 Xóa tất cả
                             </button>
@@ -87,6 +87,18 @@ function Product() {
                                 <option value="">2</option>
                                 <option value="">3</option>
                             </select>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Từ</label>
+                            <input type="date" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Đến</label>
+                            <input type="date" className="form-control"/>
                         </div>
                     </div>
                     <div className="col-12">

@@ -20,11 +20,11 @@ function CategoryLv1() {
                 <div className="row">
                     <div className="col-12">
                         <div className="box-light box-btn">
-                            <button className="btn btn-primary btn-icon-text btn-hover">
+                            <button className="btn btn-primary btn-icon-text">
                                 <i className="ti-plus"></i>
-                                Thoát
+                                Thêm
                             </button>
-                            <button className="btn btn-danger btn-icon-text btn-hover">
+                            <button className="btn btn-danger btn-icon-text">
                                 <i className="ti-trash"></i>
                                 Xóa tất cả
                             </button>
