@@ -439,15 +439,15 @@
 }
 
 .input-group input {
-  height: 30px;
-  width: 175px;
+  height: 44px;
+  width: 350px;
   outline: none;
   background-color: transparent;
   border: 1px solid var(--main-color);
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
   padding: 0 4px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .icon {
@@ -464,16 +464,22 @@
 }
 
 .selection {
-  min-width: 190px;
-  min-height: 38px;
+  width: 100%;
+  max-width: 252px;
+  min-height: 43px;
   border-radius: 3px;
   font-size: 1.4rem;
   outline: none;
   background-color: transparent;
+  border: 1px solid var(--secondary);
+}
+
+.selection.form {
+  min-width: 310px;
 }
 
 .selection + .selection {
-  margin-left: 15px;
+  margin-left: 50px;
 }
 
 .update-end {

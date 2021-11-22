@@ -16,7 +16,6 @@ function App() {
                         <Pages/>
                     </Route>
                     <Route path="/admin" component={Login}/>
-
                 </Switch>
                 <div className="overlay"/>
             </Router>
