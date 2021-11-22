@@ -501,6 +501,15 @@
   font-style: italic;
 }
 
+.data-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-time span:first-child {
+  color: var(--success);
+  margin-bottom: 8px;
+}
 /* end product */
 
 /* Phân trang */

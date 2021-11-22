@@ -88,7 +88,8 @@ function ProductDetail() {
                             <div className="box-header">
                                 <div className="box-text">
                                     <p>Chỉnh sửa thông tin</p>
-                                    <div>
+                                    <div className="data-time">
+                                        <span>Ngày tạo: {detail.create_at}</span>
                                         <span>cập nhập lần cuối: {detail.update_at}</span>
                                     </div>
 
