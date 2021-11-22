@@ -25,12 +25,12 @@ function Product() {
         }).reverse();
     }
 
-    const cosole = () => {
-        products.filter(product => {
-            return product.id.match(1)
-        })
-    }
-    console.log(cosole())
+    // const cosole = () => {
+    //     products.filter(product => {
+    //         return product.id.match(1)
+    //     })
+    // }
+    // console.log(cosole())
 
 
 
@@ -84,10 +84,6 @@ function Product() {
                                 <option value="">3</option>
                             </select>
 
-                            <label className="form-label">Từ</label>
-                            <input type="date" className="form-control"/>
-                            <label className="form-label">Từ</label>
-                            <input type="date" className="form-control"/>
                         </div>
                     </div>
                     <div className="col-3">
