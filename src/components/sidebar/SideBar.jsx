@@ -160,7 +160,7 @@ function SideBar() {
                     sidebars.map((sd, index) => {
                         return (
                             <li className={sd.liClass} key={sd.index}>
-                                <Link to={sd.link} className={show[index].active?"active":""} onClick={() => onClickSidebar(sd.index)}>
+                                <Link to={sd.link} className={""} onClick={() => onClickSidebar(sd.index)}>
                                     <i className={sd.icon}/>
                                     <span>{sd.name}</span>
                                     {sd.dropdown ? <div className={sd.dropdown}/> : null}
