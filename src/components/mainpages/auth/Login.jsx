@@ -45,14 +45,14 @@ function Login() {
                 <div className="login-card">
                     <p className="login-msg">Đăng nhập vào hệ thống</p>
                     <form action="">
-                        <div className="form-group">
+                        <div className="form-group-login">
                             <div className="login-icon">
                                 <i className="ti-user"></i>
                             </div>
                             <input type="text" className="form-input"
                                   onChange={onChangeInput} name="username" placeholder="Tên tài khoản"/>
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-login">
                             <div className="login-icon">
                                 <i className="ti-lock"></i>
                             </div>
