@@ -1,7 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from "react-router-dom";
+import {GlobalState} from "../../GlobalState";
 
 function SideBar() {
+    const state = useContext(GlobalState)
+    const [user] = state.userAPI.personal;
+
+
+
     const [show, setShow] = useState([
         {
             active: true,
@@ -146,9 +152,9 @@ function SideBar() {
             </div>
             <div className="sidebar-user">
                 <div className="sidebar-user-info">
-                    <img src="./images/avatar.png" alt="User" className="profile-image"/>
+                    <img src={user?user.avatar:null} alt="User" className="profile-image"/>
                     <div className="sidebar-user-name">
-                        Tan Dai
+                        {user?.fullname}
                     </div>
                 </div>
                 <a href="" className="btn btn-outline">
