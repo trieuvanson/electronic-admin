@@ -25,7 +25,7 @@ function OrdersApi(token) {
     }
 
 
-    const getOrderDetails = async (orderId) => {
+    const getOrderDetails = async () => {
         try {
             const res = await axios.get(`${LOCAL_LINK}/api/order/order-details/`, {
                     headers: {Authorization: `Bearer ${token}`}

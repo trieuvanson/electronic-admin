@@ -2,10 +2,12 @@ import React, {useContext} from 'react'
 import Chart from 'react-apexcharts'
 import TableOrdersRender from "./TableOrdersRender";
 import {GlobalState} from "../../../GlobalState";
+import TopProducts from "./TopProducts";
 
 function Index() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
+    const [orderDetails] = state.orderAPI.orderDetails
     const customer_options = {
         options: {},
         series: [
@@ -138,56 +140,7 @@ function Index() {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-3 col-md-6 col-sm-12">
-                        <div className="box f-height">
-                            <div className="box-header">
-                                top product
-                            </div>
-                            <div className="box-body">
-                                <ul className="product-list">
-                                    <li className="product-list-item">
-                                        <div className="item-info">
-                                            <img src="./images/product11.jpg" alt=""/>
-                                                <div className="item-name">
-                                                    <div className="product-name">Dien thoai</div>
-                                                    <div className="text-second">Cloths</div>
-                                                </div>
-                                        </div>
-                                        <div className="item-sale-info">
-                                            <div className="text-second">Sale</div>
-                                            <div className="product-sale">#3333</div>
-                                        </div>
-                                    </li>
-                                    <li className="product-list-item">
-                                        <div className="item-info">
-                                            <img src="./images/product11.jpg" alt=""/>
-                                                <div className="item-name">
-                                                    <div className="product-name">Dien thoai</div>
-                                                    <div className="text-second">Cloths</div>
-                                                </div>
-                                        </div>
-                                        <div className="item-sale-info">
-                                            <div className="text-second">Sale</div>
-                                            <div className="product-sale">#3333</div>
-                                        </div>
-                                    </li>
-                                    <li className="product-list-item">
-                                        <div className="item-info">
-                                            <img src="./images/product11.jpg" alt=""/>
-                                                <div className="item-name">
-                                                    <div className="product-name">Dien thoai</div>
-                                                    <div className="text-second">Cloths</div>
-                                                </div>
-                                        </div>
-                                        <div className="item-sale-info">
-                                            <div className="text-second">Sale</div>
-                                            <div className="product-sale">#3333</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <TopProducts item={orderDetails}/>
                     <div className="col-4 col-md-6 col-sm-12">
                         <div className="box f-height">
                             <div className="box-body">
