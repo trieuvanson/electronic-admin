@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Chart from 'react-apexcharts'
+import TableOrdersRender from "./TableOrdersRender";
+import {GlobalState} from "../../../GlobalState";
 
-function Dashboard() {
-
+function Index() {
+    const state = useContext(GlobalState)
+    const [order] = state.orderAPI.order
     const customer_options = {
         options: {},
         series: [
@@ -204,106 +207,11 @@ function Dashboard() {
                                 customers
                             </div>
                             <div className="box-body">
-                                <div id="customers-chart"></div>
+                                <div id="customers-chart"/>
                             </div>
                         </div>
                     </div>
-                    <div className="col-12">
-                        <div className="box">
-                            <div className="box-header">
-                                Order
-                            </div>
-                            <div className="box-body overflow-scroll">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <input type="checkbox" name="" id=""/>
-                                        </th>
-                                        <th>Mã</th>
-                                        <th>Họ tên</th>
-                                        <th>Ngày đặt</th>
-                                        <th>Hình thức thanh toán</th>
-                                        <th>Tổng</th>
-                                        <th>Tình trạng</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Nguyễn Thị Mỹ Duyên</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                    <span className="order-status order-shipped">
-                                      chưa giao
-                                    </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Tân Đại</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                    <span className="order-status order-ready">
-                                      Đã giao
-                                    </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Tân Đại</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                  <span className="order-status order-cancel">
-                                    đã hủy
-                                  </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <TableOrdersRender item={order}/>
                 </div>
             </div>
         </div>
@@ -311,4 +219,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard
+export default Index

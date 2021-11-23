@@ -2,23 +2,12 @@ import React, {useContext} from 'react'
 import {Link} from "react-router-dom"
 import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
+import {OrderStatus} from "../../../utils/DataCommon";
 
 function Product() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
-    const status = [{
-        name: 'Đang chờ xử lý',
-        class: 'order-ready'
-    }, {
-        name: 'Đang giao hàng',
-        class: 'order-delivery'
-    }, {
-        name: 'Đã giao hàng',
-        class: 'order-shipped'
-    }, {
-        name: 'Huỷ bỏ',
-        class: 'order-cancel'
-    }]
+    const status = OrderStatus
 
     const sortOrder = () => {
         return order.sort((a,b) => {
@@ -27,11 +16,9 @@ function Product() {
         }).reverse();
     }
 
-    console.log(sortOrder())
-
-
     const getClassStatus = (str) => {
         let className = ''
+        console.log(status)
         status.find(item => {
             if (item.name === str) {
                 className = item.class
@@ -59,12 +46,6 @@ function Product() {
                             </div>
                             <div className="box-body">
                                 <div className="row">
-                                    <div className="col-3">
-                                        <div className="form-group">
-                                            <label className="form-label">Mã</label>
-                                            <input type="text" className="form-control"/>
-                                        </div>
-                                    </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Họ tên</label>
@@ -133,7 +114,25 @@ function Product() {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>#{index + 1}</td>
-                                                    <td>{item.address?.fullname}</td>
+                                                    <td>{item.address?.fullname}
+                                                        <sup className="update-end"> Cập nhập lần
+                                                            cuối: {item.update_at}</sup>
+                                                        <div className="table-title">
+                                                            <Link to="#" className="mr-8 text-priamry">
+                                                                <i className="ti-eye"></i>
+                                                                view
+                                                            </Link>
+                                                            <Link to={`/admin/product/${item.id}`}
+                                                                  className="mr-8 text-priamry">
+                                                                <i className="ti-pencil-alt"></i>
+                                                                edit
+                                                            </Link>
+                                                            <Link to="#" className="text-danger">
+                                                                <i className="ti-trash"></i>
+                                                                delete
+                                                            </Link>
+                                                        </div>
+                                                    </td>
                                                     <td>{item.created_at}</td>
                                                     <td>{item.payment}</td>
                                                     <td>{item.total ? formatCash(item.total) : null} <sup>đ</sup></td>

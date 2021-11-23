@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState"
 import {Link} from "react-router-dom"
 function Product() {
@@ -24,13 +24,48 @@ function Product() {
                 new Date(b.update_at).getTime()
         }).reverse();
     }
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(10)
 
-    // const cosole = () => {
-    //     products.filter(product => {
-    //         return product.id.match(1)
-    //     })
-    // }
-    // console.log(cosole())
+    const pages = [];
+    const productslength = Math.ceil(products.length / itemsPerPage);
+
+    for (let i = 0; i < productslength; i++) {
+        pages.push(i + 1);
+    }
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const renderPageNumbers = pages && pages.map(number => {
+        return (
+            <li key={number}>
+                <Link to="#" id={number} className={number === currentPage ? "active" : ""}
+                      onClick={(e) => handleClickSetCurrentPage(e)}>{number}</Link>
+            </li>
+        )
+    })
+    const currentItems = sortProductsByDate().slice(indexOfFirstItem, indexOfLastItem);
+
+
+    const handleClickSetCurrentPage = (e) => {
+        setCurrentPage(Number(e.target.id))
+        window.scroll(0,0)
+    }
+
+    const next = () => {
+        if (currentPage <= renderPageNumbers.length - 1) {
+            setCurrentPage(currentPage + 1)
+            window.scroll(0,0)
+        }
+    }
+
+    const prev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            window.scroll(0,0)
+        }
+    }
 
 
 
@@ -120,7 +155,7 @@ function Product() {
                                     </thead>
                                     <tbody>
                                     {
-                                        products && sortProductsByDate().map((product, index) => (
+                                        products && currentItems.map((product, index) => (
                                             <tr key={product.id}>
                                                 {/*<td>*/}
                                                 {/*    <input type="checkbox" name="" id=""/>*/}
@@ -173,13 +208,13 @@ function Product() {
                             </div>
 
                             <ul className="pagination">
-                                <li><a href="#"><i className="ti-angle-left"></i></a></li>
-                                <li><a href="#" className="active">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#"><i className="ti-angle-right"></i></a></li>
+                                <li><Link to="#"
+                                          onClick={() => prev()}><i
+                                    className='ti-angle-left'/></Link></li>
+                                {renderPageNumbers}
+                                <li><Link to="#"
+                                          onClick={() => next()}><i
+                                    className='ti-angle-right'/></Link></li>
                             </ul>
                         </div>
 

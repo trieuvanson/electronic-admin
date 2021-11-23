@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Switch} from "react-router-dom";
-import Dashboard from "./dashboard/Dashboard";
+import Index from "./dashboard/index";
 import Product from "./product/product-management/Product";
 import CategoryLv1 from "./product/product-management/CategoryLv1";
 import CategoryLv2 from "./product/product-management/CategoryLv2";
@@ -11,7 +11,7 @@ import Orders from "./order/Orders";
 function Pages() {
     return (
         <Switch>
-            <Route path={["/admin/dashboard"]} exact component={Dashboard} />
+            <Route path={["/admin/dashboard"]} exact component={Index} />
             <Route path={"/admin/product/brand/:id"} exact component={CategoryLv1Controller} />
             <Route path={"/admin/product/brand"} exact component={CategoryLv1} />
             <Route path={"/admin/product/category/:id"} exact component={CategoryLv2Controller} />

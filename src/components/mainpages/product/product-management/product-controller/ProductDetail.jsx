@@ -204,18 +204,6 @@ function ProductDetail() {
                                             <div className="col-12">
                                                 <div className="box">
                                                     <div className="box-header">
-                                                        Danh mục sản phẩm <br/> <br/>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="box">
-                                                    <div className="box-header">
                                                         Hình ảnh sản phẩm <br/>
                                                         <label htmlFor="thumbnail">
                                                             <img src={detail.thumbnail} width="50%" alt=""/>

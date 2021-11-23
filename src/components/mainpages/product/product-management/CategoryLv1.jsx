@@ -1,10 +1,55 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState";
 import {Link} from "react-router-dom";
 
 function CategoryLv1() {
     const state = useContext(GlobalState)
     const [brands, setBrands] = state.categoriesApi.brands
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(10)
+
+    const pages = [];
+    const itemsLength = Math.ceil(brands.length / itemsPerPage);
+
+    for (let i = 0; i < itemsLength; i++) {
+        pages.push(i + 1);
+    }
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const renderPageNumbers = pages && pages.map(number => {
+        return (
+            <li key={number}>
+                <Link to="#" id={number} className={number === currentPage ? "active" : ""}
+                      onClick={(e) => handleClickSetCurrentPage(e)}>{number}</Link>
+            </li>
+        )
+    })
+    const currentItems = brands.slice(indexOfFirstItem, indexOfLastItem);
+
+
+    const handleClickSetCurrentPage = (e) => {
+        setCurrentPage(Number(e.target.id))
+        window.scroll(0,0)
+    }
+
+    const next = () => {
+        if (currentPage <= renderPageNumbers.length - 1) {
+            setCurrentPage(currentPage + 1)
+            window.scroll(0,0)
+        }
+    }
+
+    const prev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            window.scroll(0,0)
+        }
+    }
+
+
 
     return (
         <div className="main">
@@ -55,14 +100,15 @@ function CategoryLv1() {
                                     </thead>
                                     <tbody>
                                     {
-                                        brands.map((brand, index) => {
+                                        currentItems.map((brand, index) => {
                                             return (
                                                 <tr key={brand.id}>
                                                     <td>
                                                         <input type="text" className="table-input" value={index+1}/>
                                                     </td>
                                                     <td>
-                                                        {brand.name}
+                                                        {brand.name} <sup className="update-end">Cập nhập lần
+                                                        cuối: {brand.update_at}</sup>
                                                         <div className="table-title">
                                                             <Link to="#" className="mr-8 text-priamry">
                                                                 <i className="ti-eye"/>
@@ -85,6 +131,15 @@ function CategoryLv1() {
                                     </tbody>
                                 </table>
                             </div>
+                            <ul className="pagination">
+                                <li><Link to="#"
+                                          onClick={() => prev()}><i
+                                    className='ti-angle-left'/></Link></li>
+                                {renderPageNumbers}
+                                <li><Link to="#"
+                                          onClick={() => next()}><i
+                                    className='ti-angle-right'/></Link></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
