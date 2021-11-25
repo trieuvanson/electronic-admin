@@ -13,7 +13,7 @@ export default function  TopProducts(props) {
         <div className="col-3 col-md-6 col-sm-12">
             <div className="box f-height">
                 <div className="box-header">
-                    top product
+                    Top sản phẩm
                 </div>
                 {
                     dataAfterGroupBy && dataAfterGroupBy.slice(0,3).map((item, index) => {

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {Link} from "react-router-dom"
 import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
@@ -14,6 +14,49 @@ function Order() {
             return new Date(a.update_at).getTime() -
                 new Date(b.update_at).getTime()
         }).reverse();
+    }
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(10)
+
+    const pages = [];
+    const itemsLength = Math.ceil(order.length / itemsPerPage);
+
+    for (let i = 0; i < itemsLength; i++) {
+        pages.push(i + 1);
+    }
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const renderPageNumbers = pages && pages.map(number => {
+        return (
+            <li key={number}>
+                <Link to="#" id={number} className={number === currentPage ? "active" : ""}
+                      onClick={(e) => handleClickSetCurrentPage(e)}>{number}</Link>
+            </li>
+        )
+    })
+    const currentItems = sortOrder().slice(indexOfFirstItem, indexOfLastItem);
+
+
+    const handleClickSetCurrentPage = (e) => {
+        setCurrentPage(Number(e.target.id))
+        window.scroll(0,0)
+    }
+
+    const next = () => {
+        if (currentPage <= renderPageNumbers.length - 1) {
+            setCurrentPage(currentPage + 1)
+            window.scroll(0,0)
+        }
+    }
+
+    const prev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            window.scroll(0,0)
+        }
     }
 
     const getClassStatus = (str) => {
@@ -57,9 +100,13 @@ function Order() {
                                             <label className="form-label">Trạng thái</label>
                                             <select className="selection">
                                                 <option value="">Chọn danh mục</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
+                                                {
+                                                    OrderStatus.map((item, index) => {
+                                                        return (
+                                                            <option key={index} value={item.name}>{item.name}</option>
+                                                        )
+                                                    })
+                                                }
                                             </select>
                                         </div>
                                     </div>
@@ -79,6 +126,14 @@ function Order() {
                                         <div className="form-group">
                                             <label className="form-label">Đến</label>
                                             <input type="date" className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="form-group">
+                                            <button className="btn btn-primary btn-icon-text btn-hover">
+                                                <i className="ti-save"></i>
+                                                Lọc
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -209,6 +264,15 @@ function Order() {
                                     </tbody>
                                 </table>
                             </div>
+                            <ul className="pagination">
+                                <li><Link to="#"
+                                          onClick={() => prev()}><i
+                                    className='ti-angle-left'/></Link></li>
+                                {renderPageNumbers}
+                                <li><Link to="#"
+                                          onClick={() => next()}><i
+                                    className='ti-angle-right'/></Link></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

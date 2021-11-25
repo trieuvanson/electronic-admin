@@ -78,6 +78,11 @@ function SideBar() {
                     id: 3,
                     link: "/admin/product",
                     name: "Sản phẩm"
+                },
+                {
+                    id: 4,
+                    link: "/admin/slides",
+                    name: "SlideShow"
                 }
             ]
         },
@@ -127,6 +132,18 @@ function SideBar() {
                     link: "#",
                     name: "Chính sách"
                 }
+            ]
+        },
+        {
+            index: 5,
+            liClass: 'sidebar-submenu',
+            link: "#",
+            linkClass: '',
+            icon: "ti-pulse",
+            name: "Thiết lập thông tin",
+            dropdown: "",
+            active: false,
+            child: [
             ]
         }
     ]
