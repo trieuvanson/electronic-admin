@@ -173,10 +173,14 @@ function OrderController() {
                                 <span>Tạm tính</span>
                                 <p className="text-danger">{detail.subTotal>=0?formatCash(detail.subTotal):null}<sup>đ</sup></p>
                             </div>
+                        </div>
+                        <div className="col-12">
                             <div className="order-total">
                                 <span>Giảm giá</span>
                                 <p className="text-danger">{detail.discount>=0?formatCash(detail.discount):null} <sup>đ</sup></p>
                             </div>
+                        </div>
+                        <div className="col-12">
                             <div className="order-total">
                                 <span>Tổng cộng</span>
                                 <p className="text-danger">{detail.total?formatCash(detail.total):null} <sup>đ</sup></p>

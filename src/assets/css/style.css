@@ -419,12 +419,14 @@
 }
 
 .order-total span {
-  margin-right: 130px;
   font-size: 1.6rem;
 }
 
 .order-total p {
   font-size: 1.6rem;
+  min-width: 160px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* end order-detail */
