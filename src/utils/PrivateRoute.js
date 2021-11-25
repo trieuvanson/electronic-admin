@@ -1,20 +1,28 @@
-import React, {Component, useContext} from 'react';
-import {Redirect, Route} from "react-router-dom";
-import {getToken} from "./Common";
-import {GlobalState} from "../GlobalState";
+import {
+    Route,
+    Redirect
+} from 'react-router-dom';
 
-const PublicRoute = ({component: Component, ...rest}) => {
-    const states = useContext(GlobalState)
-    const [user] = states.userAPI.user;
-    return(
+function PrivateRoute({ children, isAuthenticated, ...rest }) {
+    return (
         <Route
             {...rest}
-            render={props => {
-                return user ? <Component {...props} />
-                    : <Redirect to={{pathname: "/admin/dashboard", state: {from: props.location} }} />
-            }}
-            />
-    )
+            render={
+                ({ location }) => (
+                    isAuthenticated
+                        ? (
+                            children
+                        ) : (
+                            <Redirect
+                                to={{
+                                    pathname: '/admin',
+                                    state: { from: location }
+                                }}
+                            />
+                        ))
+            }
+        />
+    );
 }
 
-export default PublicRoute;
+export default PrivateRoute;

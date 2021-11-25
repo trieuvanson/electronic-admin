@@ -28,6 +28,11 @@ function OrderController() {
         setOrderDetailsByOrder(newArray)
     }
 
+    const inputChange = (e) => {
+        const {name, value} = e.target
+        setDetail({...detail, [name]: value})
+        console.log(detail)
+    }
     console.log(orderDetailsByOrder)
 
     async function getDetail() {
@@ -99,7 +104,7 @@ function OrderController() {
                                 <div className="order-detail">
                                     <div className="order">
                                         <span className="order-header">Tình trạng</span>
-                                        <select value={detail?.status} className="order-select">
+                                        <select name="status" value={detail?.status} onChange={inputChange} className="order-select">
                                             {
                                                 OrderStatus.map((item, index) => {
                                                     return (
@@ -118,7 +123,7 @@ function OrderController() {
                                     <div className="order">
                                         <span className="order-header">Ghi chú</span>
                                         <textarea className="order-textarea" rows="6"
-                                                  value={detail?.note} placeholder="Ghi chú"/>
+                                                 name={"note"} onChange={inputChange} value={detail?.note} placeholder="Ghi chú"/>
                                     </div>
 
                                 </div>

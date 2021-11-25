@@ -24,7 +24,7 @@ function UserApi(token) {
                 } catch (err) {
                     console.log(err)
                     localStorage.clear()
-                    window.location.href = "/login"
+                    window.location.href = "/admin"
                 }
             }
             getUser();
