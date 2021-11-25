@@ -18,7 +18,6 @@ function CategoriesApi() {
     useEffect(() => {
         getCategories()
         getBrands()
-
     }, [])
 
 

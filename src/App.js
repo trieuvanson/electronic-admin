@@ -4,6 +4,8 @@ import {DataProvider} from "./GlobalState"
 import SideBar from "./components/sidebar/SideBar";
 import Pages from "./components/mainpages/Pages";
 import Login from "./components/mainpages/auth/Login";
+import PublicRoute from "./utils/PrivateRoute";
+import PrivateRoute from "./utils/PrivateRoute";
 
 
 function App() {
@@ -15,7 +17,7 @@ function App() {
                         <SideBar/>
                         <Pages/>
                     </Route>
-                    <Route path="/admin" component={Login}/>
+                    <Route path={["/admin", "/"]} component={Login}/>
                 </Switch>
                 <div className="overlay"/>
             </Router>

@@ -59,6 +59,7 @@ function OrdersApi(token) {
     //         console.log(err)
     //     })
     // }
+    console.log(order)
 
     const addOrderDetails = async (order) => {
         await axios.post(`${LOCAL_LINK}/api/order/order-details/`, order, {

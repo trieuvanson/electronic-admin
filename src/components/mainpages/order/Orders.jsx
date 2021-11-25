@@ -4,7 +4,7 @@ import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
 import {OrderStatus} from "../../../utils/DataCommon";
 
-function Product() {
+function Order() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
     const status = OrderStatus
@@ -118,11 +118,7 @@ function Product() {
                                                         <sup className="update-end"> Cập nhập lần
                                                             cuối: {item.update_at}</sup>
                                                         <div className="table-title">
-                                                            <Link to="#" className="mr-8 text-priamry">
-                                                                <i className="ti-eye"></i>
-                                                                view
-                                                            </Link>
-                                                            <Link to={`/admin/product/${item.id}`}
+                                                            <Link to={`/admin/order/${item.id}`}
                                                                   className="mr-8 text-priamry">
                                                                 <i className="ti-pencil-alt"></i>
                                                                 edit
@@ -221,4 +217,4 @@ function Product() {
     )
 }
 
-export default Product
+export default Order

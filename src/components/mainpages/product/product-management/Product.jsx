@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState"
 import {Link} from "react-router-dom"
+import {USER_LINK} from "../../../../utils/hyperlink";
 function Product() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productAPI.products
@@ -170,10 +171,10 @@ function Product() {
                                                     {product.name} <sup className="update-end">Cập nhập lần
                                                     cuối: {product.update_at}</sup>
                                                     <div className="table-title">
-                                                        <Link to="#" className="mr-8 text-priamry">
+                                                        <a href={`${USER_LINK}/product/detail/${product.id}`} className="mr-8 text-priamry">
                                                             <i className="ti-eye"></i>
                                                             view
-                                                        </Link>
+                                                        </a>
                                                         <Link to={`/admin/product/${product.id}`}
                                                               className="mr-8 text-priamry">
                                                             <i className="ti-pencil-alt"></i>
