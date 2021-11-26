@@ -19,7 +19,7 @@ function App() {
                         <SideBar/>
                         <Pages/>
                     </Route>
-                    <PublicRoute exact path="/admin" component={Login}/>
+                    <PublicRoute exact path={["/admin", "/"]} component={Login}/>
                 </Switch>
                 <div className="overlay"/>
             </Router>

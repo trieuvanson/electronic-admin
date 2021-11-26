@@ -3,17 +3,34 @@ import {Link} from "react-router-dom"
 import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
 import {OrderStatus} from "../../../utils/DataCommon";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Order() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
     const status = OrderStatus
+    const action = state.orderAPI.action
+    const [filter, setFilter] = useState({
+        fullname: "", status: "", payment: "", max: "", minDate: "", maxDate: ""
+    })
 
     const sortOrder = () => {
         return order.sort((a,b) => {
             return new Date(a.update_at).getTime() -
                 new Date(b.update_at).getTime()
         }).reverse();
+    }
+
+    const inputChange = (e) => {
+        const {name, value} = e.target
+        setFilter({...filter, [name]: value})
+        console.log(filter)
+    }
+    const filterOrder = (e) => {
+        e.preventDefault()
+        action.getOrdersByFilter(filter)
+        toast("Lọc thành công!")
     }
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -61,7 +78,6 @@ function Order() {
 
     const getClassStatus = (str) => {
         let className = ''
-        console.log(status)
         status.find(item => {
             if (item.name === str) {
                 className = item.class
@@ -92,14 +108,16 @@ function Order() {
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Họ tên</label>
-                                            <input type="text" className="form-control"/>
+                                            <input type="text" name={"fullname"} value={filter?.fullname}
+                                                   onChange={inputChange} className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Trạng thái</label>
-                                            <select className="selection">
-                                                <option value="">Chọn danh mục</option>
+                                            <select className="selection" value={filter?.status}
+                                                    onChange={inputChange} name={"status"}>
+                                                <option value="">Tất cả</option>
                                                 {
                                                     OrderStatus.map((item, index) => {
                                                         return (
@@ -112,26 +130,41 @@ function Order() {
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
-                                            <label className="form-label">Tổng tiền</label>
-                                            <input type="text" className="form-control"/>
+                                            <label className="form-label">Khoảng tiền</label>
+                                            <input type="number" value={filter?.max}
+                                                   onChange={inputChange} name={"max"} className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Thanh toán</label>
+                                            <select className="selection" name={"payment"}
+                                                    onChange={inputChange} value={filter?.payment}>
+                                                <option value="">Tất cả</option>
+                                                <option value="Tiền mặt">Tiền mặt</option>
+                                                <option value="Thanh toán Paypal">Thanh toán Paypal</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Từ</label>
-                                            <input type="date" className="form-control"/>
+                                            <input type="date" value={filter?.minDate}
+                                                   onChange={inputChange} name={"minDate"} className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Đến</label>
-                                            <input type="date" className="form-control"/>
+                                            <input type="date" value={filter?.maxDate}
+                                                   onChange={inputChange} name={"maxDate"} className="form-control"/>
                                         </div>
                                     </div>
+
                                     <div className="col-12">
                                         <div className="form-group">
-                                            <button className="btn btn-primary btn-icon-text btn-hover">
-                                                <i className="ti-save"></i>
+                                            <button onClick={filterOrder} className="btn btn-primary btn-icon-text btn-hover">
+                                                <i className="ti-filter"></i>
                                                 Lọc
                                             </button>
                                         </div>
@@ -165,7 +198,7 @@ function Order() {
                                     </thead>
                                     <tbody>
                                     {
-                                        order && sortOrder().map((item, index) => {
+                                        order && currentItems.map((item, index) => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>#{index + 1}</td>
@@ -192,75 +225,6 @@ function Order() {
                                             )
                                         })
                                     }
-                                    {/* <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Nguyễn Thị Mỹ Duyên</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                <span className="order-status order-shipped">
-                                  chưa giao
-                                </span>
-                                        </td>
-                                        <td>
-                                            <a href="order-detail.html" href="btn">
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </a>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Tân Đại</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                <span className="order-status order-ready">
-                                  Đã giao
-                                </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Tân Đại</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                              <span className="order-status order-cancel">
-                                đã hủy
-                              </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>*/}
                                     </tbody>
                                 </table>
                             </div>
@@ -277,6 +241,7 @@ function Order() {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     )
 }
