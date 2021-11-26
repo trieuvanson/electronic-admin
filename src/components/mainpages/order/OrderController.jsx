@@ -47,7 +47,7 @@ function OrderController() {
         <div className="main">
             <div className="main-header">
                 <div className="mobile-toggle" id="mobile-toggle">
-                    <i className="ti-menu"/>
+                    <i className="ti-menu"></i>
                 </div>
                 <div className="main-title">
                     Quản lý đơn hàng
@@ -64,15 +64,15 @@ function OrderController() {
                                 <div className="order-detail">
                                     <div className="order">
                                         <span className="order-header">Mã đơn hàng</span>
-                                        <p className="text-priamry">{detail?.id}</p>
+                                        <p className="text-priamry">2323</p>
                                     </div>
                                     <div className="order">
                                         <span className="order-header">Số điện thoại</span>
-                                        <p>{detail?.address?.phone}</p>
+                                        <p>09870103358</p>
                                     </div>
                                     <div className="order">
                                         <span className="order-header">Ngày đặt</span>
-                                        <p>{detail?.created_at}</p>
+                                        <p>20/02/2001</p>
                                     </div>
                                 </div>
                             </div>
@@ -80,11 +80,11 @@ function OrderController() {
                                 <div className="order-detail">
                                     <div className="order">
                                         <span className="order-header">Hình thức thanh toán</span>
-                                        <p className="text-priamry">{detail?.payment}</p>
+                                        <p className="text-priamry">Tiền mặt</p>
                                     </div>
                                     <div className="order">
                                         <span className="order-header">Email</span>
-                                        <p>{detail?.address?.user?.email}</p>
+                                        <p>@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -92,27 +92,30 @@ function OrderController() {
                                 <div className="order-detail">
                                     <div className="order">
                                         <span className="order-header">Họ tên</span>
-                                        <p className="text-success text-bold text-uppercase">{detail?.address?.fullname}</p>
+                                        <p className="text-success text-bold text-uppercase">Nguyễn Thị Mỹ Lẹ</p>
                                     </div>
                                     <div className="order">
                                         <span className="order-header">Địa chỉ</span>
-                                        <p>{detail?.address?.address}</p>
+                                        <p>phần mềm quang trung, q.12, tp.hcm</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-12 col-md-12 col-sm-12">
                                 <div className="order-detail">
                                     <div className="order">
+                                        <span className="order-header">Yêu cầu khác</span>
+                                        <textarea className="order-textarea" rows="6"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="col-12 col-md-12 col-sm-12">
+                                <div className="order-detail">
+                                    <div className="order">
                                         <span className="order-header">Tình trạng</span>
-                                        <select name="status" value={detail?.status} onChange={inputChange} className="order-select">
-                                            {
-                                                OrderStatus.map((item, index) => {
-                                                    return (
-                                                        <option className={`order-status ${item.class}`} key={index}
-                                                                value={item.value}>{item.name}</option>
-                                                    )
-                                                })
-                                            }
+                                        <select className="order-select">
+                                            <option value="">Mới đặt</option>
+                                            <option value="">Ghi gì thì ghi</option>
                                         </select>
                                     </div>
 
@@ -122,8 +125,7 @@ function OrderController() {
                                 <div className="order-detail">
                                     <div className="order">
                                         <span className="order-header">Ghi chú</span>
-                                        <textarea className="order-textarea" rows="6"
-                                                 name={"note"} onChange={inputChange} value={detail?.note} placeholder="Ghi chú"/>
+                                        <textarea className="order-textarea" rows="6" placeholder="Ghi chú"></textarea>
                                     </div>
 
                                 </div>
@@ -149,20 +151,16 @@ function OrderController() {
                             </tr>
                             </thead>
                             <tbody>
-                            {
-                                orderDetailsByOrder && orderDetailsByOrder.map((oddt, index) => (
-                                    <tr key={oddt.id}>
-                                        <td>#{index + 1}</td>
-                                        <td>
-                                            <img src={oddt.product?.thumbnail} alt="" className="order-img"/>
-                                        </td>
-                                        <td>{oddt.product?.name}</td>
-                                        <td>{oddt.price? formatCash(oddt.price):null} <sup>đ</sup></td>
-                                        <td>{oddt.quantity}</td>
-                                        <td className="text-danger">{formatCash(oddt.price * oddt.quantity)} <sup>đ</sup></td>
-                                    </tr>
-                                ))
-                            }
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <img src="./images/product1.jpg" alt="" className="order-img"/>
+                                </td>
+                                <td>Điện thoại</td>
+                                <td>250.000 <sup>đ</sup></td>
+                                <td>1</td>
+                                <td className="text-danger">250.000 <sup>đ</sup></td>
+                            </tr>
 
                             </tbody>
                         </table>
@@ -170,22 +168,9 @@ function OrderController() {
                     <div className="box-footer">
                         <div className="col-12">
                             <div className="order-total">
-                                <span>Tạm tính</span>
-                                <p className="text-danger">{detail.subTotal>=0?formatCash(detail.subTotal):null}<sup>đ</sup></p>
+                                <span>Tổng giá trị đơn hàng</span>
+                                <p className="text-danger">250.000 <sup>đ</sup></p>
                             </div>
-                        </div>
-                        <div className="col-12">
-                            <div className="order-total">
-                                <span>Giảm giá</span>
-                                <p className="text-danger">{detail.discount>=0?formatCash(detail.discount):null} <sup>đ</sup></p>
-                            </div>
-                        </div>
-                        <div className="col-12">
-                            <div className="order-total">
-                                <span>Tổng cộng</span>
-                                <p className="text-danger">{detail.total?formatCash(detail.total):null} <sup>đ</sup></p>
-                            </div>
-
                         </div>
                     </div>
                 </div>
