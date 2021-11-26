@@ -5,7 +5,7 @@ export const OrderStatus = [{
     name: 'Đang giao hàng',
     class: 'order-delivery'
 }, {
-    name: 'Đã giao hàng',
+    name: 'Đã nhận hàng',
     class: 'order-shipped'
 }, {
     name: 'Huỷ bỏ',

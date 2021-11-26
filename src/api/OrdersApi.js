@@ -75,9 +75,6 @@ function OrdersApi(token) {
     }
 
     const getOrdersByFilter = async (filter) => {
-        // if (!filter.max) filter.max = Number.MAX_SAFE_INTEGER;
-        // if (!filter.minDate) filter.minDate = "1970-01-01";
-        // if (!filter.maxDate) filter.maxDate = "2050-01-01";
         try {
             const res = await axios.get(`${LOCAL_LINK}/api/order/filters?fullname=${filter.fullname}&status=${filter.status}&payment=${filter.payment}&max=${filter.max||Number.MAX_SAFE_INTEGER}&minDate=${filter.minDate||"1970-01-01"}&maxDate=${filter.maxDate||"2050-01-01"}`, {
                     headers: {Authorization: `Bearer ${token}`}

@@ -3,6 +3,7 @@ import Chart from 'react-apexcharts'
 import TableOrdersRender from "./TableOrdersRender";
 import {GlobalState} from "../../../GlobalState";
 import TopProducts from "./TopProducts";
+import TopBrands from "./TopBrands";
 
 function Index() {
     const state = useContext(GlobalState)
@@ -84,19 +85,7 @@ function Index() {
                 </div>
                 <div className="row">
                     <TopProducts item={orderDetails}/>
-                    {/*<div className="col-4 col-md-6 col-sm-12">*/}
-                    {/*    <div className="box f-height">*/}
-                    {/*        <div className="box-body">*/}
-                    {/*            <div id="category-chat">*/}
-                    {/*                <Chart*/}
-                    {/*                    options={customer_options.options}*/}
-                    {/*                    series={customer_options.series}*/}
-                    {/*                    type="donut"*/}
-                    {/*                    width="380" />*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <TopBrands/>
                     <div className="col-5 col-md-6 col-sm-12">
                         <div className="box f-height">
                             <div className="box-header">
