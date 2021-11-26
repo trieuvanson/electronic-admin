@@ -9,6 +9,8 @@ import CategoryLv1Controller from "./product/product-management/product-controll
 import CategoryLv2Controller from "./product/product-management/product-controller/CategoryLv2Controller";
 import Orders from "./order/Orders";
 import OrderController from "./order/OrderController";
+import Slides from "./sidebar/Slides";
+import SlidesController from "./sidebar/SlidesController";
 function Pages() {
     return (
         <Switch>
@@ -21,6 +23,8 @@ function Pages() {
             <Route path={"/admin/product"} exact component={Product} />
             <Route path={"/admin/order/:id"} exact component={OrderController} />
             <Route path={"/admin/order"} exact component={Orders} />
+            <Route path={"/admin/slides"} exact component={Slides} />
+            <Route path={"/admin/slides/detail"} exact component={SlidesController} />
         </Switch>
 
         
