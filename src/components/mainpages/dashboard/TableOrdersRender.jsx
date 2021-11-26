@@ -19,7 +19,7 @@ export default function TableOrdersRender(props) {
         <div className="col-12">
             <div className="box">
                 <div className="box-header">
-                    Order
+                    Đơn hàng mới nhất
                 </div>
                 <div className="box-body overflow-scroll">
                     <table>

@@ -1,13 +1,19 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {Link} from "react-router-dom"
 import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
 import {OrderStatus} from "../../../utils/DataCommon";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Order() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
     const status = OrderStatus
+    const action = state.orderAPI.action
+    const [filter, setFilter] = useState({
+        fullname: "", status: "", payment: "", max: "", minDate: "", maxDate: ""
+    })
 
     const sortOrder = () => {
         return order.sort((a,b) => {
@@ -16,9 +22,62 @@ function Order() {
         }).reverse();
     }
 
+    const inputChange = (e) => {
+        const {name, value} = e.target
+        setFilter({...filter, [name]: value})
+        console.log(filter)
+    }
+    const filterOrder = (e) => {
+        e.preventDefault()
+        action.getOrdersByFilter(filter)
+        toast("Lọc thành công!")
+    }
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(10)
+
+    const pages = [];
+    const itemsLength = Math.ceil(order.length / itemsPerPage);
+
+    for (let i = 0; i < itemsLength; i++) {
+        pages.push(i + 1);
+    }
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const renderPageNumbers = pages && pages.map(number => {
+        return (
+            <li key={number}>
+                <Link to="#" id={number} className={number === currentPage ? "active" : ""}
+                      onClick={(e) => handleClickSetCurrentPage(e)}>{number}</Link>
+            </li>
+        )
+    })
+    const currentItems = sortOrder().slice(indexOfFirstItem, indexOfLastItem);
+
+
+    const handleClickSetCurrentPage = (e) => {
+        setCurrentPage(Number(e.target.id))
+        window.scroll(0,0)
+    }
+
+    const next = () => {
+        if (currentPage <= renderPageNumbers.length - 1) {
+            setCurrentPage(currentPage + 1)
+            window.scroll(0,0)
+        }
+    }
+
+    const prev = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            window.scroll(0,0)
+        }
+    }
+
     const getClassStatus = (str) => {
         let className = ''
-        console.log(status)
         status.find(item => {
             if (item.name === str) {
                 className = item.class
@@ -49,36 +108,65 @@ function Order() {
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Họ tên</label>
-                                            <input type="text" className="form-control"/>
+                                            <input type="text" name={"fullname"} value={filter?.fullname}
+                                                   onChange={inputChange} className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Trạng thái</label>
-                                            <select className="selection">
-                                                <option value="">Chọn danh mục</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
+                                            <select className="selection" value={filter?.status}
+                                                    onChange={inputChange} name={"status"}>
+                                                <option value="">Tất cả</option>
+                                                {
+                                                    OrderStatus.map((item, index) => {
+                                                        return (
+                                                            <option key={index} value={item.name}>{item.name}</option>
+                                                        )
+                                                    })
+                                                }
                                             </select>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
-                                            <label className="form-label">Tổng tiền</label>
-                                            <input type="text" className="form-control"/>
+                                            <label className="form-label">Khoảng tiền</label>
+                                            <input type="number" value={filter?.max}
+                                                   onChange={inputChange} name={"max"} className="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="form-group">
+                                            <label className="form-label">Thanh toán</label>
+                                            <select className="selection" name={"payment"}
+                                                    onChange={inputChange} value={filter?.payment}>
+                                                <option value="">Tất cả</option>
+                                                <option value="Tiền mặt">Tiền mặt</option>
+                                                <option value="Thanh toán Paypal">Thanh toán Paypal</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Từ</label>
-                                            <input type="date" className="form-control"/>
+                                            <input type="date" value={filter?.minDate}
+                                                   onChange={inputChange} name={"minDate"} className="form-control"/>
                                         </div>
                                     </div>
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Đến</label>
-                                            <input type="date" className="form-control"/>
+                                            <input type="date" value={filter?.maxDate}
+                                                   onChange={inputChange} name={"maxDate"} className="form-control"/>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-12">
+                                        <div className="form-group">
+                                            <button onClick={filterOrder} className="btn btn-primary btn-icon-text btn-hover">
+                                                <i className="ti-filter"></i>
+                                                Lọc
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +198,7 @@ function Order() {
                                     </thead>
                                     <tbody>
                                     {
-                                        order && sortOrder().map((item, index) => {
+                                        order && currentItems.map((item, index) => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>#{index + 1}</td>
@@ -137,82 +225,23 @@ function Order() {
                                             )
                                         })
                                     }
-                                    {/* <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Nguyễn Thị Mỹ Duyên</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                <span className="order-status order-shipped">
-                                  chưa giao
-                                </span>
-                                        </td>
-                                        <td>
-                                            <a href="order-detail.html" href="btn">
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </a>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Tân Đại</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                                <span className="order-status order-ready">
-                                  Đã giao
-                                </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" id=""/>
-                                        </td>
-                                        <td>#2345</td>
-                                        <td>Tân Đại</td>
-                                        <td>2021-05-09</td>
-                                        <td>Tiền mặt</td>
-                                        <td>$123.45</td>
-                                        <td>
-                              <span className="order-status order-cancel">
-                                đã hủy
-                              </span>
-                                        </td>
-                                        <td>
-                                            <button>
-                                                <i className="ti-pencil-alt icon-edit"></i>
-                                            </button>
-                                            <button>
-                                                <i className="ti-trash icon-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>*/}
                                     </tbody>
                                 </table>
                             </div>
+                            <ul className="pagination">
+                                <li><Link to="#"
+                                          onClick={() => prev()}><i
+                                    className='ti-angle-left'/></Link></li>
+                                {renderPageNumbers}
+                                <li><Link to="#"
+                                          onClick={() => next()}><i
+                                    className='ti-angle-right'/></Link></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     )
 }
