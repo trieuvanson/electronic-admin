@@ -4,9 +4,12 @@ import axios from "axios";
 
 function ReportsApi(token) {
     const [topBrands, setTopBrands] = useState([]);
+    const [orderRevenue, setOrderRevenue] = useState([]);
     useEffect(() => {
         if (token) {
             getTopBrands()
+            console.log(new Date().getFullYear())
+            getOrderRevenueByYear(new Date().getFullYear())
         }
     }, [token])
 
@@ -21,10 +24,24 @@ function ReportsApi(token) {
                 console.log(err)
             })
     }
-    console.log(topBrands)
 
+    const getOrderRevenueByYear = (year) => {
+        axios.get(`${LOCAL_LINK}/api/reports/orders/${year}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+            .then(res => {
+                setOrderRevenue(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return {
-        topBrands: [topBrands, setTopBrands]
+        topBrands: [topBrands, setTopBrands],
+        orderRevenue: [orderRevenue, setOrderRevenue],
+        orderAction: {
+            getOrderRevenueByYear
+        }
     }
 }
 

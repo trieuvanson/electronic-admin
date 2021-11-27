@@ -15,6 +15,7 @@ import PublicRoute from "../../utils/PublicRoute";
 import Login from "./auth/Login";
 import PrivateRoute from "../../utils/PrivateRoute";
 import ReportsRevenue from "./reports/Reports-Revenue";
+import ReportsOrders from "./reports/Reports-Orders";
 function Pages() {
     return (
         <Switch>
@@ -30,7 +31,7 @@ function Pages() {
             <PrivateRoute path={"/admin/slides/detail"} exact component={SlidesController} />
             <PrivateRoute path={"/admin/slides"} exact component={Slides} />
             <PrivateRoute path={"/admin/statistic/revenue"} exact component={ReportsRevenue} />
-            <PrivateRoute path={"/admin/slides"} exact component={Slides} />
+            <PrivateRoute path={"/admin/statistic/order"} exact component={ReportsOrders} />
             <PrivateRoute path={"/admin/slides"} exact component={Slides} />
             <PublicRoute exact path={["/admin", "/"]} component={Login}/>
         </Switch>
