@@ -9,22 +9,26 @@ import CategoryLv1Controller from "./product/product-management/product-controll
 import CategoryLv2Controller from "./product/product-management/product-controller/CategoryLv2Controller";
 import Orders from "./order/Orders";
 import OrderController from "./order/OrderController";
-import Slides from "./sidebar/Slides";
-import SlidesController from "./sidebar/SlidesController";
+import Slides from "./slides/Slides";
+import SlidesController from "./slides/SlidesController";
+import PublicRoute from "../../utils/PublicRoute";
+import Login from "./auth/Login";
+import PrivateRoute from "../../utils/PrivateRoute";
 function Pages() {
     return (
         <Switch>
-            <Route path={["/admin/dashboard"]} exact component={Index} />
-            <Route path={"/admin/product/brand/:id"} exact component={CategoryLv1Controller} />
-            <Route path={"/admin/product/brand"} exact component={CategoryLv1} />
-            <Route path={"/admin/product/category/:id"} exact component={CategoryLv2Controller} />
-            <Route path={"/admin/product/category"} exact component={CategoryLv2} />
-            <Route path={"/admin/product/:id"} exact component={ProductDetail} />
-            <Route path={"/admin/product"} exact component={Product} />
-            <Route path={"/admin/order/:id"} exact component={OrderController} />
-            <Route path={"/admin/order"} exact component={Orders} />
-            <Route path={"/admin/slides"} exact component={Slides} />
-            <Route path={"/admin/slides/detail"} exact component={SlidesController} />
+            <PrivateRoute path={["/admin/dashboard"]} exact component={Index} />
+            <PrivateRoute path={"/admin/product/brand/:id"} exact component={CategoryLv1Controller} />
+            <PrivateRoute path={"/admin/product/brand"} exact component={CategoryLv1} />
+            <PrivateRoute path={"/admin/product/category/:id"} exact component={CategoryLv2Controller} />
+            <PrivateRoute path={"/admin/product/category"} exact component={CategoryLv2} />
+            <PrivateRoute path={"/admin/product/:id"} exact component={ProductDetail} />
+            <PrivateRoute path={"/admin/product"} exact component={Product} />
+            <PrivateRoute path={"/admin/order/:id"} exact component={OrderController} />
+            <PrivateRoute path={"/admin/order"} exact component={Orders} />
+            <PrivateRoute path={"/admin/slides"} exact component={Slides} />
+            <PrivateRoute    path={"/admin/slides/detail"} exact component={SlidesController} />
+            <PublicRoute exact path={["/admin", "/"]} component={Login}/>
         </Switch>
 
         

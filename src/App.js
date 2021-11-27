@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, useLocation} from "react-router-dom";
 import {DataProvider} from "./GlobalState"
 import SideBar from "./components/sidebar/SideBar";
 import Pages from "./components/mainpages/Pages";
@@ -10,17 +10,23 @@ import {isLogin} from "./utils/Common";
 
 
 function App() {
-    const isAuthenticated = isLogin();
+    // return (
+    //     <DataProvider>
+    //         <Router>
+    //             <SideBar/>
+    //             <Switch>
+    //                 <PublicRoute path="/admin" component={Login}/>
+    //                 <Pages/>
+    //             </Switch>
+    //             <div className="overlay"/>
+    //         </Router>
+    //     </DataProvider>
+    // );
     return (
         <DataProvider>
             <Router>
-                <Switch>
-                    <Route exact path={["/admin/:page", "/admin/:page/:page", "/admin/:page/:page/:id"]}>
-                        <SideBar/>
-                        <Pages/>
-                    </Route>
-                    <PublicRoute exact path={["/admin", "/"]} component={Login}/>
-                </Switch>
+                    <SideBar/>
+                    <Pages/>
                 <div className="overlay"/>
             </Router>
         </DataProvider>

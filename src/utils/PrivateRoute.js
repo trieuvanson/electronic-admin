@@ -1,28 +1,17 @@
-import {
-    Route,
-    Redirect
-} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {Redirect, Route} from "react-router-dom";
+import {isLogin} from "./Common";
 
-function PrivateRoute({ children, isAuthenticated, ...rest }) {
+const PrivateRoute = ({component: Component, ...rest}) => {
     return (
         <Route
             {...rest}
-            render={
-                ({ location }) => (
-                    isAuthenticated
-                        ? (
-                            children
-                        ) : (
-                            <Redirect
-                                to={{
-                                    pathname: '/admin',
-                                    state: { from: location }
-                                }}
-                            />
-                        ))
-            }
+            render={props => {
+                return isLogin()? <Component {...props} />
+                    : <Redirect to={{pathname: "/admin"}}/>
+            }}
         />
-    );
+    )
 }
 
 export default PrivateRoute;
