@@ -1,6 +1,8 @@
 import React, {useContext, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState";
 import {Link} from "react-router-dom";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CategoryLv2() {
     const state = useContext(GlobalState)
@@ -11,6 +13,7 @@ function CategoryLv2() {
         search: '',
         brandName: ''
     })
+
     const actione = state.categoriesApi.categoryAction
 
 
@@ -66,7 +69,11 @@ function CategoryLv2() {
 
     const filterCategories = (e) => {
         e.preventDefault()
-        actione.getCategoriesByFilter(filter)
+        actione.getCategoriesByFilter(filter).then(toast("Lọc thành công!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000,
+            closeOnClick: true
+        }))
 
     }
 
@@ -106,7 +113,8 @@ function CategoryLv2() {
                     </div>
                     <div className="col-12">
                         <div className="box-light box-btn">
-                            <select className="selection" name={"brandName"} value={filter.brandName} onChange={inputChange}>
+                            <select className="selection" name={"brandName"} value={filter.brandName}
+                                    onChange={inputChange}>
                                 <option value="">Chọn danh mục</option>
                                 {brands.map((brand, index) => {
                                     return (
@@ -129,7 +137,7 @@ function CategoryLv2() {
                                         {/*    <input type="checkbox" name="" id=""/>*/}
                                         {/*</th>*/}
                                         <th>STT</th>
-                                        <th >Tiêu đề</th>
+                                        <th>Tiêu đề</th>
                                         <th>Danh mục cấp 1</th>
                                         <th className={"text-center"}>Số lượng sản phẩm</th>
                                     </tr>
@@ -186,6 +194,7 @@ function CategoryLv2() {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
 
     )

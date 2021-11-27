@@ -3,6 +3,8 @@ import {GlobalState} from "../../../../GlobalState"
 import {Link} from "react-router-dom"
 import {USER_LINK} from "../../../../utils/hyperlink";
 import {OrderStatus} from "../../../../utils/DataCommon";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Product() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productAPI.products
@@ -70,27 +72,30 @@ function Product() {
 
     const handleClickSetCurrentPage = (e) => {
         setCurrentPage(Number(e.target.id))
-        window.scroll(0,0)
+        window.scroll(0, 0)
     }
 
     const next = () => {
         if (currentPage <= renderPageNumbers.length - 1) {
             setCurrentPage(currentPage + 1)
-            window.scroll(0,0)
+            window.scroll(0, 0)
         }
     }
 
     const prev = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1)
-            window.scroll(0,0)
+            window.scroll(0, 0)
         }
     }
 
     const clickFilter = (e) => {
-        action.getProductsByFilter(filter)
+        action.getProductsByFilter(filter).then(toast("Lọc thành công!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000,
+            closeOnClick: true
+        }))
     }
-
 
 
     return (
@@ -248,7 +253,8 @@ function Product() {
                                                     {product.name} <sup className="update-end">Cập nhập lần
                                                     cuối: {product.update_at}</sup>
                                                     <div className="table-title">
-                                                        <a href={`${USER_LINK}/product/detail/${product.id}`} className="mr-8 text-priamry">
+                                                        <a href={`${USER_LINK}/product/detail/${product.id}`}
+                                                           className="mr-8 text-priamry">
                                                             <i className="ti-eye"></i>
                                                             view
                                                         </a>
@@ -300,6 +306,7 @@ function Product() {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
 
     )

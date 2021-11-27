@@ -507,6 +507,9 @@
   display: flex;
   flex-direction: column;
 }
+.data-time span {
+  font-size: 12px;
+}
 
 .data-time span:first-child {
   color: var(--success);

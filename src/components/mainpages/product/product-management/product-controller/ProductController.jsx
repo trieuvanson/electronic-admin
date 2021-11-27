@@ -91,7 +91,7 @@ function ProductController() {
                                 <div className="box-text">
                                     <p>Chỉnh sửa thông tin</p>
                                     <div className="data-time">
-                                        <span>Ngày tạo: {detail.create_at}</span>
+                                        <span>Ngày tạo: {detail.created_at}</span>
                                         <span>cập nhập lần cuối: {detail.update_at}</span>
                                     </div>
 
