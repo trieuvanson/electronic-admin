@@ -55,7 +55,7 @@ function ReportsCategories() {
             }
         },
         title: {
-            text: 'Sản phẩm bán chạy',
+            text: 'Danh mục sản phẩm bán chạy',
             align: 'center',
             floating: true
         },
@@ -73,8 +73,6 @@ function ReportsCategories() {
             }
         }
     };
-
-
     const changeDate = (e) => {
         // setBrand(e.target.value)
         action.topCategoriesByBrandName(e.target.value)
@@ -109,7 +107,7 @@ function ReportsCategories() {
                         <div className="box f-height">
                             <div className="box-body">
                                 <div id="chart">
-                                    <ReactApexChart options={options} series={options.series} type="bar" height={350}/>
+                                    <ReactApexChart options={options} series={options.series} type="bar" height={400}/>
                                 </div>
                             </div>
                         </div>

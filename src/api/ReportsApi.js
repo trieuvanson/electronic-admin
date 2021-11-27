@@ -6,10 +6,12 @@ function ReportsApi(token) {
     const [topBrands, setTopBrands] = useState([]);
     const [orderRevenue, setOrderRevenue] = useState([]);
     const [topCategoriesByBrand, setTopCategoriesByBrand] = useState([]);
+    const [revenueByYear, setRevenueByYear] = useState([]);
     useEffect(() => {
         if (token) {
             getTopBrands()
             getOrderRevenueByYear(new Date().getFullYear())
+            getRevenueByYear(new Date().getFullYear())
             topCategoriesByBrandName('')
         }
     }, [token])
@@ -51,6 +53,18 @@ function ReportsApi(token) {
             })
     }
 
+    const getRevenueByYear = (year) => {
+        axios.get(`${LOCAL_LINK}/api/reports/revenue/${year}`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+            .then(res => {
+                setRevenueByYear(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     return {
         topBrands: [topBrands, setTopBrands],
         orderRevenue: [orderRevenue, setOrderRevenue],
@@ -60,6 +74,10 @@ function ReportsApi(token) {
         topCategoriesByBrand: [topCategoriesByBrand, setTopCategoriesByBrand],
         categoriesAction: {
             topCategoriesByBrandName
+        },
+        revenueByYear: [revenueByYear, setRevenueByYear],
+        revenueAction: {
+            getRevenueByYear
         }
     }
 }
