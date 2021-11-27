@@ -4,7 +4,7 @@ import Index from "./dashboard/index";
 import Product from "./product/product-management/Product";
 import CategoryLv1 from "./product/product-management/CategoryLv1";
 import CategoryLv2 from "./product/product-management/CategoryLv2";
-import ProductDetail from "./product/product-management/product-controller/ProductDetail";
+import ProductController from "./product/product-management/product-controller/ProductController";
 import CategoryLv1Controller from "./product/product-management/product-controller/CategoryLv1Controller";
 import CategoryLv2Controller from "./product/product-management/product-controller/CategoryLv2Controller";
 import Orders from "./order/Orders";
@@ -22,7 +22,7 @@ function Pages() {
             <PrivateRoute path={"/admin/product/brand"} exact component={CategoryLv1} />
             <PrivateRoute path={"/admin/product/category/:id"} exact component={CategoryLv2Controller} />
             <PrivateRoute path={"/admin/product/category"} exact component={CategoryLv2} />
-            <PrivateRoute path={"/admin/product/:id"} exact component={ProductDetail} />
+            <PrivateRoute path={"/admin/product/:id"} exact component={ProductController} />
             <PrivateRoute path={"/admin/product"} exact component={Product} />
             <PrivateRoute path={"/admin/order/:id"} exact component={OrderController} />
             <PrivateRoute path={"/admin/order"} exact component={Orders} />

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 function CategoryLv1() {
     const state = useContext(GlobalState)
     const [brands, setBrands] = state.categoriesApi.brands
-
+    const [products] = state.productAPI.products
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(10)
 
@@ -96,6 +96,7 @@ function CategoryLv1() {
                                     <tr>
                                         <th>STT</th>
                                         <th>Tên</th>
+                                        <th className={"text-center"}>Số lượng sản phẩm</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -124,6 +125,7 @@ function CategoryLv1() {
                                                             </Link>
                                                         </div>
                                                     </td>
+                                                    <td className={"text-center"}>{products.filter(p => p?.category?.brand?.id == brand.id).length}</td>
                                                 </tr>
                                             )
                                         })

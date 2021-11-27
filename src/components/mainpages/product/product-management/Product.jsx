@@ -5,6 +5,8 @@ import {USER_LINK} from "../../../../utils/hyperlink";
 function Product() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productAPI.products
+    const [brands] = state.categoriesApi.brands
+    const [categories] = state.categoriesApi.categories
     const action = state.productAPI.productAction
 
     const updateProductOnclick = (e, id) => {
@@ -104,22 +106,34 @@ function Product() {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12">
-                        <div className="box-light box-btn">
-                            <select className="selection">
-                                <option value="">Danh mục cấp 1</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Danh mục cấp 1</label>
+                            <select className="form-control">
+                                <option value="">Chọn danh mục</option>
+                                {
+                                    brands.map(brand => {
+                                        return (
+                                            <option key={brand.id} value={brand.name}>{brand.name}</option>
+                                        )
+                                    })
+                                }
                             </select>
-
-                            <select className="selection">
-                                <option value="">Danh mục cấp 2</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Danh mục cấp 2</label>
+                            <select className="form-control">
+                                <option value="">Chọn danh mục</option>
+                                {
+                                    categories.map(category => {
+                                        return (
+                                            <option key={category.id} value={category.name}>{category.name}</option>
+                                        )
+                                    })
+                                }
                             </select>
-
                         </div>
                     </div>
                     <div className="col-3">

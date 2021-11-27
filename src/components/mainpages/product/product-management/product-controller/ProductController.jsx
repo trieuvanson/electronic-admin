@@ -3,7 +3,7 @@ import {GlobalState} from "../../../../../GlobalState";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 
-function ProductDetail() {
+function ProductController() {
     const state = useContext(GlobalState)
     const params = useParams();
     const [products] = state.productAPI.products
@@ -127,7 +127,7 @@ function ProductDetail() {
                                             <div className="col-6">
                                                 <div className="form-group">
                                                     <label className="form-label">Loại sản phẩm</label>
-                                                    <select className="selection form"
+                                                    <select className="form-control"
                                                             name="brand"
                                                             value={detail?.category?.brand?.id}
                                                             onChange={(e) => {
@@ -153,8 +153,8 @@ function ProductDetail() {
                                             </div>
                                             <div className="col-6">
                                                 <div className="form-group">
-                                                    <label className="form-label">Hãng</label>
-                                                    <select className="selection form"
+                                                    <label className="form-label">Nhãn hiệu</label>
+                                                    <select className="form-control"
                                                             name="category"
                                                             onChange={inputChange}
                                                             value={detail?.category?.id}
@@ -250,4 +250,4 @@ function ProductDetail() {
     )
 }
 
-export default ProductDetail
+export default ProductController

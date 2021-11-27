@@ -6,6 +6,7 @@ function CategoryLv2() {
     const state = useContext(GlobalState)
     const [categories, setCategories] = state.categoriesApi.categories
     const [brands] = state.categoriesApi.brands
+    const [products] = state.productAPI.products
     const [filter, setFilter] = useState({
         search: '',
         brandName: ''
@@ -128,8 +129,9 @@ function CategoryLv2() {
                                         {/*    <input type="checkbox" name="" id=""/>*/}
                                         {/*</th>*/}
                                         <th>STT</th>
-                                        <th>Tiêu đề</th>
+                                        <th >Tiêu đề</th>
                                         <th>Danh mục cấp 1</th>
+                                        <th className={"text-center"}>Số lượng sản phẩm</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -162,6 +164,7 @@ function CategoryLv2() {
                                                     <td>
                                                         {category.brand?.name}
                                                     </td>
+                                                    <td className={"text-center"}>{products.filter(p => p?.category?.id == category.id).length}</td>
                                                 </tr>
                                             )
                                         })
