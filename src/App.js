@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, useLocation} from "react-router-dom";
 import {DataProvider} from "./GlobalState"
 import SideBar from "./components/sidebar/SideBar";
@@ -10,18 +10,18 @@ import {isLogin} from "./utils/Common";
 
 
 function App() {
-    // return (
-    //     <DataProvider>
-    //         <Router>
-    //             <SideBar/>
-    //             <Switch>
-    //                 <PublicRoute path="/admin" component={Login}/>
-    //                 <Pages/>
-    //             </Switch>
-    //             <div className="overlay"/>
-    //         </Router>
-    //     </DataProvider>
-    // );
+    useEffect(() => {
+        let hours = 1; // to clear the localStorage after 1 hour(if someone want to clear after 8hrs simply change hours=8)
+        let now = new Date().getTime();
+        let setupTime = localStorage.getItem('setupTime');
+        if (setupTime == null) {
+            localStorage.setItem('setupTime', now)
+        } else {
+            if(now-setupTime > hours*60*60*1000) {
+                localStorage.clear()
+                localStorage.setItem('setupTime', now);
+            }
+        }    }, []);
     return (
         <DataProvider>
             <Router>

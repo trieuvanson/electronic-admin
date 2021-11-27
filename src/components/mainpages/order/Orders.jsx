@@ -115,7 +115,7 @@ function Order() {
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Trạng thái</label>
-                                            <select className="selection" value={filter?.status}
+                                            <select className="form-control" value={filter?.status}
                                                     onChange={inputChange} name={"status"}>
                                                 <option value="">Tất cả</option>
                                                 {
@@ -138,7 +138,7 @@ function Order() {
                                     <div className="col-3">
                                         <div className="form-group">
                                             <label className="form-label">Thanh toán</label>
-                                            <select className="selection" name={"payment"}
+                                            <select className="form-control" name={"payment"}
                                                     onChange={inputChange} value={filter?.payment}>
                                                 <option value="">Tất cả</option>
                                                 <option value="Tiền mặt">Tiền mặt</option>

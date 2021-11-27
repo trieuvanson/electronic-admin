@@ -2,12 +2,14 @@ import React, {useContext, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState"
 import {Link} from "react-router-dom"
 import {USER_LINK} from "../../../../utils/hyperlink";
+import {OrderStatus} from "../../../../utils/DataCommon";
 function Product() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productAPI.products
     const [brands] = state.categoriesApi.brands
     const [categories] = state.categoriesApi.categories
     const action = state.productAPI.productAction
+    const [filter, setFilter] = useState("")
 
     const updateProductOnclick = (e, id) => {
         const {name} = e.target
@@ -18,6 +20,9 @@ function Product() {
             }
         })
         setProducts([...products])
+    }
+    const inputChange = (e) => {
+        e.preventDefault()
     }
 
 
@@ -98,9 +103,9 @@ function Product() {
 
                             <div className="form-search">
                                 <div className="input-group">
-                                    <input type="text"/>
+                                    <input type="text" placeholder={"Nhập dữ liệu tìm kiếm..."}/>
                                     <div className="icon">
-                                        <i className="ti-search"></i>
+                                        <i className="ti-search"/>
                                     </div>
                                 </div>
                             </div>
@@ -146,6 +151,39 @@ function Product() {
                         <div className="form-group box-light">
                             <label className="form-label">Đến</label>
                             <input type="date" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Khoảng tiền</label>
+                            <input type="number" className="form-control"/>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Trạng thái</label>
+                            <select className="form-control">
+                                <option value={true}>Hiển thị</option>
+                                <option value={false}>Không hiển thị</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Nổi bật</label>
+                            <select className="form-control">
+                                <option value={true}>Có</option>
+                                <option value={false}>Không</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <div className="form-group box-light">
+                            <label className="form-label">Bán chạy</label>
+                            <select className="form-control">
+                                <option value={true}>Có</option>
+                                <option value={false}>Không</option>
+                            </select>
                         </div>
                     </div>
                     <div className="col-12">
