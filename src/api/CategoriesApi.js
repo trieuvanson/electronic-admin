@@ -22,6 +22,15 @@ function CategoriesApi() {
         setSlides(res.data)
     }
 
+    const getCategoriesByFilter = async (filter) => {
+        await axios.get(`${LOCAL_LINK}/api/product-category/filters?search=${filter.search}&brandName=${filter.brandName}`)
+            .then(res => {
+                setCategories(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
     useEffect(() => {
         getCategories()
         getBrands()
@@ -32,7 +41,8 @@ function CategoriesApi() {
     return {
         categories: [categories, setCategories],
         brands: [brands, setBrands],
-        slides: [slides, setSlides]
+        slides: [slides, setSlides],
+        categoryAction: {getCategoriesByFilter}
 
     }
 }

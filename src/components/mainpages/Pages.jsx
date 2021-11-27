@@ -26,8 +26,8 @@ function Pages() {
             <PrivateRoute path={"/admin/product"} exact component={Product} />
             <PrivateRoute path={"/admin/order/:id"} exact component={OrderController} />
             <PrivateRoute path={"/admin/order"} exact component={Orders} />
+            <PrivateRoute path={"/admin/slides/detail"} exact component={SlidesController} />
             <PrivateRoute path={"/admin/slides"} exact component={Slides} />
-            <PrivateRoute    path={"/admin/slides/detail"} exact component={SlidesController} />
             <PublicRoute exact path={["/admin", "/"]} component={Login}/>
         </Switch>
 

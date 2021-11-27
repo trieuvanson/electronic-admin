@@ -30,7 +30,7 @@ function CategoryLv1() {
                     <i className="ti-menu"></i>
                 </div>
                 <div className="main-title">
-                    Quản lý danh mục cấp 1
+                    Quản lý danh mục cấp 2
                 </div>
             </div>
             <div className="main-content">
@@ -48,7 +48,7 @@ function CategoryLv1() {
                                                 <div className="form-group">
                                                     <label className="form-label">Name</label>
                                                     <input type="text" name="name"
-                                                           value={detail?.name} onChange={onChangeInput}
+                                                              value={detail?.name} onChange={onChangeInput}
                                                             className="form-control"/>
                                                 </div>
                                             </div>

@@ -4,11 +4,37 @@ import TableOrdersRender from "./TableOrdersRender";
 import {GlobalState} from "../../../GlobalState";
 import TopProducts from "./TopProducts";
 import TopBrands from "./TopBrands";
+import TotalData from "./TotalData";
 
 function Index() {
     const state = useContext(GlobalState)
     const [order] = state.orderAPI.order
     const [orderDetails] = state.orderAPI.orderDetails
+
+    const filterOrders = order
+        .filter(o => o.status.match("Đang chờ xử lý"))
+        .sort((a, b) => {
+            return new Date(b.create_at).getTime() -
+                new Date(a.create_at).getTime()
+        })
+
+    const totalData = [
+        {
+            name: "Tổng doanh thu",
+            value: order.filter(o => o.status.match("Đã nhận hàng")).reduce((total, o) => {
+                return total + o.total
+            }, 0)
+        }, {
+            name: "Tổng số đơn hàng",
+            value: order.length
+        }, {
+            name: "Đơn hàng đang chờ xử lý",
+            value: order.filter(o => o.status.match("Đang chờ xử lý")).length
+        }, {
+            name: "Đơn hàng đã nhận hàng",
+            value: order.filter(o => o.status.match("Đã nhận hàng")).length
+        }
+    ]
 
     return (
         <div className="main">
@@ -21,68 +47,7 @@ function Index() {
                 </div>
             </div>
             <div className="main-content">
-                <div className="row">
-                    <div className="col-3 col-md-6 col-sm-12">
-                        <div className="box box-hover">
-                            <div className="counter">
-                                <div className="counter-title">
-                                    total order
-                                </div>
-                                <div className="counter-info">
-                                    <div className="counter-count">
-                                        6578
-                                    </div>
-                                    <i className="ti-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-3 col-md-6 col-sm-12">
-                        <div className="box box-hover">
-                            <div className="counter">
-                                <div className="counter-title">
-                                    total order
-                                </div>
-                                <div className="counter-info">
-                                    <div className="counter-count">
-                                        6578
-                                    </div>
-                                    <i className="ti-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-3 col-md-6 col-sm-12">
-                        <div className="box box-hover">
-                            <div className="counter">
-                                <div className="counter-title">
-                                    total order
-                                </div>
-                                <div className="counter-info">
-                                    <div className="counter-count">
-                                        6578
-                                    </div>
-                                    <i className="ti-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-3 col-md-6 col-sm-12">
-                        <div className="box box-hover">
-                            <div className="counter">
-                                <div className="counter-title">
-                                    total order
-                                </div>
-                                <div className="counter-info">
-                                    <div className="counter-count">
-                                        6578
-                                    </div>
-                                    <i className="ti-bag"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <TotalData item={totalData}/>
                 <div className="row">
                     <TopProducts item={orderDetails}/>
                     <TopBrands/>
@@ -96,7 +61,7 @@ function Index() {
                             </div>
                         </div>
                     </div>
-                    <TableOrdersRender item={order}/>
+                    <TableOrdersRender item={filterOrders}/>
                 </div>
             </div>
         </div>

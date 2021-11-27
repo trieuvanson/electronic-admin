@@ -5,6 +5,20 @@ import {Link} from "react-router-dom";
 function CategoryLv2() {
     const state = useContext(GlobalState)
     const [categories, setCategories] = state.categoriesApi.categories
+    const [brands] = state.categoriesApi.brands
+    const [filter, setFilter] = useState({
+        search: '',
+        brandName: ''
+    })
+    const actione = state.categoriesApi.categoryAction
+
+
+    const inputChange = (e) => {
+        const {name, value} = e.target
+        setFilter({...filter, [name]: value})
+    }
+
+
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(10)
 
@@ -31,24 +45,29 @@ function CategoryLv2() {
 
     const handleClickSetCurrentPage = (e) => {
         setCurrentPage(Number(e.target.id))
-        window.scroll(0,0)
+        window.scroll(0, 0)
     }
 
     const next = () => {
         if (currentPage <= renderPageNumbers.length - 1) {
             setCurrentPage(currentPage + 1)
-            window.scroll(0,0)
+            window.scroll(0, 0)
         }
     }
 
     const prev = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1)
-            window.scroll(0,0)
+            window.scroll(0, 0)
         }
     }
 
 
+    const filterCategories = (e) => {
+        e.preventDefault()
+        actione.getCategoriesByFilter(filter)
+
+    }
 
     return (
         <div className="main">
@@ -75,9 +94,10 @@ function CategoryLv2() {
 
                             <div className="form-search">
                                 <div className="input-group">
-                                    <input type="text"/>
-                                    <div className="icon">
-                                        <i className="ti-search"></i>
+                                    <input type="text" name={"search"} value={filter.search}
+                                           onChange={inputChange} placeholder={"Nhập dữ liệu tìm kiếm..."}/>
+                                    <div className="icon" onClick={filterCategories}>
+                                        <i className="ti-search"/>
                                     </div>
                                 </div>
                             </div>
@@ -85,11 +105,13 @@ function CategoryLv2() {
                     </div>
                     <div className="col-12">
                         <div className="box-light box-btn">
-                            <select className="selection">
-                                <option value="">Chọn danh mục cấp 1</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
+                            <select className="selection" name={"brandName"} value={filter.brandName} onChange={inputChange}>
+                                <option value="">Chọn danh mục</option>
+                                {brands.map((brand, index) => {
+                                    return (
+                                        <option key={index} value={brand.name}>{brand.name}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                     </div>
