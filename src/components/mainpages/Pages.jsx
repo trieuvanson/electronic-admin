@@ -14,6 +14,7 @@ import SlidesController from "./slides/SlidesController";
 import PublicRoute from "../../utils/PublicRoute";
 import Login from "./auth/Login";
 import PrivateRoute from "../../utils/PrivateRoute";
+import ReportsRevenue from "./reports/Reports-Revenue";
 function Pages() {
     return (
         <Switch>
@@ -27,6 +28,9 @@ function Pages() {
             <PrivateRoute path={"/admin/order/:id"} exact component={OrderController} />
             <PrivateRoute path={"/admin/order"} exact component={Orders} />
             <PrivateRoute path={"/admin/slides/detail"} exact component={SlidesController} />
+            <PrivateRoute path={"/admin/slides"} exact component={Slides} />
+            <PrivateRoute path={"/admin/statistic/revenue"} exact component={ReportsRevenue} />
+            <PrivateRoute path={"/admin/slides"} exact component={Slides} />
             <PrivateRoute path={"/admin/slides"} exact component={Slides} />
             <PublicRoute exact path={["/admin", "/"]} component={Login}/>
         </Switch>
