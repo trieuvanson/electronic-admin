@@ -9,7 +9,18 @@ function Product() {
     const [brands] = state.categoriesApi.brands
     const [categories] = state.categoriesApi.categories
     const action = state.productAPI.productAction
-    const [filter, setFilter] = useState("")
+    const [filter, setFilter] = useState({
+        search: "",
+        pcname: "",
+        bname: "",
+        minDate: "",
+        maxDate: "",
+        maxPrice: "",
+        status: true,
+        features: false,
+        bestSeller: false
+
+    })
 
     const updateProductOnclick = (e, id) => {
         const {name} = e.target
@@ -22,7 +33,8 @@ function Product() {
         setProducts([...products])
     }
     const inputChange = (e) => {
-        e.preventDefault()
+        const {name, value} = e.target
+        setFilter({...filter, [name]: value})
     }
 
 
@@ -75,6 +87,9 @@ function Product() {
         }
     }
 
+    const clickFilter = (e) => {
+        action.getProductsByFilter(filter)
+    }
 
 
 
@@ -103,8 +118,9 @@ function Product() {
 
                             <div className="form-search">
                                 <div className="input-group">
-                                    <input type="text" placeholder={"Nhập dữ liệu tìm kiếm..."}/>
-                                    <div className="icon">
+                                    <input type="text" placeholder={"Nhập dữ liệu tìm kiếm..."}
+                                           name={"search"} value={filter.search} onChange={inputChange}/>
+                                    <div className="icon" onClick={clickFilter}>
                                         <i className="ti-search"/>
                                     </div>
                                 </div>
@@ -114,7 +130,8 @@ function Product() {
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Danh mục cấp 1</label>
-                            <select className="form-control">
+                            <select className="form-control"
+                                    name={"bname"} value={filter.bname} onChange={inputChange}>
                                 <option value="">Chọn danh mục</option>
                                 {
                                     brands.map(brand => {
@@ -129,7 +146,8 @@ function Product() {
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Danh mục cấp 2</label>
-                            <select className="form-control">
+                            <select className="form-control"
+                                    name={"pcname"} value={filter.pcname} onChange={inputChange}>
                                 <option value="">Chọn danh mục</option>
                                 {
                                     categories.map(category => {
@@ -144,25 +162,30 @@ function Product() {
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Từ</label>
-                            <input type="date" className="form-control"/>
+                            <input type="date"
+                                   name={"minDate"} value={filter.minDate} onChange={inputChange}
+                                   className="form-control"/>
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Đến</label>
-                            <input type="date" className="form-control"/>
+                            <input type="date" className="form-control"
+                                   name={"maxDate"} value={filter.maxDate} onChange={inputChange}/>
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Khoảng tiền</label>
-                            <input type="number" className="form-control"/>
+                            <input type="number" className="form-control"
+                                   name={"maxPrice"} value={filter.maxPrice} onChange={inputChange}/>
                         </div>
                     </div>
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Trạng thái</label>
-                            <select className="form-control">
+                            <select className="form-control"
+                                    name={"status"} value={filter.status} onChange={inputChange}>
                                 <option value={true}>Hiển thị</option>
                                 <option value={false}>Không hiển thị</option>
                             </select>
@@ -171,7 +194,8 @@ function Product() {
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Nổi bật</label>
-                            <select className="form-control">
+                            <select className="form-control"
+                                    name={"features"} value={filter.features} onChange={inputChange}>
                                 <option value={true}>Có</option>
                                 <option value={false}>Không</option>
                             </select>
@@ -180,7 +204,8 @@ function Product() {
                     <div className="col-3">
                         <div className="form-group box-light">
                             <label className="form-label">Bán chạy</label>
-                            <select className="form-control">
+                            <select className="form-control"
+                                    name={"bestSeller"} value={filter.bestSeller} onChange={inputChange}>
                                 <option value={true}>Có</option>
                                 <option value={false}>Không</option>
                             </select>

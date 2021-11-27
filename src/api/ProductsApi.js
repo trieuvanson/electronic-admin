@@ -10,11 +10,15 @@ function ProductsApi(token) {
     }
 
     const getProductsByBrandId = async (brandId) => {
-        await axios.get(`${LOCAL_LINK}/api/products/brand/${brandId}`).then(res => {setProducts(res.data)})
+        await axios.get(`${LOCAL_LINK}/api/products/brand/${brandId}`).then(res => {
+            setProducts(res.data)
+        })
     }
 
     const getProductsByCategoryId = async (categoryId) => {
-        await axios.get(`${LOCAL_LINK}/api/products/category/${categoryId}`).then(res => {setProducts(res.data)})
+        await axios.get(`${LOCAL_LINK}/api/products/category/${categoryId}`).then(res => {
+            setProducts(res.data)
+        })
     }
 
     const addProduct = async (product) => {
@@ -26,7 +30,7 @@ function ProductsApi(token) {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            data : product
+            data: product
         };
 
         axios(config)
@@ -46,7 +50,7 @@ function ProductsApi(token) {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            data : product
+            data: product
         };
 
         axios(config)
@@ -58,6 +62,18 @@ function ProductsApi(token) {
             });
     }
 
+    const getProductsByFilter = async (filter) => {
+        await axios.get(`${LOCAL_LINK}/api/products/filters?search=${filter.search}&pcname=${filter.pcname}&bname=${filter.bname}&minDate=${filter.minDate||"1970-01-01"}&maxDate=${filter.maxDate||"2050-01-01"}&maxPrice=${filter.maxPrice||Number.MAX_SAFE_INTEGER}&status=${filter.status}&features=${filter.features}&bestSeller=${filter.bestSeller}`, {
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+            .then(res => {
+                setProducts(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -65,7 +81,14 @@ function ProductsApi(token) {
 
     return {
         products: [products, setProducts],
-        productAction: {getProductsByCategoryId, getProductsByBrandId, getProducts, addProduct, updateProduct}
+        productAction: {
+            getProductsByCategoryId,
+            getProductsByBrandId,
+            getProducts,
+            addProduct,
+            updateProduct,
+            getProductsByFilter
+        }
     }
 }
 

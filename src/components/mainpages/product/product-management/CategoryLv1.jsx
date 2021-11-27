@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState";
 import {Link} from "react-router-dom";
 
@@ -8,7 +8,6 @@ function CategoryLv1() {
     const [products] = state.productAPI.products
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(10)
-
     const pages = [];
     const itemsLength = Math.ceil(brands.length / itemsPerPage);
 
