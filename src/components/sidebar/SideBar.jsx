@@ -138,6 +138,33 @@ function SideBar() {
             index: 5,
             liClass: 'sidebar-submenu',
             link: "#",
+            linkClass: 'sidebar-menu-dropdown',
+            icon: "ti-stats-up",
+            name: "Thống kê",
+            dropdown: "dropdown-icon",
+            active: false,
+            child: [
+                {
+                    id: 4,
+                    link: "/admin/statistic/revenue",
+                    name: "Thống kê doanh thu"
+                },
+                {
+                    id: 5,
+                    link: "/admin/statistic/order",
+                    name: "Thống kê đơn hàng"
+                },
+                {
+                    id: 6,
+                    link: "/admin/statistic/product",
+                    name: "Thống kê sản phẩm"
+                }
+            ]
+        },
+        {
+            index: 6,
+            liClass: 'sidebar-submenu',
+            link: "#",
             linkClass: '',
             icon: "ti-pulse",
             name: "Thiết lập thông tin",
