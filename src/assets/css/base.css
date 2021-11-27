@@ -199,7 +199,7 @@ button + button {
 
 .box-header {
   text-transform: capitalize;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
@@ -213,7 +213,7 @@ button + button {
 
 .text-second {
   color: var(--text-second-color);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .text-center {
