@@ -5,6 +5,8 @@ import ReactApexChart from 'react-apexcharts'
 function ReportsOrders() {
     const state = useContext(GlobalState)
     const [orderRevenue] = state.reportsApi.orderRevenue
+    const action  = state.reportsApi.orderAction
+
     const getQuantity = [
         orderRevenue.filter(item => item.month === 1)[0]?.quantity || 0,
         orderRevenue.filter(item => item.month === 2)[0]?.quantity || 0,
@@ -35,6 +37,7 @@ function ReportsOrders() {
         orderRevenue.filter(item => item.month === 12)[0]?.total || 0
     ]
 
+    const year = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
 
     const options = {
         series: [{
@@ -127,6 +130,11 @@ function ReportsOrders() {
         }
     };
 
+    const changeDate = (e) => {
+        // setBrand(e.target.value)
+        action.getOrderRevenueByYear(e.target.value)
+    }
+
 
     return (
         <div className="main">
@@ -140,7 +148,16 @@ function ReportsOrders() {
             </div>
             <div className="main-content">
                 <div className="row">
-
+                    <div className="col-12">
+                        <select className="selection" onChange={changeDate}>
+                            <option value="">Chọn năm</option>
+                            {
+                                year.map((item, index) => {
+                                    return <option key={index} value={item}>{item}</option>
+                                })
+                            }
+                        </select>
+                    </div>
                     <div className="col-12 col-md-6 col-sm-12">
                         <div className="box f-height">
                             <div className="box-body">
