@@ -156,8 +156,8 @@ function SideBar() {
                 },
                 {
                     id: 6,
-                    link: "/admin/statistic/product",
-                    name: "Thống kê sản phẩm"
+                    link: "/admin/statistic/categories",
+                    name: "Thống kê danh mục"
                 }
             ]
         },
