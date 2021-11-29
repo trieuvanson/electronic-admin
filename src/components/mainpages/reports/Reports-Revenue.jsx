@@ -74,7 +74,7 @@ function ReportsRevenue() {
                         <select className="selection" onChange={changeDate}>
                             <option value="">Chọn năm</option>
                             {
-                                year.map((item, index) => {
+                                year.reverse().map((item, index) => {
                                     return <option key={index} value={item}>{item}</option>
                                 })
                             }
