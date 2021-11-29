@@ -4,51 +4,58 @@ import ReactApexChart from 'react-apexcharts'
 
 function ReportsRevenue() {
     const state = useContext(GlobalState)
-    const [brands, setBrands] = state.categoriesApi.brands
-    const [products] = state.productAPI.products
+    const [revenueByYear] = state.reportsApi.revenueByYear
+    const action = state.reportsApi.revenueAction
 
-    const options = {
+    console.log(revenueByYear.map(item => "Tháng "+item.month))
+    function unique(arr) {
+        var newArr = []
+        for (let i = 0; i < arr.length; i++) {
+            if (newArr.indexOf(arr[i]) === -1) {
+                newArr.push(arr[i])
+            } else {
+                newArr.push(0)
+            }
+        }
+        return newArr
+    }
+    const year = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+
+    var options = {
         series: [{
-            name: 'Website Blog',
-            type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-        }, {
-            name: 'Social Media',
-            type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            name: "Doanh số",
+            data: revenueByYear.map(item => item.total)
         }],
-        options: {
-            chart: {
-                height: 350,
-                type: 'line',
-            },
-            stroke: {
-                width: [0, 4]
-            },
-            title: {
-                text: 'Traffic Sources'
-            },
-            dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1]
-            },
-            labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-            xaxis: {
-                type: 'datetime'
-            },
-            yaxis: [{
-                title: {
-                    text: 'Website Blog',
-                },
-
-            }, {
-                opposite: true,
-                title: {
-                    text: 'Social Media'
-                }
-            }]
+        chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
         },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'straight'
+        },
+        title: {
+            text: 'Doanh thu theo tháng',
+            align: 'left'
+        },
+        grid: {
+            row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: revenueByYear.map(item => "Tháng "+item.month)
+        }
     };
+    const changeDate = (e) => {
+        action.getRevenueByYear(e.target.value)
+    }
 
 
     return (
@@ -63,13 +70,21 @@ function ReportsRevenue() {
             </div>
             <div className="main-content">
                 <div className="row">
-
+                    <div className="col-12">
+                        <select className="selection" onChange={changeDate}>
+                            <option value="">Chọn năm</option>
+                            {
+                                year.map((item, index) => {
+                                    return <option key={index} value={item}>{item}</option>
+                                })
+                            }
+                        </select>
+                    </div>
                     <div className="col-12 col-md-6 col-sm-12">
                         <div className="box f-height">
                             <div className="box-body">
                                 <div id="chart">
-                                    <ReactApexChart options={options.options} series={options.series} type="line"
-                                                    height={350}/>
+                                    <ReactApexChart options={options} series={options.series} type="line" height={400}/>
                                 </div>
                             </div>
                         </div>

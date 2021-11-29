@@ -5,6 +5,7 @@ import {GlobalState} from "../../../GlobalState";
 import TopProducts from "./TopProducts";
 import TopBrands from "./TopBrands";
 import TotalData from "./TotalData";
+import Customer from "./Customer";
 
 function Index() {
     const state = useContext(GlobalState)
@@ -51,16 +52,7 @@ function Index() {
                 <div className="row">
                     <TopProducts item={orderDetails}/>
                     <TopBrands/>
-                    <div className="col-5 col-md-6 col-sm-12">
-                        <div className="box f-height">
-                            <div className="box-header">
-                                customers
-                            </div>
-                            <div className="box-body">
-                                <div id="customers-chart"/>
-                            </div>
-                        </div>
-                    </div>
+                    <Customer/>
                     <TableOrdersRender item={filterOrders}/>
                 </div>
             </div>
