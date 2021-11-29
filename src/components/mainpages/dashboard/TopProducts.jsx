@@ -8,7 +8,8 @@ export default function  TopProducts(props) {
         return r;
     }, {});
     const dataAfterGroupBy = Object.keys(groupBy).map(key => groupBy[key]).sort((a, b) => b.length - a.length)
-    console.log(dataAfterGroupBy)
+
+    console.log(props)
     return (
         <div className="col-3 col-md-6 col-sm-12">
             <div className="box f-height">

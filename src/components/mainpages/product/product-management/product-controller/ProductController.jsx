@@ -66,7 +66,6 @@ function ProductController() {
         else {
             setDetail({...detail, [name]: value})
         }
-        console.log(detail)
     }
 
     const updateProduct = (e) => {

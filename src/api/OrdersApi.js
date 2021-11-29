@@ -5,10 +5,11 @@ import axios from "axios";
 function OrdersApi(token) {
     const [order, setOrder] = useState([])
     const [orderDetails, setOrderDetails] = useState([])
+    const [orderDetailsByOrderId, setOrderDetailsByOrderId] = useState([])
     useEffect(() => {
         if (token) {
             getOrders();
-            getOrderDetails();
+            getOrderDetails()
         }
     }, [token])
 
@@ -25,16 +26,30 @@ function OrdersApi(token) {
     }
 
 
+    const getOrderDetailsByOrderId = async (orderId) => {
+        await axios.get(`${LOCAL_LINK}/api/order/order-details/${orderId}`, {
+                headers: {Authorization: `Bearer ${token}`}
+            }
+        )
+            .then(res => {
+                setOrderDetailsByOrderId(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     const getOrderDetails = async () => {
-        try {
-            const res = await axios.get(`${LOCAL_LINK}/api/order/order-details/`, {
-                    headers: {Authorization: `Bearer ${token}`}
-                }
-            )
-            setOrderDetails(res.data)
-        } catch (err) {
-            console.log(err)
-        }
+        await axios.get(`${LOCAL_LINK}/api/order/order-details/`, {
+                headers: {Authorization: `Bearer ${token}`}
+            }
+        )
+            .then(res => {
+                setOrderDetails(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     // const addOrder = async (address, od) => {
@@ -75,7 +90,7 @@ function OrdersApi(token) {
 
     const getOrdersByFilter = async (filter) => {
         try {
-            const res = await axios.get(`${LOCAL_LINK}/api/order/filters?fullname=${filter.fullname}&status=${filter.status}&payment=${filter.payment}&max=${filter.max||Number.MAX_SAFE_INTEGER}&minDate=${filter.minDate||"1970-01-01"}&maxDate=${filter.maxDate||"2050-01-01"}`, {
+            const res = await axios.get(`${LOCAL_LINK}/api/order/filters?fullname=${filter.fullname}&status=${filter.status}&payment=${filter.payment}&max=${filter.max || Number.MAX_SAFE_INTEGER}&minDate=${filter.minDate || "1970-01-01"}&maxDate=${filter.maxDate || "2050-01-01"}`, {
                     headers: {Authorization: `Bearer ${token}`}
                 }
             )
@@ -84,7 +99,6 @@ function OrdersApi(token) {
             console.log(err)
         }
     }
-
 
 
     // const deleteCartItem = async (id, username) => {
@@ -104,7 +118,8 @@ function OrdersApi(token) {
     return {
         order: [order, setOrder],
         orderDetails: [orderDetails, setOrderDetails],
-        action: {getOrdersByFilter}
+        orderDetailsByOrderId: [orderDetailsByOrderId],
+        action: {getOrdersByFilter, getOrderDetails, getOrderDetailsByOrderId}
         // actionOrder: {addOrder}
     }
 

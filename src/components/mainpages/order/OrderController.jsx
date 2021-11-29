@@ -3,37 +3,28 @@ import {Link, useParams} from "react-router-dom"
 import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
 import {OrderStatus} from "../../../utils/DataCommon";
+import {USER_LINK} from "../../../utils/hyperlink";
 
 function OrderController() {
     const state = useContext(GlobalState)
     const params = useParams();
     const [detail, setDetail] = useState([])
     const [order] = state.orderAPI.order;
-    const [orderDetails] = state.orderAPI.orderDetails
-    const [orderDetailsByOrder, setOrderDetailsByOrder] = useState([]);
+    const [orderDetailsByOrderId] = state.orderAPI.orderDetailsByOrderId
+    const action = state.orderAPI.action
 
     useEffect(() => {
         getDetails()
-        getOrderDetailsByOrderId()
     }, [params.id, order])
     const inputChange = (e) => {
         const {name, value} = e.target
         setDetail({...detail, [name]: value})
     }
-
-    async function getOrderDetailsByOrderId() {
-        const newArray = [];
-        await orderDetails.forEach(oddt => {
-            if (oddt.order.id == detail.id) {
-                newArray.push(oddt)
-            }
-        })
-        setOrderDetailsByOrder(newArray)
-    }
+    console.log(orderDetailsByOrderId)
     async function getDetails() {
         await order.forEach(o => {
             if (o.id == params.id) {
-                console.log(o.id)
+                action.getOrderDetailsByOrderId(o.id)
                 setDetail(o)
             }
         })
@@ -146,13 +137,13 @@ function OrderController() {
                             </thead>
                             <tbody>
                             {
-                                orderDetailsByOrder.map((oddt, index) => (
+                                orderDetailsByOrderId.map((oddt, index) => (
                                     <tr key={oddt.id}>
                                         <td>#{index + 1}</td>
                                         <td>
                                             <img src={oddt.product?.thumbnail} alt="" className="order-img"/>
                                         </td>
-                                        <td>{oddt.product?.name}</td>
+                                        <td><a href={`${USER_LINK}/product/detail/${oddt.id}`}>{oddt.product?.name}</a></td>
                                         <td>{oddt.price? formatCash(oddt.price):null} <sup>đ</sup></td>
                                         <td>{oddt.quantity}</td>
                                         <td className="text-danger">{formatCash(oddt.price * oddt.quantity)} <sup>đ</sup></td>
@@ -171,7 +162,7 @@ function OrderController() {
                             </div>
                             <div className="order-total">
                                 <span>Giảm giá</span>
-                                {/*<p className="text-danger">{detail.discount>=0?formatCash(detail.discount?.discount):null} <sup>đ</sup></p>*/}
+                                <p className="text-danger">{detail?.discount?.discount>=0?formatCash(detail.discount?.discount):0} <sup>đ</sup></p>
                             </div>
                             <div className="order-total">
                                 <span>Tổng cộng</span>
