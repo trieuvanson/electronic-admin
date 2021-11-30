@@ -547,3 +547,95 @@
 }
 /* end phân trang */
 
+/* Modal */
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-text {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.modal-group {
+  display: flex;
+  border-bottom: 1px #dde3e8 solid;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.modal-label {
+  font-size: 1.4rem;
+  color: var(--black);
+  margin-right: 5px;
+  width: 100px;
+}
+
+.modal-span {
+  font-size: 1.2rem;
+  color: var(--secondary);
+}
+
+.model-desc {
+  font-size: 1.3rem;
+  color: var(--secondary);
+  padding: 0 20px;
+  border-left: 1px solid #dde3e8;
+  height: 100%;
+}
+
+.modal-order-total {
+  margin-top: 40px;
+  float: right;
+  width: 200px;
+}
+
+.model-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.model-item p{
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+.model-item span {
+  font-size: 1.3rem;
+  color: var(--secondary);
+}
+/*end Modal */
+
