@@ -164,6 +164,30 @@ function SideBar() {
         {
             index: 6,
             liClass: 'sidebar-submenu',
+            link: "/admin/user",
+            linkClass: '',
+            icon: "ti-user",
+            name: "Quản lý khách hàng",
+            dropdown: "",
+            active: false,
+            child: [
+            ]
+        },
+        {
+            index: 7,
+            liClass: 'sidebar-submenu',
+            link: "/admin/voucher",
+            linkClass: '',
+            icon: "ti-gift",
+            name: "Quản lý voucher",
+            dropdown: "",
+            active: false,
+            child: [
+            ]
+        },
+        {
+            index: 8,
+            liClass: 'sidebar-submenu',
             link: "#",
             linkClass: '',
             icon: "ti-pulse",
