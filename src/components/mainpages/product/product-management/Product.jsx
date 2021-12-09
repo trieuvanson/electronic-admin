@@ -5,6 +5,7 @@ import {USER_LINK} from "../../../../utils/hyperlink";
 import {OrderStatus} from "../../../../utils/DataCommon";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from "../../../../api/Pagination";
 function Product() {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productAPI.products
@@ -46,48 +47,8 @@ function Product() {
                 new Date(b.update_at).getTime()
         }).reverse();
     }
-    const [currentPage, setCurrentPage] = useState(1)
-    const [itemsPerPage, setItemsPerPage] = useState(10)
 
-    const pages = [];
-    const productslength = Math.ceil(products.length / itemsPerPage);
-
-    for (let i = 0; i < productslength; i++) {
-        pages.push(i + 1);
-    }
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-    const renderPageNumbers = pages && pages.map(number => {
-        return (
-            <li key={number}>
-                <Link to="#" id={number} className={number === currentPage ? "active" : ""}
-                      onClick={(e) => handleClickSetCurrentPage(e)}>{number}</Link>
-            </li>
-        )
-    })
-    const currentItems = sortProductsByDate().slice(indexOfFirstItem, indexOfLastItem);
-
-
-    const handleClickSetCurrentPage = (e) => {
-        setCurrentPage(Number(e.target.id))
-        window.scroll(0, 0)
-    }
-
-    const next = () => {
-        if (currentPage <= renderPageNumbers.length - 1) {
-            setCurrentPage(currentPage + 1)
-            window.scroll(0, 0)
-        }
-    }
-
-    const prev = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
-            window.scroll(0, 0)
-        }
-    }
+    const pagination = new Pagination(sortProductsByDate())
 
     const clickFilter = (e) => {
         action.getProductsByFilter(filter).then(toast("Lọc thành công!", {
@@ -238,7 +199,7 @@ function Product() {
                                     </thead>
                                     <tbody>
                                     {
-                                        products && currentItems.map((product, index) => (
+                                        products && pagination.currentItems.map((product, index) => (
                                             <tr key={product.id}>
                                                 {/*<td>*/}
                                                 {/*    <input type="checkbox" name="" id=""/>*/}
@@ -293,11 +254,11 @@ function Product() {
 
                             <ul className="pagination">
                                 <li><Link to="#"
-                                          onClick={() => prev()}><i
+                                          onClick={() => pagination.prev()}><i
                                     className='ti-angle-left'/></Link></li>
-                                {renderPageNumbers}
+                                {pagination.renderPageNumbers}
                                 <li><Link to="#"
-                                          onClick={() => next()}><i
+                                          onClick={() => pagination.next()}><i
                                     className='ti-angle-right'/></Link></li>
                             </ul>
                         </div>

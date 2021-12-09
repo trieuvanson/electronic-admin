@@ -5,6 +5,7 @@ import {formatCash} from "../../../utils/CurrencyCommon";
 import {OrderStatus} from "../../../utils/DataCommon";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from "../../../api/Pagination";
 
 function Order() {
     const state = useContext(GlobalState)
@@ -33,49 +34,7 @@ function Order() {
         toast("Lọc thành công!")
     }
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const [itemsPerPage, setItemsPerPage] = useState(10)
-
-    const pages = [];
-    const itemsLength = Math.ceil(order.length / itemsPerPage);
-
-    for (let i = 0; i < itemsLength; i++) {
-        pages.push(i + 1);
-    }
-
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-    const renderPageNumbers = pages && pages.map(number => {
-        return (
-            <li key={number}>
-                <Link to="#" id={number} className={number === currentPage ? "active" : ""}
-                      onClick={(e) => handleClickSetCurrentPage(e)}>{number}</Link>
-            </li>
-        )
-    })
-    const currentItems = sortOrder().slice(indexOfFirstItem, indexOfLastItem);
-
-
-    const handleClickSetCurrentPage = (e) => {
-        setCurrentPage(Number(e.target.id))
-        window.scroll(0,0)
-    }
-
-    const next = () => {
-        if (currentPage <= renderPageNumbers.length - 1) {
-            setCurrentPage(currentPage + 1)
-            window.scroll(0,0)
-        }
-    }
-
-    const prev = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
-            window.scroll(0,0)
-        }
-    }
-
+    const pagination = new Pagination(sortOrder())
     const getClassStatus = (str) => {
         let className = ''
         status.find(item => {
@@ -198,7 +157,7 @@ function Order() {
                                     </thead>
                                     <tbody>
                                     {
-                                        order && currentItems.map((item, index) => {
+                                        order && pagination.currentItems.map((item, index) => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>#{index + 1}</td>
@@ -230,11 +189,11 @@ function Order() {
                             </div>
                             <ul className="pagination">
                                 <li><Link to="#"
-                                          onClick={() => prev()}><i
+                                          onClick={() => pagination.prev()}><i
                                     className='ti-angle-left'/></Link></li>
-                                {renderPageNumbers}
+                                {pagination.renderPageNumbers}
                                 <li><Link to="#"
-                                          onClick={() => next()}><i
+                                          onClick={() => pagination.next()}><i
                                     className='ti-angle-right'/></Link></li>
                             </ul>
                         </div>
