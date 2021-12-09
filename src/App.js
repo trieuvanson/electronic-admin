@@ -4,8 +4,8 @@ import {DataProvider} from "./GlobalState"
 import SideBar from "./components/sidebar/SideBar";
 import Pages from "./components/mainpages/Pages";
 import Login from "./components/mainpages/auth/Login";
-import PublicRoute from "./utils/PublicRoute";
-import PrivateRoute from "./utils/PrivateRoute";
+import PublicRoute from "./route/PublicRoute";
+import PrivateRoute from "./route/PrivateRoute";
 import {isLogin} from "./utils/Common";
 
 

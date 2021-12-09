@@ -1,10 +1,11 @@
 import React, {useContext, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {GlobalState} from "../../GlobalState";
 
 function SideBar() {
     const state = useContext(GlobalState)
     const [user] = state.userAPI.personal;
+    const history = useHistory()
 
 
 
@@ -135,33 +136,6 @@ function SideBar() {
             ]
         },
         {
-            index: 5,
-            liClass: 'sidebar-submenu',
-            link: "#",
-            linkClass: 'sidebar-menu-dropdown',
-            icon: "ti-stats-up",
-            name: "Thống kê",
-            dropdown: "dropdown-icon",
-            active: false,
-            child: [
-                {
-                    id: 4,
-                    link: "/admin/statistic/revenue",
-                    name: "Thống kê doanh thu"
-                },
-                {
-                    id: 5,
-                    link: "/admin/statistic/order",
-                    name: "Thống kê đơn hàng"
-                },
-                {
-                    id: 6,
-                    link: "/admin/statistic/categories",
-                    name: "Thống kê danh mục"
-                }
-            ]
-        },
-        {
             index: 6,
             liClass: 'sidebar-submenu',
             link: "/admin/user",
@@ -183,6 +157,33 @@ function SideBar() {
             dropdown: "",
             active: false,
             child: [
+            ]
+        },
+        {
+            index: 5,
+            liClass: 'sidebar-submenu',
+            link: "#",
+            linkClass: 'sidebar-menu-dropdown',
+            icon: "ti-stats-up",
+            name: "Thống kê",
+            dropdown: "dropdown-icon",
+            active: false,
+            child: [
+                {
+                    id: 4,
+                    link: "/admin/statistic/revenue",
+                    name: "Thống kê doanh thu"
+                    },
+                {
+                    id: 5,
+                    link: "/admin/statistic/order",
+                    name: "Thống kê đơn hàng"
+                },
+                {
+                    id: 6,
+                    link: "/admin/statistic/categories",
+                    name: "Thống kê danh mục"
+                }
             ]
         },
         {
@@ -209,6 +210,13 @@ function SideBar() {
         else return null
     }
 
+    const logout = (e) => {
+        e.preventDefault()
+        localStorage.clear()
+        history.push('/admin')
+        window.location.reload()
+    }
+
 
     return (
         <div className="sidebar">
@@ -220,14 +228,14 @@ function SideBar() {
             </div>
             <div className="sidebar-user">
                 <div className="sidebar-user-info">
-                    <img src={user?user.avatar:null} alt="User" className="profile-image"/>
+                    <img src={user?user.avatar:null} className="profile-image"/>
                     <div className="sidebar-user-name">
                         {user?.fullname}
                     </div>
                 </div>
-                <a href="" className="btn btn-outline">
+                <button onClick={logout} className="btn btn-outline">
                     <i className="ti-power-off"/>
-                </a>
+                </button>
             </div>
             <ul className="sidebar-menu">
                 {
@@ -260,144 +268,6 @@ function SideBar() {
                 }
             </ul>
 
-
-            {/*
-                <li className="sidebar-submenu">
-                    <a href="" className="sidebar-menu-dropdown">
-                        <i className="ti-files"/>
-                        <span>Quản lý bài viết</span>
-                        <div className="dropdown-icon"/>
-                    </a>
-                    <ul className="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#">Giới thiệu</a>
-                        </li>
-                        <li>
-                            <a href="#">Tại sao chọn chúng tôi</a>
-                        </li>
-                        <li>
-                            <a href="#">Cảm nhận khách hàng</a>
-                        </li>
-                        <li>
-                            <a href="#">Tin tức</a>
-                        </li>
-                        <li>
-                            <a href="#">Chính sách</a>
-                        </li>
-                    </ul>
-                </li>
-                <li className="sidebar-submenu">
-                    <a href="" className="sidebar-menu-dropdown">
-                        <i className="ti-email"/>
-                        <span>Quản lý nhận tin</span>
-                        <div className="dropdown-icon"/>
-                    </a>
-                    <ul className="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#">Đăng ký nhận tin</a>
-                        </li>
-                    </ul>
-                </li>
-                <li className="sidebar-submenu">
-                    <a href="" className="sidebar-menu-dropdown">
-                        <i className="ti-bookmark"/>
-                        <span>Quản lý trang tĩnh</span>
-                        <div className="dropdown-icon"/>
-                    </a>
-                    <ul className="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#">slogan</a>
-                        </li>
-                        <li>
-                            <a href="#">slogan menu</a>
-                        </li>
-                        <li>
-                            <a href="#">slogan tại sao chọn chúng tôi</a>
-                        </li>
-                        <li>
-                            <a href="#">slogan album ảnh</a>
-                        </li>
-                        <li>
-                            <a href="#">slogan tin tức</a>
-                        </li>
-                        <li>
-                            <a href="#">Liên hệ</a>
-                        </li>
-                        <li>
-                            <a href="#">fotter</a>
-                        </li>
-                    </ul>
-                </li>
-                <li className="sidebar-submenu">
-                    <a href="#" className="sidebar-menu-dropdown">
-                        <i className="ti-camera"></i>
-                        <span>Quản lý hình ảnh - video</span>
-                        <div className="dropdown-icon"></div>
-                    </a>
-                    <ul className="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#">Logo</a>
-                        </li>
-                        <li>
-                            <a href="#">Banner quảng cáo</a>
-                        </li>
-                        <li>
-                            <a href="#">favicon</a>
-                        </li>
-                        <li>
-                            <a href="#">slideshow</a>
-                        </li>
-                        <li>
-                            <a href="#">Album ảnh</a>
-                        </li>
-                        <li>
-                            <a href="#">Mạng xã hội</a>
-                        </li>
-                    </ul>
-                </li>
-                <li className="sidebar-submenu">
-                    <a href="" className="sidebar-menu-dropdown">
-                        <i className="ti-user"></i>
-                        <span>Quản lý user</span>
-                        <div className="dropdown-icon"></div>
-                    </a>
-                    <ul className="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#">Thông tin admin</a>
-                        </li>
-                    </ul>
-                </li>
-                <li className="sidebar-submenu">
-                    <a href="" className="sidebar-menu-dropdown">
-                        <i className="ti-layout-slider-alt"></i>
-                        <span>Page</span>
-                        <div className="dropdown-icon"></div>
-                    </a>
-                    <ul className="sidebar-menu sidebar-menu-dropdown-content">
-                        <li>
-                            <a href="#">Error 404</a>
-                        </li>
-                        <li>
-                            <a href="#">Error 500</a>
-                        </li>
-                        <li>
-                            <a href="#">Hình ảnh</a>
-                        </li>
-                        <li>
-                            <a href="#">Tin tức sự kiện</a>
-                        </li>
-                        <li>
-                            <a href="#">Liên hệ</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="">
-                        <i className="ti-pulse"></i>
-                        <span>Thiết lập thông tin</span>
-                    </a>
-                </li>
-            </ul>*/}
         </div>
     );
 }
