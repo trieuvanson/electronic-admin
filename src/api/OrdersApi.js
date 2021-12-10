@@ -14,15 +14,17 @@ function OrdersApi(token) {
     }, [token])
 
     const getOrders = async () => {
-        try {
-            const res = await axios.get(`${LOCAL_LINK}/api/order/?field=id`, {
-                    headers: {Authorization: `Bearer ${token}`}
-                }
-            )
-            setOrder(res.data)
-        } catch (err) {
-            console.log(err)
-        }
+        await axios.get(`${LOCAL_LINK}/api/order/`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                setOrder(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
 
@@ -52,28 +54,18 @@ function OrdersApi(token) {
             })
     }
 
-    // const addOrder = async (address, od) => {
-    //     const order = JSON.stringify({
-    //         "status": od.status,
-    //         "quantity": od.quantity,
-    //         "total": od.total,
-    //         "note": od.note,
-    //         "payment": od.payment,
-    //         "user": user,
-    //         "address": address
-    //     });
-    //     await axios.post(`${LOCAL_LINK}/api/order/`, order, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }).then(res => {
-    //         setOrder([...order, res.data])
-    //         addOrderDetails(res.data)
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+    const updateOrder = async (orderId, order) => {
+        await axios.put(`${LOCAL_LINK}/api/order/${orderId}`, order, {
+                headers: {Authorization: `Bearer ${token}`}
+            }
+        )
+            .then(res => {
+                getOrders()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     const addOrderDetails = async (order) => {
         await axios.post(`${LOCAL_LINK}/api/order/order-details/`, order, {
@@ -119,7 +111,7 @@ function OrdersApi(token) {
         order: [order, setOrder],
         orderDetails: [orderDetails, setOrderDetails],
         orderDetailsByOrderId: [orderDetailsByOrderId],
-        action: {getOrdersByFilter, getOrderDetails, getOrderDetailsByOrderId}
+        action: {getOrdersByFilter, getOrderDetails, getOrderDetailsByOrderId, updateOrder, getOrders}
         // actionOrder: {addOrder}
     }
 

@@ -2,12 +2,15 @@ import React, {useContext, useEffect, useState} from 'react'
 import {GlobalState} from "../../../../../GlobalState";
 import {useParams} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CategoryLv1() {
     const state = useContext(GlobalState)
     const params = useParams();
     const [brands] = state.categoriesApi.brands
     const [detail, setDetail] = useState("")
+    const brandAction = state.categoriesApi.brandAction
 
     useEffect(() => {
         getDetail(params.id)
@@ -21,6 +24,21 @@ function CategoryLv1() {
     const onChangeInput = (e) => {
         const {name, value} = e.target
         setDetail({...detail, [name]: value})
+    }
+
+    async function updateBrand(detail) {
+        await brandAction.updateBrand(detail)
+            .then(res => {
+                toast.success("Cập nhật thành công")
+            })
+            .catch(err => {
+                toast.error("Cập nhật thất bại")
+            })
+    }
+
+    function clear() {
+        setDetail({name: ""}
+        )
     }
 
     return (
@@ -50,7 +68,7 @@ function CategoryLv1() {
                                             <div className="row">
                                                 <div className="col-6">
                                                     <div className="form-group">
-                                                        <label className="form-label">Name</label>
+                                                        <label className="form-label">Tên danh mục</label>
                                                         <input type="text" name="name"
                                                                value={detail?.name} onChange={onChangeInput}
                                                                className="form-control"/>
@@ -60,30 +78,33 @@ function CategoryLv1() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="box-footer box-btn">
-                                    <button className="btn btn-primary btn-icon-text">
-                                        <i className="ti-save"></i>
-                                        Lưu
-                                    </button>
-                                    <button className="btn btn-success btn-icon-text">
-                                        <i className="ti-save"></i>
-                                        Lưu lại trang
-                                    </button>
-                                    <button className="btn btn-danger btn-icon-text">
-                                        <i className="ti-reload"></i>
-                                        Xóa tất cả
-                                    </button>
-                                    <button className="btn btn-primary btn-icon-text">
-                                        <i className="ti-close"></i>
-                                        Thoát
-                                    </button>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="box-btn mt-32">
+                                            <button onClick={() => updateBrand(detail)}
+                                                    className="btn btn-primary btn-icon-text btn-hover">
+                                                <i className="ti-save"/>
+                                                Cập nhật
+                                            </button>
+                                            <button onClick={clear}
+                                                    className="btn btn-secondary btn-icon-text btn-hover">
+                                                <i className="ti-reload"/>
+                                                Làm mới
+                                            </button>
+                                            <button onClick={() => window.location.href = "/admin/product/brand"}
+                                                    className="btn btn-danger btn-icon-text btn-hover">
+                                                <i className="ti-shift-right"/>
+                                                Thoát
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <ToastContainer/>
         </>
 
     )

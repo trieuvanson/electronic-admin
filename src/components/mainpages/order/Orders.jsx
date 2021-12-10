@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Link} from "react-router-dom"
 import {GlobalState} from "../../../GlobalState";
 import {formatCash} from "../../../utils/CurrencyCommon";
@@ -17,6 +17,13 @@ function Order() {
         fullname: "", status: "", payment: "", max: "", minDate: "", maxDate: ""
     })
 
+    useEffect(() => {
+        if ([filter.fullname, filter.status, filter.payment, filter.max, filter.minDate, filter.maxDate].includes("")) {
+            action.getOrders()
+        }
+    }, [filter])
+
+
     const sortOrder = () => {
         return order.sort((a,b) => {
             return new Date(a.update_at).getTime() -
@@ -27,7 +34,6 @@ function Order() {
     const inputChange = (e) => {
         const {name, value} = e.target
         setFilter({...filter, [name]: value})
-        console.log(filter)
     }
     const filterOrder = (e) => {
         e.preventDefault()
@@ -65,7 +71,7 @@ function Order() {
                         <div className="col-12">
                             <div className="box">
                                 <div className="box-header">
-                                    Fitter
+                                    Bộ lọc
                                 </div>
                                 <div className="box-body">
                                     <div className="row">

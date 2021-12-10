@@ -21,7 +21,6 @@ function ProductController() {
         setCategoriesByBrands(newArray)
     }
 
-
     function getDetail() {
         products.forEach(pro => {
             if (pro.id == params.id) {

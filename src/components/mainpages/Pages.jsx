@@ -35,7 +35,7 @@ function Pages() {
             <PrivateRoute path={"/admin/product"} exact component={Product}/>
             <PrivateRoute path={"/admin/order/:id"} exact component={OrderController}/>
             <PrivateRoute path={"/admin/order"} exact component={Orders}/>
-            <PrivateRoute path={"/admin/slides/detail"} exact component={SlidesController}/>
+            <PrivateRoute path={"/admin/slides/:id"} exact component={SlidesController}/>
             <PrivateRoute path={"/admin/slides"} exact component={Slides}/>
             <PrivateRoute path={"/admin/user"} exact component={User}/>
             <PrivateRoute path={"/admin/user/detail"} exact component={UserController}/>
