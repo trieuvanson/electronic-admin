@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {GlobalState} from "../../../GlobalState";
 import ReactApexChart from 'react-apexcharts'
+import {Helmet} from "react-helmet";
 
 function ReportsCategories() {
     const state = useContext(GlobalState)
@@ -74,47 +75,53 @@ function ReportsCategories() {
         }
     };
     const changeDate = (e) => {
-        // setBrand(e.target.value)
         action.topCategoriesByBrandName(e.target.value)
     }
 
 
     return (
-        <div className="main">
-            <div className="main-header">
-                <div className="mobile-toggle" id="mobile-toggle">
-                    <i className="ti-menu"></i>
-                </div>
-                <div className="main-title">
-                    Thống kê
-                </div>
-            </div>
-            <div className="main-content">
-                <div className="row">
-                    <div className="col-12">
-                        <select className="selection" onChange={changeDate}>
-                            <option value="">Chọn hãng</option>
-                            {
-                                brands.map((brand, index) => {
-                                    return (
-                                        <option key={index} value={brand.name}>{brand.name}</option>
-                                    )
-                                })
-                            }
-                        </select>
+
+        <>
+            <Helmet>
+                <title>Administrator - Thống kê danh mục</title>
+            </Helmet>
+            <div className="main">
+                <div className="main-header">
+                    <div className="mobile-toggle" id="mobile-toggle">
+                        <i className="ti-menu"></i>
                     </div>
-                    <div className="col-12 col-md-6 col-sm-12">
-                        <div className="box f-height">
-                            <div className="box-body">
-                                <div id="chart">
-                                    <ReactApexChart options={options} series={options.series} type="bar" height={400}/>
+                    <div className="main-title">
+                        Thống kê
+                    </div>
+                </div>
+                <div className="main-content">
+                    <div className="row">
+                        <div className="col-12">
+                            <select className="selection" onChange={changeDate}>
+                                <option value="">Chọn hãng</option>
+                                {
+                                    brands.map((brand, index) => {
+                                        return (
+                                            <option key={index} value={brand.name}>{brand.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <div className="col-12 col-md-6 col-sm-12">
+                            <div className="box f-height">
+                                <div className="box-body">
+                                    <div id="chart">
+                                        <ReactApexChart options={options} series={options.series} type="bar" height={400}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </>
 
     )
 }

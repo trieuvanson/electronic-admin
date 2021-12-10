@@ -4,9 +4,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 
 function Pagination(data) {
-    const dataPagination = data.filter(p => p.status)
-
-
+    const dataPagination = data
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(10)
 
@@ -33,7 +31,6 @@ function Pagination(data) {
 
 
     const currentItems = dataPagination
-        .filter(p => p.status)
         .slice(indexOfFirstItem, indexOfLastItem);
 
     const next = () => {

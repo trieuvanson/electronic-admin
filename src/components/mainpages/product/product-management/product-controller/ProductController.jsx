@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {GlobalState} from "../../../../../GlobalState";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import {Helmet} from "react-helmet";
 
 function ProductController() {
     const state = useContext(GlobalState)
@@ -72,104 +73,90 @@ function ProductController() {
         action.updateProduct(detail)
         window.location.reload()
     }
+
+    const clear = (e) => {
+        setDetail({...detail,
+            name: "",
+            regular_price: "",
+            sale_price: "",
+            thumbnail: "",
+            thumbnail2: "",
+            category: {id: categoriesByBrands[0]?.id, brand: {id: brands[0]?.id}},
+            description: "",
+
+        })
+    }
     return (
-        <div className="main">
-            <div className="main-header">
-                <div className="mobile-toggle" id="mobile-toggle">
-                    <i className="ti-menu"></i>
+        <>
+            <Helmet>
+                <title>Administrator - Sản phẩm chi tiết</title>
+            </Helmet>
+            <div className="main">
+                <div className="main-header">
+                    <div className="mobile-toggle" id="mobile-toggle">
+                        <i className="ti-menu"></i>
+                    </div>
+                    <div className="main-title">
+                        Quản lý sản phẩm
+                    </div>
                 </div>
-                <div className="main-title">
-                    Quản lý sản phẩm
-                </div>
-            </div>
-            <div className="main-content">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="box">
-                            <div className="box-header">
-                                <div className="box-text">
-                                    <p>Chỉnh sửa thông tin</p>
-                                    <div className="data-time">
-                                        <span>Ngày tạo: {detail.created_at}</span>
-                                        <span>cập nhập lần cuối: {detail.update_at}</span>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div className="box-body">
-                                <div className="row">
-                                    <div className="col-7">
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="form-group">
-                                                    <label className="form-label">Name</label>
-                                                    <input type="text" name="name" className="form-control"
-                                                           value={detail?.name} onChange={inputChange}/>
-                                                </div>
-                                            </div>
-                                            <div className="col-6">
-                                                <div className="form-group">
-                                                    <label className="form-label">Giá gốc</label>
-                                                    <input type="number" name="regular_price" className="form-control"
-                                                           value={detail?.regular_price} onChange={inputChange}/>
-                                                </div>
-                                            </div>
-                                            <div className="col-6">
-                                                <div className="form-group">
-                                                    <label className="form-label">Giá khuyến mãi</label>
-                                                    <input type="number" name="sale_price" className="form-control"
-                                                           onChange={inputChange} value={detail?.sale_price}/>
-                                                </div>
-                                            </div>
+                <div className="main-content">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="box">
+                                <div className="box-header">
+                                    <div className="box-text">
+                                        <p>Chỉnh sửa thông tin</p>
+                                        <div className="data-time">
+                                            <span>Ngày tạo: {detail.created_at}</span>
+                                            <span>cập nhập lần cuối: {detail.update_at}</span>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <div className="form-group">
-                                                    <label className="form-label">Loại sản phẩm</label>
-                                                    <select className="form-control"
-                                                            name="brand"
-                                                            value={detail?.category?.brand?.id}
-                                                            onChange={(e) => {
-                                                                getCategoriesByBrand(e.target.value)
-                                                                inputChange(e)
-                                                            }}
-                                                            onClick={(e) => {
-                                                                getCategoriesByBrand(e.target.value)
-                                                                inputChange(e)
-                                                            }}>
-                                                        {
-                                                            brands.map((item, index) => {
-                                                                return (
-                                                                    <option key={index}
-                                                                            value={item.id}>
-                                                                        {item.name}
-                                                                    </option>
-                                                                )
-                                                            })
-                                                        }
-                                                    </select>
+
+                                    </div>
+                                </div>
+                                <div className="box-body">
+                                    <div className="row">
+                                        <div className="col-7">
+                                            <div className="row">
+                                                <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label className="form-label">Name</label>
+                                                        <input type="text" name="name" className="form-control"
+                                                               value={detail?.name} onChange={inputChange}/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-6">
+                                                    <div className="form-group">
+                                                        <label className="form-label">Giá gốc</label>
+                                                        <input type="number" name="regular_price" className="form-control"
+                                                               value={detail?.regular_price} onChange={inputChange}/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-6">
+                                                    <div className="form-group">
+                                                        <label className="form-label">Giá khuyến mãi</label>
+                                                        <input type="number" name="sale_price" className="form-control"
+                                                               onChange={inputChange} value={detail?.sale_price}/>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col-6">
-                                                <div className="form-group">
-                                                    <label className="form-label">Nhãn hiệu</label>
-                                                    <select className="form-control"
-                                                            name="category"
-                                                            onChange={inputChange}
-                                                            value={detail?.category?.id}
-                                                    >
-
-                                                        {
-                                                            categoriesByBrands?
-                                                                categoriesByBrands && categoriesByBrands.map((item, index) => {
-                                                                    return (
-                                                                        <option key={index}
-                                                                                value={item.id}>
-                                                                            {item.name}
-                                                                        </option>
-                                                                    )
-                                                                }):
-                                                                categories.filter(item => item.brand?.id == detail?.category?.brand?.id).map((item, index) => {
+                                            <div className="row">
+                                                <div className="col-6">
+                                                    <div className="form-group">
+                                                        <label className="form-label">Loại sản phẩm</label>
+                                                        <select className="form-control"
+                                                                name="brand"
+                                                                value={detail?.category?.brand?.id}
+                                                                onChange={(e) => {
+                                                                    getCategoriesByBrand(e.target.value)
+                                                                    inputChange(e)
+                                                                }}
+                                                                onClick={(e) => {
+                                                                    getCategoriesByBrand(e.target.value)
+                                                                    inputChange(e)
+                                                                }}>
+                                                            {
+                                                                brands.map((item, index) => {
                                                                     return (
                                                                         <option key={index}
                                                                                 value={item.id}>
@@ -177,46 +164,78 @@ function ProductController() {
                                                                         </option>
                                                                     )
                                                                 })
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="col-6">
+                                                    <div className="form-group">
+                                                        <label className="form-label">Nhãn hiệu</label>
+                                                        <select className="form-control"
+                                                                name="category"
+                                                                onChange={inputChange}
+                                                                value={detail?.category?.id}
+                                                        >
 
-                                                        }
-                                                    </select>
+                                                            {
+                                                                categoriesByBrands?
+                                                                    categoriesByBrands && categoriesByBrands.map((item, index) => {
+                                                                        return (
+                                                                            <option key={index}
+                                                                                    value={item.id}>
+                                                                                {item.name}
+                                                                            </option>
+                                                                        )
+                                                                    }):
+                                                                    categories.filter(item => item.brand?.id == detail?.category?.brand?.id).map((item, index) => {
+                                                                        return (
+                                                                            <option key={index}
+                                                                                    value={item.id}>
+                                                                                {item.name}
+                                                                            </option>
+                                                                        )
+                                                                    })
+
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-12">
+                                                    <div className="form-group">
+                                                        <label className="form-label" htmlFor="description">
+                                                            Mô tả
+                                                        </label>
+                                                        <textarea name="description" id="description"
+                                                                  onChange={inputChange}
+                                                                  value={detail?.description} cols="30" rows="7"
+                                                                  className="form-textarea"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="form-group">
-                                                    <label className="form-label" htmlFor="description">
-                                                        Description
-                                                    </label>
-                                                    <textarea name="description" id="description"
-                                                              onChange={inputChange}
-                                                              value={detail?.description} cols="30" rows="7"
-                                                              className="form-textarea"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div className="col-5">
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="box">
-                                                    <div className="box-header">
-                                                        Hình ảnh sản phẩm <br/>
-                                                        <label htmlFor="thumbnail">
-                                                            <img src={detail.thumbnail} width="50%" alt=""/>
-                                                        </label>
-                                                        <div className="form-group">
-                                                            <input type="file" name="thumbnail" className="form-control-file"
-                                                                   onChange={inputChange} id="thumbnail"/>
-                                                        </div>
-                                                        <label htmlFor="thumbnail2">
-                                                            <img src={detail.thumbnail2} width="50%" alt=""/>
-                                                        </label>
-                                                        <div className="form-group">
-                                                            <input type="file" name="thumbnail2" className="form-control-file"
-                                                                   onChange={inputChange} id="thumbnail2"/>
+                                        <div className="col-5">
+                                            <div className="row">
+                                                <div className="col-12">
+                                                    <div className="box">
+                                                        <div className="box-header">
+                                                            Hình ảnh sản phẩm <br/>
+                                                            <label htmlFor="thumbnail">
+                                                                <img src={detail.thumbnail} width="50%" alt=""/>
+                                                            </label>
+                                                            <div className="form-group">
+                                                                <input type="file" name="thumbnail" className="form-control-file"
+                                                                       onChange={inputChange} id="thumbnail"/>
+                                                            </div>
+                                                            <label htmlFor="thumbnail2">
+                                                                <img src={detail.thumbnail2} width="50%" alt=""/>
+                                                            </label>
+                                                            <div className="form-group">
+                                                                <input type="file" name="thumbnail2" className="form-control-file"
+                                                                       onChange={inputChange} id="thumbnail2"/>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,27 +243,32 @@ function ProductController() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="box-footer box-btn">
-                                <button className="btn btn-primary btn-icon-text" onClick={updateProduct}>
-                                    Lưu
-                                </button>
-                                <button className="btn btn-success btn-icon-text">
-                                    Lưu lại trang
-                                </button>
-                                <button className="btn btn-danger btn-icon-text">
-                                    Xóa tất cả
-                                </button>
-                                <button className="btn btn-secondary btn-icon-text">
-                                    Thoát
-                                </button>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="box-btn mt-32">
+                                            <button className="btn btn-primary btn-icon-text btn-hover">
+                                                <i className="ti-save"/>
+                                                Lưu
+                                            </button>
+                                            <button className="btn btn-secondary btn-icon-text btn-hover">
+                                                <i className="ti-reload"/>
+                                                Làm mới
+                                            </button>
+                                            <button className="btn btn-danger btn-icon-text btn-hover">
+                                                <i className="ti-shift-right"/>
+                                                Thoát
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </>
 
     )
 }

@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import {LOCAL_LINK} from "../../../utils/hyperlink";
+import {LOCAL_LINK, USER_LINK} from "../../../utils/hyperlink";
 import {setLogin, setToken} from "../../../utils/Common";
 import {Link} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 
 function Login() {
@@ -35,9 +36,12 @@ function Login() {
 
     return (
         <>
+            <Helmet>
+                <title>Administrator - Login</title>
+            </Helmet>
             <div className="login-websites">
-                <a href="" title="Xem website">
-                    <i className="ti-back-left"></i>
+                <a href={`${USER_LINK}/`} title="Xem website">
+                    <i className="ti-back-left"/>
                     Xem website
                 </a>
             </div>
@@ -47,7 +51,7 @@ function Login() {
                     <form action="">
                         <div className="form-group-login">
                             <div className="login-icon">
-                                <i className="ti-user"></i>
+                                <i className="ti-user"/>
                             </div>
                             <input type="text" className="form-input"
                                   onChange={onChangeInput} name="username" placeholder="Tên tài khoản"/>

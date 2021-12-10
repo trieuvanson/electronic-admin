@@ -41,6 +41,7 @@ function SideBar() {
             return s;
         });
         setShow(updatedList);
+
     }
 
     const sidebars = [
@@ -228,7 +229,7 @@ function SideBar() {
             </div>
             <div className="sidebar-user">
                 <div className="sidebar-user-info">
-                    <img src={user?user.avatar:null} className="profile-image"/>
+                    <img src={user?user.avatar:null} className="profile-image" alt={""}/>
                     <div className="sidebar-user-name">
                         {user?.fullname}
                     </div>

@@ -6,6 +6,7 @@ import TopProducts from "./TopProducts";
 import TopBrands from "./TopBrands";
 import TotalData from "./TotalData";
 import Customer from "./Customer";
+import {Helmet} from "react-helmet";
 
 function Index() {
     const state = useContext(GlobalState)
@@ -38,25 +39,31 @@ function Index() {
     ]
 
     return (
-        <div className="main">
-            <div className="main-header">
-                <div className="mobile-toggle" id="mobile-toggle">
-                    <i className="ti-menu"/>
+        <>
+            <Helmet>
+                <title>Administrator - Dashboard</title>
+            </Helmet>
+            <div className="main">
+                <div className="main-header">
+                    <div className="mobile-toggle" id="mobile-toggle">
+                        <i className="ti-menu"/>
+                    </div>
+                    <div className="main-title">
+                        Dashboard
+                    </div>
                 </div>
-                <div className="main-title">
-                    Dashboard
+                <div className="main-content">
+                    <TotalData item={totalData}/>
+                    <div className="row">
+                        <TopProducts item={orderDetails}/>
+                        <TopBrands/>
+                        <Customer/>
+                        <TableOrdersRender item={filterOrders}/>
+                    </div>
                 </div>
             </div>
-            <div className="main-content">
-                <TotalData item={totalData}/>
-                <div className="row">
-                    <TopProducts item={orderDetails}/>
-                    <TopBrands/>
-                    <Customer/>
-                    <TableOrdersRender item={filterOrders}/>
-                </div>
-            </div>
-        </div>
+
+        </>
 
     )
 }

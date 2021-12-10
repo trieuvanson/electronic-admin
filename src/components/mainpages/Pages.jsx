@@ -21,31 +21,34 @@ import User from "./user/User";
 import UserController from "./user/UserController";
 import Voucher from "./voucher/Voucher";
 import VoucherController from "./voucher/VoucherController";
+import NotFound from "../../utils/not_found/NotFound";
+
 function Pages() {
     return (
         <Switch>
-            <PrivateRoute path={["/admin/dashboard"]} exact component={Index} />
-            <PrivateRoute path={"/admin/product/brand/:id"} exact component={CategoryLv1Controller} />
-            <PrivateRoute path={"/admin/product/brand"} exact component={CategoryLv1} />
-            <PrivateRoute path={"/admin/product/category/:id"} exact component={CategoryLv2Controller} />
-            <PrivateRoute path={"/admin/product/category"} exact component={CategoryLv2} />
-            <PrivateRoute path={"/admin/product/:id"} exact component={ProductController} />
-            <PrivateRoute path={"/admin/product"} exact component={Product} />
-            <PrivateRoute path={"/admin/order/:id"} exact component={OrderController} />
-            <PrivateRoute path={"/admin/order"} exact component={Orders} />
-            <PrivateRoute path={"/admin/slides/detail"} exact component={SlidesController} />
-            <PrivateRoute path={"/admin/slides"} exact component={Slides} />
-            <PrivateRoute path={"/admin/user"} exact component={User} />
-            <PrivateRoute path={"/admin/user/detail"} exact component={UserController} />
-                <PrivateRoute path={"/admin/voucher"} exact component={Voucher} />
-                <PrivateRoute path={"/admin/voucher/detail"} exact component={VoucherController} />
-            <PrivateRoute path={"/admin/statistic/revenue"} exact component={ReportsRevenue} />
-            <PrivateRoute path={"/admin/statistic/order"} exact component={ReportsOrders} />
-            <PrivateRoute path={"/admin/statistic/categories"} exact component={ReportsCategories} />
+            <PrivateRoute path={["/admin/dashboard"]} exact component={Index}/>
+            <PrivateRoute path={"/admin/product/brand/:id"} exact component={CategoryLv1Controller}/>
+            <PrivateRoute path={"/admin/product/brand"} exact component={CategoryLv1}/>
+            <PrivateRoute path={"/admin/product/category/:id"} exact component={CategoryLv2Controller}/>
+            <PrivateRoute path={"/admin/product/category"} exact component={CategoryLv2}/>
+            <PrivateRoute path={"/admin/product/:id"} exact component={ProductController}/>
+            <PrivateRoute path={"/admin/product"} exact component={Product}/>
+            <PrivateRoute path={"/admin/order/:id"} exact component={OrderController}/>
+            <PrivateRoute path={"/admin/order"} exact component={Orders}/>
+            <PrivateRoute path={"/admin/slides/detail"} exact component={SlidesController}/>
+            <PrivateRoute path={"/admin/slides"} exact component={Slides}/>
+            <PrivateRoute path={"/admin/user"} exact component={User}/>
+            <PrivateRoute path={"/admin/user/detail"} exact component={UserController}/>
+            <PrivateRoute path={"/admin/voucher"} exact component={Voucher}/>
+            <PrivateRoute path={"/admin/voucher/detail"} exact component={VoucherController}/>
+            <PrivateRoute path={"/admin/statistic/revenue"} exact component={ReportsRevenue}/>
+            <PrivateRoute path={"/admin/statistic/order"} exact component={ReportsOrders}/>
+            <PrivateRoute path={"/admin/statistic/categories"} exact component={ReportsCategories}/>
             <PublicRoute exact path={["/admin", "/"]} component={Login}/>
+            <Route component={NotFound}/>
         </Switch>
 
-        
+
     )
 }
 

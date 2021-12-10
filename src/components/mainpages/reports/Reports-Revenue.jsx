@@ -1,13 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {GlobalState} from "../../../GlobalState";
 import ReactApexChart from 'react-apexcharts'
+import {Helmet} from "react-helmet";
 
 function ReportsRevenue() {
     const state = useContext(GlobalState)
     const [revenueByYear] = state.reportsApi.revenueByYear
     const action = state.reportsApi.revenueAction
-
-    console.log(revenueByYear.map(item => "Tháng "+item.month))
     function unique(arr) {
         var newArr = []
         for (let i = 0; i < arr.length; i++) {
@@ -59,39 +58,46 @@ function ReportsRevenue() {
 
 
     return (
-        <div className="main">
-            <div className="main-header">
-                <div className="mobile-toggle" id="mobile-toggle">
-                    <i className="ti-menu"/>
-                </div>
-                <div className="main-title">
-                    Thống kê
-                </div>
-            </div>
-            <div className="main-content">
-                <div className="row">
-                    <div className="col-12">
-                        <select className="selection" onChange={changeDate}>
-                            <option value="">Chọn năm</option>
-                            {
-                                year.reverse().map((item, index) => {
-                                    return <option key={index} value={item}>{item}</option>
-                                })
-                            }
-                        </select>
+        <>
+            <Helmet>
+                <title>Administrator - Thống kê doanh thu</title>
+            </Helmet>
+            <div className="main">
+                <div className="main-header">
+                    <div className="mobile-toggle" id="mobile-toggle">
+                        <i className="ti-menu"/>
                     </div>
-                    <div className="col-12 col-md-6 col-sm-12">
-                        <div className="box f-height">
-                            <div className="box-body">
-                                <div id="chart">
-                                    <ReactApexChart options={options} series={options.series} type="line" height={400}/>
+                    <div className="main-title">
+                        Thống kê
+                    </div>
+                </div>
+                <div className="main-content">
+                    <div className="row">
+                        <div className="col-12">
+                            <select className="selection" onChange={changeDate}>
+                                <option value="">Chọn năm</option>
+                                {
+                                    year.reverse().map((item, index) => {
+                                        return <option key={index} value={item}>{item}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <div className="col-12 col-md-6 col-sm-12">
+                            <div className="box f-height">
+                                <div className="box-body">
+                                    <div id="chart">
+                                        <ReactApexChart options={options} series={options.series} type="line" height={400}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </>
+
 
     )
 }
