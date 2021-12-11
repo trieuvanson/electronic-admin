@@ -4,14 +4,14 @@ import {GlobalState} from "../../../GlobalState";
 
 export default function Customer(props) {
     const state = useContext(GlobalState)
-    const [topBrands] = state.reportsApi.topBrands
+    const [topCustomers] = state.reportsApi.topCustomers
     const customer_options = {
-        series: topBrands.map(item => item.quantity),
+        series: topCustomers.slice(0,5).map(item => item.total),
         options: {
             chart: {
                 type: 'donut',
             },
-            labels: topBrands.map(item => item.name),
+            labels: topCustomers.slice(0,5).map(item => item.name),
             responsive: [{
                 breakpoint: 480,
                 options: {
@@ -26,13 +26,14 @@ export default function Customer(props) {
         }
     };
     return (
-        <div className="col-5 col-md-6 col-sm-12">
+        <div className="col-4 col-md-6 col-sm-12">
             <div className="box f-height">
                 <div className="box-header">
-                    Khách hàng mua hàng nhiều nhất
+                    5 khách hàng mua hàng nhiều nhất
                 </div>
                 <div className="box-body">
-                    <div id="customers-chart"/>
+                    <ReactApexChart options={customer_options.options} series={customer_options.series}
+                                    type="donut"/>
                 </div>
             </div>
         </div>

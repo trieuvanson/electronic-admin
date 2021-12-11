@@ -50,7 +50,7 @@ export default function TableOrdersRender(props) {
                                                     <i className="ti-eye"></i>
                                                     view
                                                 </Link>
-                                                <Link to={`/admin/product/${item.id}`}
+                                                <Link to={`/admin/order/${item.id}`}
                                                       className="mr-8 text-priamry">
                                                     <i className="ti-pencil-alt"></i>
                                                     edit

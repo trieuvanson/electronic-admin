@@ -1,4 +1,5 @@
 import React from 'react'
+import {USER_LINK} from "../../../utils/hyperlink";
 
 export default function  TopProducts(props) {
     const {item} = props
@@ -8,8 +9,6 @@ export default function  TopProducts(props) {
         return r;
     }, {});
     const dataAfterGroupBy = Object.keys(groupBy).map(key => groupBy[key]).sort((a, b) => b.length - a.length)
-
-    console.log(props)
     return (
         <div className="col-3 col-md-6 col-sm-12">
             <div className="box f-height">
@@ -25,7 +24,9 @@ export default function  TopProducts(props) {
                                         <div className="item-info">
                                             <img src={item[0].product?.thumbnail} alt=""/>
                                             <div className="item-name">
-                                                <div className="product-name">{item[0].product?.name}</div>
+                                                <div className="product-name">
+                                                    <a href={`${USER_LINK}/product/detail/${item[0].product?.id}`}>{item[0].product?.name}</a>
+                                                </div>
                                                 <div className="text-second">{item[0].product?.category?.brand?.name}</div>
                                             </div>
                                         </div>

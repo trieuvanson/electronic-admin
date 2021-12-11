@@ -9,7 +9,7 @@ function Pagination(data) {
     const [itemsPerPage, setItemsPerPage] = useState(10)
 
     const pages = [];
-    const dataLength = Math.ceil(dataPagination.length / itemsPerPage);
+    const dataLength = Math.ceil(dataPagination?.length / itemsPerPage) || 0;
     for (let i = 0; i < dataLength; i++) {
         pages.push(i + 1);
     }
@@ -30,8 +30,7 @@ function Pagination(data) {
     }
 
 
-    const currentItems = dataPagination
-        .slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = dataPagination?.slice(indexOfFirstItem, indexOfLastItem);
 
     const next = () => {
         if (currentPage <= renderPageNumbers.length - 1) {

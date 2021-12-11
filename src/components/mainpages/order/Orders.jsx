@@ -175,17 +175,17 @@ function Order() {
                                                         <td>{item.address?.fullname}
                                                             <sup className="update-end"> Cập nhập lần
                                                                 cuối: {item.update_at}</sup>
-                                                            <div className="table-title">
-                                                                <Link to={`/admin/order/${item.id}`}
-                                                                      className="mr-8 text-priamry">
-                                                                    <i className="ti-pencil-alt"></i>
-                                                                    edit
-                                                                </Link>
-                                                                <Link to="#" className="text-danger">
-                                                                    <i className="ti-trash"></i>
-                                                                    delete
-                                                                </Link>
-                                                            </div>
+                                                                <div className="table-title">
+                                                                    <Link to={`/admin/order/${item.id}`}
+                                                                          className="mr-8 text-priamry">
+                                                                        <i className="ti-pencil-alt"></i>
+                                                                        edit
+                                                                    </Link>
+                                                                    <Link to="#" className="text-danger">
+                                                                        <i className="ti-trash"></i>
+                                                                        delete
+                                                                    </Link>
+                                                                </div>
                                                         </td>
                                                         <td>{item.created_at}</td>
                                                         <td>{item.payment}</td>

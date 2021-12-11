@@ -2,11 +2,34 @@ import React, {useContext, useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import {GlobalState} from "../../../GlobalState";
+import Pagination from "../../../api/Pagination";
+import {formatCash} from "../../../utils/CurrencyCommon";
 
 function User() {
+    const state = useContext(GlobalState)
+    const [users, setUsers] = state.userAPI.users
+    const [orderDetails] = state.orderAPI.orderDetails
+    const [order] = state.orderAPI.order
+    const sortUsersByUpdate_at = users.sort((a, b) => {
+        return new Date(b.update_at).getTime() -
+            new Date(a.update_at).getTime()
+    })
+
+    const pagination = new Pagination(sortUsersByUpdate_at)
+
+    const groupBy = order.reduce((r, a) => {
+        r[a.user?.username] = [...r[a.user?.username] || [], a]
+        return r;
+    }, {});
+
+    const getTotal = (username) => {
+        return groupBy[username]?.reduce((r, a) => {
+            return r + a?.total
+        }, 0)
+    }
 
     return (
-
         <>
             <Helmet>
                 <title>Administrator - Quản lý khách hàng</title>
@@ -57,87 +80,58 @@ function User() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="text" className="table-input" value="2"/>
-                                            </td>
-                                            <td>
-                                                Hoàng Tân Đại
-                                                <div className="table-title">
-                                                    <Link
-                                                        to="/admin/user/detail"
-                                                        className="mr-8 text-priamry"
-                                                    >
-                                                        <i className="ti-pencil-alt"></i>
-                                                        edit
-                                                    </Link>
-                                                    <Link to="" className="text-danger">
-                                                        <i className="ti-trash"></i>
-                                                        delete
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>Nam</td>
-                                            <td className="text-center">
-                                                29/07/2001
-                                            </td>
-                                            <td className="text-center">
-                                                100
-                                            </td>
-                                            <td className="text-center">
-                                                100
-                                            </td>
-                                        </tr>
+                                        {
+                                            pagination.currentItems.map((user, index) => {
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>
+                                                            <input type="text" className="table-input"
+                                                                   value={index + 1}/>
+                                                        </td>
+                                                        <td>
+                                                            {user?.fullname}
+                                                            <div className="table-title">
+                                                                <Link
+                                                                    to={`/admin/user/${user?.username}`}
+                                                                    className="mr-8 text-priamry">
+                                                                    <i className="ti-pencil-alt"/>
+                                                                    edit
+                                                                </Link>
+                                                                <button className="text-danger">
+                                                                    <i className="ti-trash"></i>
+                                                                    Delete
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                        <td>{user?.gender?"Nam":"Nữ"}</td>
+                                                        <td className="text-center">
+                                                            {user?.birthday}
+                                                        </td>
+                                                        <td className="text-center">
+                                                            {groupBy[user?.username]?.length || 0}
+                                                        </td>
+                                                        <td className="text-center">
+                                                            {getTotal(user?.username)>0?formatCash(getTotal(user?.username)):0} <sup>đ</sup>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
 
-                                        <tr>
-                                            <td>
-                                                <input type="text" className="table-input" value="2"/>
-                                            </td>
-                                            <td>
-                                                Hoàng Tân Đại
-                                                <div className="table-title">
-                                                    <Link to="/admin/user/detail" className="mr-8 text-priamry">
-                                                        <i className="ti-pencil-alt"></i>
-                                                        edit
-                                                    </Link>
-                                                    <Link href="" className="text-danger">
-                                                        <i className="ti-trash"></i>
-                                                        delete
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                            <td>Nam</td>
-                                            <td className="text-center">
-                                                29/07/2001
-                                            </td>
-                                            <td className="text-center">
-                                                100
-                                            </td>
-                                            <td className="text-center">
-                                                100
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
 
 
                                 </div>
                                 <ul className="pagination">
-                                    <li>
-                                        <a href="#"><i className="ti-angle-left"></i></a>
-                                    </li>
-                                    <li><a href="#" className="active">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#"><i className="ti-angle-right"></i></a>
-                                    </li>
+                                    <li><Link to="#"
+                                              onClick={() => pagination.prev()}><i
+                                        className='ti-angle-left'/></Link></li>
+                                    {pagination.renderPageNumbers}
+                                    <li><Link to="#"
+                                              onClick={() => pagination.next()}><i
+                                        className='ti-angle-right'/></Link></li>
                                 </ul>
-                            </div>
-                            <div className="box">
-
                             </div>
                         </div>
                     </div>

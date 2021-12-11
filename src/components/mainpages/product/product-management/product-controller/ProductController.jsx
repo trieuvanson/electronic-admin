@@ -78,8 +78,6 @@ function ProductController() {
             name: "",
             regular_price: "",
             sale_price: "",
-            thumbnail: "",
-            thumbnail2: "",
             category: {id: categoriesByBrands[0]?.id, brand: {id: brands[0]?.id}},
             description: "",
 
@@ -246,15 +244,15 @@ function ProductController() {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="box-btn mt-32">
-                                            <button className="btn btn-primary btn-icon-text btn-hover">
+                                            <button onClick={updateProduct} className="btn btn-primary btn-icon-text btn-hover">
                                                 <i className="ti-save"/>
                                                 Lưu
                                             </button>
-                                            <button className="btn btn-secondary btn-icon-text btn-hover">
+                                            <button onClick={clear} className="btn btn-secondary btn-icon-text btn-hover">
                                                 <i className="ti-reload"/>
                                                 Làm mới
                                             </button>
-                                            <button className="btn btn-danger btn-icon-text btn-hover">
+                                            <button onClick={() => window.location.href = "/admin/product"} className="btn btn-danger btn-icon-text btn-hover">
                                                 <i className="ti-shift-right"/>
                                                 Thoát
                                             </button>

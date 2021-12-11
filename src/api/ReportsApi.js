@@ -7,12 +7,14 @@ function ReportsApi(token) {
     const [orderRevenue, setOrderRevenue] = useState([]);
     const [topCategoriesByBrand, setTopCategoriesByBrand] = useState([]);
     const [revenueByYear, setRevenueByYear] = useState([]);
+    const [topCustomers, setTopCustomers] = useState([]);
     useEffect(() => {
         if (token) {
             getTopBrands()
             getOrderRevenueByYear(new Date().getFullYear())
             getRevenueByYear(new Date().getFullYear())
             topCategoriesByBrandName('')
+            getTopByUser()
         }
     }, [token])
 
@@ -22,6 +24,18 @@ function ReportsApi(token) {
         })
             .then(res => {
                 setTopBrands(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    const getTopByUser = () => {
+        axios.get(`${LOCAL_LINK}/api/reports/top-customer`, {
+            headers: {Authorization: `Bearer ${token}`}
+        })
+            .then(res => {
+                setTopCustomers(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -78,7 +92,8 @@ function ReportsApi(token) {
         revenueByYear: [revenueByYear, setRevenueByYear],
         revenueAction: {
             getRevenueByYear
-        }
+        },
+        topCustomers: [topCustomers, setTopCustomers],
     }
 }
 

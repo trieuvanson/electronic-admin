@@ -2,8 +2,16 @@ import React, {useContext, useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import {GlobalState} from "../../../GlobalState";
+import {formatCash} from "../../../utils/CurrencyCommon";
+import Pagination from "../../../api/Pagination";
 
 function Voucher() {
+    const state = useContext(GlobalState)
+    const [discounts, setDiscounts] = state.discountsApi.discounts
+
+
+    const pagination = new Pagination(discounts)
 
     return (
         <>
@@ -62,7 +70,6 @@ function Voucher() {
                                         <thead>
                                         <tr>
                                             <th>Mã đợt phát hành</th>
-                                            <th>Tên đợt phát hành</th>
                                             <th className="text-center">Từ ngày</th>
                                             <th className="text-center">Đến ngày</th>
                                             <th className="text-center">Số lượng</th>
@@ -71,67 +78,39 @@ function Voucher() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                PH001
-                                            </td>
-                                            <td>
-                                                Tết đến
-                                                <div className="table-title">
-                                                    <Link
-                                                        to="/admin/voucher/detail"
-                                                        className="mr-8 text-priamry"
-                                                    >
-                                                        <i className="ti-pencil-alt"></i>
-                                                        edit
-                                                    </Link>
-                                                    <a href="" className="text-danger">
-                                                        <i className="ti-trash"></i>
-                                                        delete
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td className="text-center">29/07/2001</td>
-                                            <td className="text-center">29/07/2001</td>
-                                            <td className="text-center">100</td>
-                                            <td className="text-center">
-                                                100
-                                            </td>
-                                            <td className="text-center">
-                                                Kích hoạt
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                PH001
-                                            </td>
-                                            <td>
-                                                Chào hè
-                                                <div className="table-title">
-                                                    <a
-                                                        href="/admin/voucher/detail"
-                                                        className="mr-8 text-priamry"
-                                                    >
-                                                        <i className="ti-pencil-alt"></i>
-                                                        edit
-                                                    </a>
-                                                    <a href="" className="text-danger">
-                                                        <i className="ti-trash"></i>
-                                                        delete
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td className="text-center">29/07/2001</td>
-                                            <td className="text-center">29/07/2001</td>
-                                            <td className="text-center">100</td>
-                                            <td className="text-center">
-                                                100
-                                            </td>
-                                            <td className="text-center">
-                                                Kích hoạt
-                                            </td>
-                                        </tr>
+                                        {
+                                            pagination.currentItems?.map((discount, index) => {
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{discount.id}
+                                                            <div className="table-title">
+                                                                <Link to={`/admin/voucher/${discount.id}`}
+                                                                      className="mr-8 text-priamry">
+                                                                    <i className="ti-pencil-alt"></i>
+                                                                    edit
+                                                                </Link>
+                                                                <Link to="#" className="text-danger">
+                                                                    <i className="ti-trash"></i>
+                                                                    delete
+                                                                </Link>
+                                                            </div>
+                                                        </td>
+                                                        <td className="text-center">{discount.created_at}</td>
+                                                        <td className="text-center">{discount.expired_at}</td>
+                                                        <td className="text-center">{discount.total}</td>
+                                                        <td className="text-center">{discount.discount>0?formatCash(discount?.discount):0} <sup>đ</sup></td>
+                                                        <td className="text-center">
+                                                            <div className="switch">
+                                                                <label>
+                                                                    <input type="checkbox" checked={discount?.discount_status}/>
+                                                                    <span className="lever"></span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
 
                                         </tbody>
                                     </table>
@@ -139,17 +118,13 @@ function Voucher() {
 
                                 </div>
                                 <ul className="pagination">
-                                    <li>
-                                        <a href="#"><i className="ti-angle-left"></i></a>
-                                    </li>
-                                    <li><a href="#" className="active">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#"><i className="ti-angle-right"></i></a>
-                                    </li>
+                                    <li><Link to="#"
+                                              onClick={() => pagination.prev()}><i
+                                        className='ti-angle-left'/></Link></li>
+                                    {pagination.renderPageNumbers}
+                                    <li><Link to="#"
+                                              onClick={() => pagination.next()}><i
+                                        className='ti-angle-right'/></Link></li>
                                 </ul>
                             </div>
                             <div className="box">

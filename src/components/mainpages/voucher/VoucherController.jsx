@@ -1,15 +1,25 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
 
 function VoucherController() {
+    useEffect(() => {
+        showPopup()
+    }, [])
 
-
-
+    function showPopup() {
+        const modal = document.getElementById('myModal');
+        window.onclick = (event) => {
+            if (event.target.className === 'modal' || event.target.className === 'close') {
+                modal.style.display = "none";
+            } else if (event.target.id === 'orderBtn') {
+                modal.style.display = "block";
+            }
+        }
+    }
 
     return (
-
         <>
             <Helmet>
                 <title>Administrator - Chi tiết voucher</title>
@@ -41,7 +51,8 @@ function VoucherController() {
                                                 <div className="col-3">
                                                     <div className="form-group">
                                                         <label className="form-label">Mã đợt phát hành</label>
-                                                        <input type="text" className="form-control" value="12" disabled/>
+                                                        <input type="text" className="form-control" value="12"
+                                                               disabled/>
                                                     </div>
                                                 </div>
                                                 <div className="col-3">
@@ -153,7 +164,7 @@ function VoucherController() {
 
                                         <tr>
                                             <td>
-                                                <a href="" className="text-link">HD001</a>
+                                                <button id={"orderBtn"} className="text-link">HD001</button>
                                             </td>
                                             <td>08/05/2020 09:24</td>
                                             <td>Admin</td>
@@ -164,7 +175,7 @@ function VoucherController() {
 
                                         <tr>
                                             <td>
-                                                <a href="" className="text-link">HD001</a>
+                                                <button id={"orderBtn"} className="text-link">HD001</button>
                                             </td>
                                             <td>08/05/2020 09:24</td>
                                             <td>Admin</td>
@@ -175,7 +186,7 @@ function VoucherController() {
 
                                         <tr>
                                             <td>
-                                                <button id="myBtn" className="text-link">HD001</button>
+                                                <button id={"orderBtn"} className="text-link">HD001</button>
                                             </td>
                                             <td>08/05/2020 09:24</td>
                                             <td>Admin</td>
@@ -191,15 +202,11 @@ function VoucherController() {
                         </div>
                     </div>
                 </div>
-
-
-                {/*Tìm model trong css display: block; thành none là nó ẩn*/}
-                {/*Model*/}
-                <div id="myModal" className="modal">
+                <div id="myModal" className="modal" onClick={"showPopup"}>
                     <div className="modal-content">
                         <div className="modal-text">
                             <h1>Hóa đơn</h1>
-                            <span className="close">&times;</span>
+                            <span className="close" onClick={"showPopup"}>&times;</span>
                         </div>
                         <div className="modal-box">
                             <div className="row">
@@ -312,31 +319,10 @@ function VoucherController() {
 
                 </div>
 
-                {/*  Mã js bật modal  */}
-                {/*var modal = document.getElementById("myModal");*/}
 
-                {/*var btn = document.getElementById("myBtn");*/}
-
-                {/*var span = document.getElementsByClassName("close")[0];*/}
-
-                {/*btn.onclick = function() {*/}
-                {/*    modal.style.display = "block";*/}
-                {/*}*/}
-
-                {/*span.onclick = function() {*/}
-                {/*    modal.style.display = "none";*/}
-                {/*}*/}
-
-                {/*window.onclick = function(event) {*/}
-                {/*    if (event.target == modal) {*/}
-                {/*        modal.style.display = "none";*/}
-                {/*    }*/}
-                {/*}*/}
             </div>
 
         </>
-
-
 
 
     )

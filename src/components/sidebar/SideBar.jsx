@@ -99,7 +99,7 @@ function SideBar() {
             active: false,
             child: []
         },
-        {
+       /* {
             index: 4,
             liClass: 'sidebar-submenu',
             link: "#",
@@ -135,7 +135,7 @@ function SideBar() {
                     name: "Chính sách"
                 }
             ]
-        },
+        },*/
         {
             index: 6,
             liClass: 'sidebar-submenu',

@@ -5,6 +5,7 @@ import {getToken} from "./utils/Common";
 import CategoriesApi from "./api/CategoriesApi";
 import OrdersApi from "./api/OrdersApi";
 import ReportsApi from "./api/ReportsApi";
+import DiscountsApi from "./api/DiscountsApi";
 
 export const GlobalState = createContext({})
 
@@ -25,7 +26,8 @@ export const DataProvider = ({children}) => {
         productAPI: ProductsApi(token),
         categoriesApi: CategoriesApi(token),
         orderAPI: OrdersApi(token),
-        reportsApi: ReportsApi(token)
+        reportsApi: ReportsApi(token),
+        discountsApi: DiscountsApi(token),
     }
 
     return (
