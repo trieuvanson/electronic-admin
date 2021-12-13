@@ -53,10 +53,10 @@ function Voucher() {
                             <div className="box-light box-btn">
                                 <div className="form-group">
                                     <label className="form-label">Trạng thái</label>
-                                    <select className="selection">
+                                    <select className="form-control">
                                         <option value="">Kích hoạt</option>
                                         <option value="">Chưa áp dụng</option>
-                                        <option value="">Tất cả</option>
+                                        {/*<option value="">Tất cả</option>*/}
                                     </select>
                                 </div>
                             </div>
