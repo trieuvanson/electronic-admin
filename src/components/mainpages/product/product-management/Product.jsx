@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react'
 import {GlobalState} from "../../../../GlobalState"
 import {Link} from "react-router-dom"
 import {USER_LINK} from "../../../../utils/hyperlink";
-import {OrderStatus} from "../../../../utils/DataCommon";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Pagination from "../../../../api/Pagination";
@@ -58,6 +57,13 @@ function Product() {
             closeOnClick: true
         }))
     }
+    const deleteProduct = (product) => {
+        action.deleteProduct(product).then(toast("Xóa thành công!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000,
+            closeOnClick: true
+        }))
+    }
 
 
     return (
@@ -79,15 +85,10 @@ function Product() {
                     <div className="row">
                         <div className="col-12">
                             <div className="box-light box-btn">
-                                <button className="btn btn-primary btn-icon-text">
+                                <Link to={"product/create"} className="btn btn-primary btn-icon-text text-link">
                                     <i className="ti-plus"></i>
                                     Thêm
-                                </button>
-                                <button className="btn btn-danger btn-icon-text">
-                                    <i className="ti-trash"></i>
-                                    Xóa tất cả
-                                </button>
-
+                                </Link>
                                 <div className="form-search">
                                     <div className="input-group">
                                         <input type="text" placeholder={"Nhập dữ liệu tìm kiếm..."}
@@ -230,10 +231,10 @@ function Product() {
                                                                 <i className="ti-pencil-alt"></i>
                                                                 edit
                                                             </Link>
-                                                            <Link to="#" className="text-danger">
+                                                            <button onClick={() => deleteProduct(product)} className="text-danger">
                                                                 <i className="ti-trash"></i>
                                                                 delete
-                                                            </Link>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                     <td className="text-center">

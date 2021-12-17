@@ -34,9 +34,7 @@ function ProductsApi(token) {
         };
 
         axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
+            .then(() => getProducts())
             .catch(function (error) {
                 console.log(error);
             });
@@ -54,9 +52,23 @@ function ProductsApi(token) {
         };
 
         axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
+            .then(() => getProducts())
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    const deleteProduct = async (product) => {
+        var config = {
+            method: 'delete',
+            url: `${LOCAL_LINK}/api/products/${product.id}`,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        };
+
+        axios(config)
+            .then(() => getProducts())
             .catch(function (error) {
                 console.log(error);
             });
@@ -87,6 +99,7 @@ function ProductsApi(token) {
             getProducts,
             addProduct,
             updateProduct,
+            deleteProduct,
             getProductsByFilter
         }
     }

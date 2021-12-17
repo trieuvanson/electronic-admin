@@ -3,6 +3,7 @@ import {GlobalState} from "../../../../../GlobalState";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Helmet} from "react-helmet";
+import {toast, ToastContainer} from "react-toastify";
 
 function ProductController() {
     const state = useContext(GlobalState)
@@ -38,15 +39,14 @@ function ProductController() {
         var config = {
             method: 'post',
             url: 'https://api.cloudinary.com/v1_1/trieuvanson/image/upload',
-            headers: {
-            },
+            headers: {},
             data: formData
         };
-      const res = await axios(config)
+        const res = await axios(config)
             .catch(function (error) {
                 console.log(error);
             });
-      setDetail({...detail, [model]: res.data.url})
+        setDetail({...detail, [model]: res.data.url})
     }
 
     const inputChange = (e) => {
@@ -62,19 +62,19 @@ function ProductController() {
         } else if (name === "thumbnail2") {
             console.log(e.target.files[0])
             upLoadImage(e.target.files[0], name)
-        }
-        else {
+        } else {
             setDetail({...detail, [name]: value})
         }
     }
 
     const updateProduct = (e) => {
-        action.updateProduct(detail)
+        action.updateProduct(detail).then(() => toast.success("Cập nhật thành công"))
         window.location.reload()
     }
 
     const clear = (e) => {
-        setDetail({...detail,
+        setDetail({
+            ...detail,
             name: "",
             regular_price: "",
             sale_price: "",
@@ -83,6 +83,26 @@ function ProductController() {
 
         })
     }
+
+    const addProduct = () => {
+        action.addProduct(detail).then(() => toast.success("Thêm sản phẩm thành công"))
+    }
+
+    const changeUpdateAndCreate = () => {
+        if (window.location.href.match("/create")) {
+            return <button onClick={() => addProduct(detail)}
+                           className="btn btn-primary btn-icon-text btn-hover">
+                <i className="ti-save"/>
+                Lưu
+            </button>
+        } else
+            return <button onClick={() => updateProduct(detail)}
+                           className="btn btn-primary btn-icon-text btn-hover">
+                <i className="ti-save"/>
+                Cập nhật
+            </button>
+    }
+
     return (
         <>
             <Helmet>
@@ -125,7 +145,8 @@ function ProductController() {
                                                 <div className="col-6">
                                                     <div className="form-group">
                                                         <label className="form-label">Giá gốc</label>
-                                                        <input type="number" name="regular_price" className="form-control"
+                                                        <input type="number" name="regular_price"
+                                                               className="form-control"
                                                                value={detail?.regular_price} onChange={inputChange}/>
                                                     </div>
                                                 </div>
@@ -175,7 +196,7 @@ function ProductController() {
                                                         >
 
                                                             {
-                                                                categoriesByBrands?
+                                                                categoriesByBrands ?
                                                                     categoriesByBrands && categoriesByBrands.map((item, index) => {
                                                                         return (
                                                                             <option key={index}
@@ -183,7 +204,7 @@ function ProductController() {
                                                                                 {item.name}
                                                                             </option>
                                                                         )
-                                                                    }):
+                                                                    }) :
                                                                     categories.filter(item => item.brand?.id == detail?.category?.brand?.id).map((item, index) => {
                                                                         return (
                                                                             <option key={index}
@@ -223,14 +244,16 @@ function ProductController() {
                                                                 <img src={detail.thumbnail} width="50%" alt=""/>
                                                             </label>
                                                             <div className="form-group">
-                                                                <input type="file" name="thumbnail" className="form-control-file"
+                                                                <input type="file" name="thumbnail"
+                                                                       className="form-control-file"
                                                                        onChange={inputChange} id="thumbnail"/>
                                                             </div>
                                                             <label htmlFor="thumbnail2">
                                                                 <img src={detail.thumbnail2} width="50%" alt=""/>
                                                             </label>
                                                             <div className="form-group">
-                                                                <input type="file" name="thumbnail2" className="form-control-file"
+                                                                <input type="file" name="thumbnail2"
+                                                                       className="form-control-file"
                                                                        onChange={inputChange} id="thumbnail2"/>
                                                             </div>
                                                         </div>
@@ -244,15 +267,14 @@ function ProductController() {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="box-btn mt-32">
-                                            <button onClick={updateProduct} className="btn btn-primary btn-icon-text btn-hover">
-                                                <i className="ti-save"/>
-                                                Lưu
-                                            </button>
-                                            <button onClick={clear} className="btn btn-secondary btn-icon-text btn-hover">
+                                            {changeUpdateAndCreate()}
+                                            <button onClick={clear}
+                                                    className="btn btn-secondary btn-icon-text btn-hover">
                                                 <i className="ti-reload"/>
                                                 Làm mới
                                             </button>
-                                            <button onClick={() => window.location.href = "/admin/product"} className="btn btn-danger btn-icon-text btn-hover">
+                                            <button onClick={() => window.location.href = "/admin/product"}
+                                                    className="btn btn-danger btn-icon-text btn-hover">
                                                 <i className="ti-shift-right"/>
                                                 Thoát
                                             </button>
@@ -264,7 +286,7 @@ function ProductController() {
                     </div>
                 </div>
             </div>
-
+            <ToastContainer/>
         </>
 
     )

@@ -5,6 +5,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Pagination from "../../../../api/Pagination";
 import {Helmet} from "react-helmet";
+import {USER_LINK} from "../../../../utils/hyperlink";
 
 function CategoryLv2() {
     const state = useContext(GlobalState)
@@ -16,7 +17,7 @@ function CategoryLv2() {
         brandName: ''
     })
 
-    const actione = state.categoriesApi.categoryAction
+    const action = state.categoriesApi.categoryAction
 
 
     const inputChange = (e) => {
@@ -26,10 +27,13 @@ function CategoryLv2() {
 
     const pagination = new Pagination(categories)
 
+    const deleteCategory = (category) => {
+        action.deleteCategory(category).then(() => toast.success('Xóa thành công'))
+    }
 
     const filterCategories = (e) => {
         e.preventDefault()
-        actione.getCategoriesByFilter(filter).then(toast("Lọc thành công!", {
+        action.getCategoriesByFilter(filter).then(toast("Lọc thành công!", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
             closeOnClick: true
@@ -55,14 +59,10 @@ function CategoryLv2() {
                     <div className="row">
                         <div className="col-12">
                             <div className="box-light box-btn">
-                                <button className="btn btn-primary btn-icon-text">
+                                <Link to="category/create" className="btn btn-primary btn-icon-text text-link">
                                     <i className="ti-plus"></i>
                                     Thêm
-                                </button>
-                                <button className="btn btn-danger btn-icon-text">
-                                    <i className="ti-trash"></i>
-                                    Xóa tất cả
-                                </button>
+                                </Link>
 
                                 <div className="form-search">
                                     <div className="input-group">
@@ -75,9 +75,9 @@ function CategoryLv2() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12">
+                        <div className="col-3">
                             <div className="box-light box-btn">
-                                <select className="selection" name={"brandName"} value={filter.brandName}
+                                <select className="form-control" name={"brandName"} value={filter.brandName}
                                         onChange={inputChange}>
                                     <option value="">Chọn danh mục</option>
                                     {brands.map((brand, index) => {
@@ -109,25 +109,26 @@ function CategoryLv2() {
                                                 return (
                                                     <tr key={category.id}>
                                                         <td>
-                                                            <input type="text" className="table-input" value={index + 1}/>
+                                                            <input type="text" className="table-input"
+                                                                   value={index + 1}/>
                                                         </td>
                                                         <td>
                                                             {category.name} <sup className="update-end">Cập nhập lần
                                                             cuối: {category.update_at}</sup>
                                                             <div className="table-title">
-                                                                <Link to="#" className="mr-8 text-priamry">
+                                                                <a href={`${USER_LINK}/products/category/${category.id}`} className="mr-8 text-priamry">
                                                                     <i className="ti-eye"/>
                                                                     view
-                                                                </Link>
+                                                                </a>
                                                                 <Link to={`category/${category.id}`}
                                                                       className="mr-8 text-priamry">
                                                                     <i className="ti-pencil-alt"/>
                                                                     edit
                                                                 </Link>
-                                                                <Link to="#" className="text-danger">
+                                                                <button onClick={() => deleteCategory(category)} className="text-danger">
                                                                     <i className="ti-trash"/>
                                                                     delete
-                                                                </Link>
+                                                                </button>
                                                             </div>
                                                         </td>
                                                         <td>

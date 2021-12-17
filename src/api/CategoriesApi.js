@@ -16,6 +16,18 @@ function CategoriesApi(token) {
             .catch(err => console.log(err))
     }
 
+    const addBrand = async (brand) => {
+        await axios.post(`${LOCAL_LINK}/api/brand/`, brand, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                getBrands()
+            })
+            .catch(err => console.log(err))
+    }
+
     const updateBrand = async (brand) => {
         await axios.put(`${LOCAL_LINK}/api/brand/${brand.id}`, brand, {
             headers: {
@@ -25,6 +37,24 @@ function CategoriesApi(token) {
             .then(res => {
                 getBrands()
             })
+            .catch(err => console.log(err))
+    }
+
+    const deleteBrand = async (brand) => {
+        await axios.delete(`${LOCAL_LINK}/api/brand/${brand.id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                getBrands()
+            })
+            .catch(err => console.log(err))
+    }
+
+    const getBrandsByName = async (name) => {
+        await axios.get(`${LOCAL_LINK}/api/brand/filter?name=${name}`)
+            .then(res => setBrands(res.data))
             .catch(err => console.log(err))
     }
 
@@ -66,6 +96,40 @@ function CategoriesApi(token) {
             })
     }
 
+    const addCategory = async (category) => {
+        await axios.post(`${LOCAL_LINK}/api/product-category/`, category, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                getCategories()
+            })
+            .catch(err => console.log(err))
+    }
+    const updateCategory = async (category) => {
+        await axios.put(`${LOCAL_LINK}/api/product-category/${category.id}`, category, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                getCategories()
+            })
+            .catch(err => console.log(err))
+    }
+    const deleteCategory = async (category) => {
+        await axios.delete(`${LOCAL_LINK}/api/product-category/${category.id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                getCategories()
+            })
+            .catch(err => console.log(err))
+    }
+
     useEffect(() => {
         getCategories().then()
         getBrands().then()
@@ -78,9 +142,9 @@ function CategoriesApi(token) {
         brands: [brands, setBrands],
         slides: [slides, setSlides],
         slideById: [slideById, setSlideById],
-        categoryAction: {getCategoriesByFilter, updateSlide},
+        categoryAction: {getCategoriesByFilter, updateSlide, addCategory, updateCategory, deleteCategory},
         slideAction: {updateSlide},
-        brandAction: {updateBrand}
+        brandAction: {updateBrand, addBrand, deleteBrand, getBrandsByName}
 
     }
 }

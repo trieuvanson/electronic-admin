@@ -36,9 +36,34 @@ function CategoryLv1() {
             })
     }
 
+    async function addBrand(detail) {
+        await brandAction.addBrand(detail)
+            .then(res => {
+                toast.success("Cập nhật thành công")
+            })
+            .catch(err => {
+                toast.error("Cập nhật thất bại")
+            })
+    }
+
     function clear() {
         setDetail({name: ""}
         )
+    }
+
+    const changeUpdateAndCreate = () => {
+        if (window.location.href.match("/create")) {
+            return <button onClick={() => addBrand(detail)}
+                    className="btn btn-primary btn-icon-text btn-hover">
+                <i className="ti-save"/>
+                Lưu
+            </button>
+        } else
+            return <button onClick={() => updateBrand(detail)}
+                           className="btn btn-primary btn-icon-text btn-hover">
+                <i className="ti-save"/>
+                Cập nhật
+            </button>
     }
 
     return (
@@ -81,11 +106,7 @@ function CategoryLv1() {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="box-btn mt-32">
-                                            <button onClick={() => updateBrand(detail)}
-                                                    className="btn btn-primary btn-icon-text btn-hover">
-                                                <i className="ti-save"/>
-                                                Cập nhật
-                                            </button>
+                                            {changeUpdateAndCreate()}
                                             <button onClick={clear}
                                                     className="btn btn-secondary btn-icon-text btn-hover">
                                                 <i className="ti-reload"/>
